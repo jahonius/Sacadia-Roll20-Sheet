@@ -1,0 +1,89 @@
+<div class='sheet-container'>
+    <div class='sheet-header'>
+      <div class='sheet-2colrow'>
+        <div class='sheet-col'>
+            <div class="sheet-attrblock">
+                <div class="row">
+                  <label class='sheet-label' data-i18n="name-u">Name:</label>
+                  <input type="text" class='sheet-input' name="attr_character_name" placeholder="Character Name" />
+                </div>
+                <div class="row">
+                  <label class='sheet-label' data-i18n="title-u">Title:</label>
+                  <input type="text" class='sheet-input' name="attr_character_title" placeholder="Character Title" />
+                </div>
+                <div class="row">
+                  <label class='sheet-label' data-i18n="species-u">Species:</label>
+                  <input type="text" class='sheet-input' name="attr_character_race" placeholder="Race/Species" />
+                </div>
+                <br />
+            </div>
+        </div>
+        <div class='sheet-col'>
+          <img style="padding-top:15px;" src="https://github.com/SPConlin/roll20-character-sheets/blob/elemental/Elemental/images/logo.png?raw=true" />
+        </div>
+      </div>
+    </div>
+	<div class="sheet-tabs">
+		<div class="sheet-tab sheet-tab-core">
+			<input type="radio" name="attr_tab" value="core" checked="checked">
+			<span class="sheet-tab-label">Core</span>
+    		<div class="sheet-tab-content">
+    		    <div class="sheet-content">
+        		</div>
+        	</div>
+        </div>
+		<div class="sheet-tab sheet-tab-equipment">
+			<input type="radio" name="attr_tab" value="equipment">
+			<span class="sheet-tab-label">Equipment</span>
+    		<div class="sheet-tab-content">
+    		    <div class="sheet-content">
+    		    </div>
+    		</div>
+    	</div>
+		<div class="sheet-tab sheet-tab-features">
+			<input type="radio" name="attr_tab" value="features">
+			<span class="sheet-tab-label">Settings</span>
+    		<div class="sheet-tab-content">
+    		    <div class="sheet-content">
+    		        Settings
+    		    </div>
+    		</div>
+    	</div>
+    </div>
+</div>
+
+<rolltemplate class="sheet-rolltemplate-basic">
+    <div class="sheet-template-container">
+    	<div class="sheet-template-header" data-i18n="sc-u">{{type}} Check</div>
+	    <div class="sheet-template-row">{{name}}: {{roll}}
+        	{{#rollWasCrit() roll}}
+    			<span> + </span>{{explode}}
+            	{{#rollWasCrit() explode}}
+        			<span data-i18n="crit-u">Critical!</span>
+        		{{/rollWasCrit() explode}}
+    		{{/rollWasCrit() roll}}
+    	</div>
+	</div>
+</rolltemplate>
+
+<rolltemplate class="sheet-rolltemplate-stat">
+    <div class="sheet-template-container">
+    	<div class="sheet-template-header" data-i18n="statc-u">Stat Check</div>
+	    <div class="sheet-template-row">
+	        {{#rollTotal() check 12}}
+	            Fumble {{name}}: {{check}}
+	        {{/rollTotal() check 12}}
+	        {{#rollTotal() check 2}}
+	            Crit {{name}}: {{roll}}
+	        {{/rollTotal() check 2}}
+	        {{#rollBetween() check 3 11}}
+	            {{name}}: {{check}}
+	        {{/rollBetween() check 3 11}}
+    	</div>
+	</div>
+</rolltemplate>
+
+<script type="text/worker">
+
+
+</script>
