@@ -41,20 +41,20 @@
             <hr>
             <table class="stats-table">
                 <tr>
-                    <td>Power<br><input type="hidden" name="attr_power_color" value="neutral"><span class="stat-display" name="attr_power_display">0</span>&nbsp;<input type="number" name="attr_power" value="0"><br><input type="checkbox" name="attr_power_prof" value="1"><br>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{power} + (@{power_prof}*@{proficiency}) ]]}}">Roll</button>
+                    <td>Power<br><input type="hidden" name="attr_power_color" value="neutral"><span class="stat-display" name="attr_power_display">0</span>&nbsp;<input type="number" name="attr_power" value="0"><br>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{power} + @{proficiency} ]]}}">Roll</button>
                     </td>
-                    <td>Finesse<br><input type="hidden" name="attr_finesse_color" value="neutral"><span class="stat-display" name="attr_finesse_display">0</span>&nbsp;<input type="number" name="attr_finesse" value="0"><br><input type="checkbox" name="attr_finesse_prof" value="1"><br>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Finesse=[[ @{stat_advantage}d20kh1+@{finesse} + (@{finesse_prof}*@{proficiency}) ]]}}">Roll</button>
+                    <td>Finesse<br><input type="hidden" name="attr_finesse_color" value="neutral"><span class="stat-display" name="attr_finesse_display">0</span>&nbsp;<input type="number" name="attr_finesse" value="0"><br>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Finesse=[[ @{stat_advantage}d20kh1+@{finesse} + @{proficiency} ]]}}">Roll</button>
                     </td>
-                    <td>Wiles<br><input type="hidden" name="attr_wiles_color" value="neutral"><span class="stat-display" name="attr_wiles_display">0</span>&nbsp;<input type="number" name="attr_wiles" value="0"><br><input type="checkbox" name="attr_wiles_prof" value="1"><br>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Wiles=[[ @{stat_advantage}d20kh1+@{wiles} + (@{wiles_prof}*@{proficiency}) ]]}}">Roll</button>
+                    <td>Wiles<br><input type="hidden" name="attr_wiles_color" value="neutral"><span class="stat-display" name="attr_wiles_display">0</span>&nbsp;<input type="number" name="attr_wiles" value="0"><br>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Wiles=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
                     </td>
-                    <td>Courage<br><input type="hidden" name="attr_courage_color" value="neutral"><span class="stat-display" name="attr_courage_display">0</span>&nbsp;<input type="number" name="attr_courage" value="0"><br><input type="checkbox" name="attr_courage_prof" value="1"><br>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Courage=[[ @{stat_advantage}d20kh1+@{courage} + (@{courage_prof}*@{proficiency}) ]]}}">Roll</button>
+                    <td>Courage<br><input type="hidden" name="attr_courage_color" value="neutral"><span class="stat-display" name="attr_courage_display">0</span>&nbsp;<input type="number" name="attr_courage" value="0"><br>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Courage=[[ @{stat_advantage}d20kh1+@{courage} + *@{proficiency} ]]}}">Roll</button>
                     </td>
-                    <td>Fate<br><input type="hidden" name="attr_fate_color" value="neutral"><span class="stat-display" name="attr_fate_display">0</span>&nbsp;<input type="number" name="attr_fate" value="0"><br><input type="checkbox" name="attr_fate_prof" value="1"><br>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Fate=[[ @{stat_advantage}d20kh1+@{fate} + (@{fate_prof}*@{proficiency}) ]]}}">Roll</button>
+                    <td>Fate<br><input type="hidden" name="attr_fate_color" value="neutral"><span class="stat-display" name="attr_fate_display">0</span>&nbsp;<input type="number" name="attr_fate" value="0"><br>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Fate=[[ @{stat_advantage}d20kh1+@{fate} + @{proficiency} ]]}}">Roll</button>
                     </td>
                 </tr>
             </table>
@@ -63,51 +63,82 @@
         </div>
 
     <div class="sheet-abilities">
+        <h2 style="text-align: center;">Abilities</h2>
+        <hr>
         <div class="abilities-container">
             <div class="abilities-column">
-                <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/full-actions.png" style="height: 80%" alt="All Actions">
+                <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/full-actions.png" style="width: 50%" alt="All Actions">
+            </div>
+            <div class="abilities-column">
+                <span>1-Hand</span>
+                <span>2-Hand</span>
+                <span>Body</span>
+                <span>Mind</span>
+                <span>Focus</span>
+                <span>Legs</span>
             </div>
         </div>
-        
-        <div class="abilities-container">
-            <div class="abilities-column">
-                <h2>Active Abilities</h2>
-                <label>Advantage Rolls: <input type="number" name="attr_ability_advantage" value="1" min="1"></label>
+        <hr>        
+        <div class="sheet-tabs">
+            <button type="action" name="act_active_abilities" value="active_abilities">Active Abilities</button>
+            <button type="action" name="act_passive_abilities" value="passive_abilities">Passive Abilities</button>
+            <button type="action" name="act_reactions_and_boosts" value="reactions_and_boosts">Reactions and Boosts</button>
+        </div>
+        <input type='hidden' class='sheet-abilities-tabstoggle' name='attr_sheet_abilitiesTab' value='active_abilities' />
+
+        <div class="sheet-active-abilities">
+            <h2>Active Abilities</h2>
+            <label>Advantage Rolls: <input type="number" name="attr_ability_advantage" value="1" min="1"></label>
+            <hr>
+            <fieldset class="repeating_abilities">
+                <label>Ability Name: <input type="text" name="attr_ability_name"></label>
+                <div class="sheet-container">
+                    <div class="sheet-child">
+                        <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-1-arm" value="1" checked="true" />
+                        <label>1-Arm</label>
+                        <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-2-arm" value="2" />
+                        <label>2-Arm</label>
+                        <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-body" value="3" />
+                        <label>Body</label>
+                        <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-mind" value="4" />
+                        <label>Mind</label>
+                        <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-focus" value="5" />
+                        <label>Focus</label>
+                        <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-legs" value="6" />
+                        <label>Legs</label>
+
+                        <input type='hidden' name='attr_ability_limb' value="One Arm"/>
+
+                        <div class="sheet-limb-1-arm"></div>
+                        <div class="sheet-limb-2-arm"></div>
+                        <div class="sheet-limb-body"></div>
+                        <div class="sheet-limb-mind"></div>
+                        <div class="sheet-limb-focus"></div>
+                        <div class="sheet-limb-legs"></div>
+                    </div>
+                </div>
+                
+                <label>Attack Modifier: <input type="text" name="attr_attack_mod" placeholder="e.g. +5"></label>
+                <label>Damage Roll: <input type="text" name="attr_damage_roll" placeholder="e.g. 2d6+3"></label>
+                <button type="roll" value="&{template:default} {{name=@{ability_name}}} {{Limb=@{ability_limb}}} {{Hit=[[ @{ability_advantage}d20kh1+@{attack_mod} ]]}}
+                [Click here to roll damage](~repeating_abilities_damage)">Roll Attack</button>
+                <button type="roll" name="roll_damage" value="&{template:default} {{name=@{ability_name}}} {{Damage=[[ @{damage_roll} ]]}}"></button>
                 <hr>
-                <fieldset class="repeating_abilities">
-                    <label>Ability Name: <input type="text" name="attr_ability_name"></label>
-                    <label>Icon: 
-                        <select name="attr_ability_icon" class="ability_limb_icon">
-                            <option value="1-arm">1 Arm</option>
-                            <option value="2-arm">2 Arm</option>
-                            <option value="body">Body</option>
-                            <option value="mind">Mind</option>
-                            <option value="focus">Focus</option>
-                            <option value="legs">Legs</option>
-                        </select>
-                        <img class="ability_limb_1_arm_preview" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png">
-                        <img class="ability_limb_2_arm_preview" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png">
-                        <img class="ability_limb_body_preview" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/body-icon.png">
-                        <img class="ability_limb_mind_preview" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/mind-icon.png">
-                        <img class="ability_limb_focus_preview" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/focus-icon.png">
-                        <img class="ability_limb_legs_preview" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/leg-icon.png">
-                    </label>
-                    
-                    <label>Attack Modifier: <input type="text" name="attr_attack_mod" placeholder="e.g. +5"></label>
-                    <label>Damage Roll: <input type="text" name="attr_damage_roll" placeholder="e.g. 2d6+3"></label>
-                    <button type="roll" value="&{template:default} {{name=@{ability_name}}} {{Hit=[[ @{ability_advantage}d20kh1+@{attack_mod} ]]}}
-                    [Click here to roll damage](~repeating_abilities_damage)">Roll Attack</button>
-                    <button type="roll" name="roll_damage" value="&{template:default} {{name=@{ability_name}}} {{Damage=[[ @{damage_roll} ]]}}"></button>
-                    <hr>
-                </fieldset>
-            </div>
-            <div class="abilities-column">
-                <h2>Passive Abilities</h2>
-                <fieldset class="repeating_passives">
-                    <label>Name: <input type="text" name="attr_passive_name"></label>
-                    <label>Description: <textarea name="attr_passive_description"></textarea></label>
-                </fieldset>
-            </div>
+            </fieldset>
+        </div>
+        <div class="sheet-passive-abilities">
+            <h2>Passive Abilities</h2>
+            <fieldset class="repeating_passives">
+                <label>Name: <input type="text" name="attr_passive_name"></label>
+                <label>Description: <textarea name="attr_passive_description"></textarea></label>
+            </fieldset>
+        </div>
+        <div class="sheet-reactions-and-boosts">
+            <h2>Reactions and Boosts</h2>
+            <fieldset class="repeating_reactions_and_boosts">
+                <label>Name: <input type="text" name="attr_reaction_and_boost_name"></label>
+                <label>Description: <textarea name="attr_reaction_and_booot_description"></textarea></label>
+            </fieldset>
         </div>
     </div>
 
@@ -122,12 +153,22 @@
     </div>
 
     <script type="text/worker">
-        const buttonlist = ["character","abilities","inventory"];
-        buttonlist.forEach(button => {
+        const main_sheet_buttonlist = ["character","abilities","inventory"];
+        main_sheet_buttonlist.forEach(button => {
             on(`clicked:${button}`, function() {
                 console.log(button)
                 setAttrs({
                     sheetTab: button
+                });
+            });
+        });
+
+        const abilities_buttonlist = ["active_abilities","passive_abilities","reactions_and_boosts"];
+        abilities_buttonlist.forEach(button => {
+            on(`clicked:${button}`, function() {
+                console.log(button)
+                setAttrs({
+                    sheet_abilitiesTab: button
                 });
             });
         });
@@ -143,6 +184,35 @@
                     update[`${stat}_color`] = statValue > 0 ? "positive" : statValue < 0 ? "negative" : "neutral";
                     setAttrs(update);
                 });
+            });
+        });
+
+        const limb_num = "ability_limb_num";
+
+        on(`change:repeating_abilities:${limb_num}`, function() {
+            console.log("changed limb")
+            getAttrs([`repeating_abilities_${limb_num}`], function(values) {
+                console.log(values[`repeating_abilities_${limb_num}`])
+                let limbValue = parseInt(values[`repeating_abilities_${limb_num}`]);
+                console.log(limbValue)
+                let update = {}
+                if (limbValue == 1) {
+                    update[`repeating_abilities_ability_limb`] = "One Arm"
+                } else if (limbValue == 2) {
+                    update[`repeating_abilities_ability_limb`] = "Two Arms"
+                } else if (limbValue == 3) {
+                    update[`repeating_abilities_ability_limb`] = "Body"
+                } else if (limbValue == 4) {
+                    update[`repeating_abilities_ability_limb`] = "Mind"
+                } else if (limbValue == 5) {
+                    update[`repeating_abilities_ability_limb`] = "Focus"
+                } else if (limbValue == 6) {
+                    update[`repeating_abilities_ability_limb`] = "Legs"
+                } else {
+                    update[`repeating_abilities_ability_limb`] = ""
+                }
+                console.log(update)
+                setAttrs(update);
             });
         });
     </script>

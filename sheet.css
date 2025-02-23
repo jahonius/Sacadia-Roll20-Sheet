@@ -1,3 +1,6 @@
+.charsheet {background: #9a7647;}
+
+
 /*Configure the tab buttons*/
 .sheet-character,
 .sheet-abilities,
@@ -6,9 +9,22 @@
 }
 
 /* show the selected tab */
-.sheet-tabstoggle[value="character"] ~ div.sheet-character,
+.sheet-tabstoggle[value="character"] ~ .sheet-character,
 .sheet-tabstoggle[value="abilities"] ~ .sheet-abilities,
-.sheet-tabstoggle[value="inventory"] ~ div.sheet-inventory {
+.sheet-tabstoggle[value="inventory"] ~ .sheet-inventory {
+	display: block;
+}
+
+.sheet-active-abilities,
+.sheet-passive-abilities,
+.sheet-reactions-and-boosts {
+	display: none;
+}
+
+/* show the selected tab */
+.sheet-abilities-tabstoggle[value="active_abilities"] ~ .sheet-active-abilities,
+.sheet-abilities-tabstoggle[value="passive_abilities"] ~ .sheet-passive-abilities,
+.sheet-abilities-tabstoggle[value="reactions_and_boosts"] ~ .sheet-reactions-and-boosts {
 	display: block;
 }
 
@@ -19,7 +35,6 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
     padding: 20px;
 }
@@ -99,7 +114,7 @@ textarea[name="attr_item_description"] {
 }
 
 .sheet-tabs button {
-    background-color: #4A90E2;
+    background-color: #ec9615;
     color: white;
     border: none;
     border-radius: 20px;
@@ -111,7 +126,7 @@ textarea[name="attr_item_description"] {
 }
 
 .sheet-tabs button:hover {
-    background-color: #357ABD;
+    background-color: #bb760e;
 }
 
 /* Hide inactive limb icons 
@@ -119,149 +134,124 @@ textarea[name="attr_item_description"] {
 ------------------------------------------------
 */
 
-/* setup hidden previews */
-
-.ability_limb_1_arm_preview {
-    display: none
-}
-.ability_limb_2_arm_preview {
-    display: none
-}
-.ability_limb_body_preview {
-    display: none
-}
-.ability_limb_mind_preview {
-    display: none
-}
-.ability_limb_focus_preview {
-    display: none
-}
-.ability_limb_legs_preview {
-    display: none
+.charsheet .sheet-container {
+    width: 280px;
 }
 
-/* select 1 arm */
-
-.ability_limb_icon:has(> option[value="1-arm"]:checked) ~ .ability_limb_1_arm_preview {
-    display: inline
-}
-.ability_limb_icon:has(> option[value="1-arm"]:checked) ~ .ability_limb_2_arm_preview {
-    display: none
-}
-.ability_limb_icon:has(> option[value="1-arm"]:checked) ~ .ability_limb_body_preview {
-    display: none
-}
-.ability_limb_icon:has(> option[value="1-arm"]:checked) ~ .ability_limb_mind_preview {
-    display: none
-}
-.ability_limb_icon:has(> option[value="1-arm"]:checked) ~ .ability_limb_focus_preview {
-    display: none
-}
-.ability_limb_icon:has(> option[value="1-arm"]:checked) ~ .ability_limb_legs_preview {
-    display: none
+.charsheet .sheet-container,
+.charsheet .sheet-child {
+    display: inline-block;
 }
 
-/* select 2 arm */
-
-.ability_limb_icon:has(> option[value="2-arm"]:checked) ~ .ability_limb_1_arm_preview {
-	display: none
-}
-.ability_limb_icon:has(> option[value="2-arm"]:checked) ~ .ability_limb_2_arm_preview {
-    display: inline
-}
-.ability_limb_icon:has(> option[value="2-arm"]:checked) ~ .ability_limb_body_preview {
-    display: none
-}
-.ability_limb_icon:has(> option[value="2-arm"]:checked) ~ .ability_limb_mind_preview {
-	display: none
-}
-.ability_limb_icon:has(> option[value="2-arm"]:checked) ~ .ability_limb_focus_preview {
-    display: none
-}
-.ability_limb_icon:has(> option[value="2-arm"]:checked) ~ .ability_limb_legs_preview {
-    display: none
+.charsheet .sheet-child {
+    vertical-align: middle;
+    width: 35px;
+    height: 35px;
 }
 
-/* select body */
-
-.ability_limb_icon:has(> option[value="body"]:checked) ~ .ability_limb_1_arm_preview {
-	display: none
-}
-.ability_limb_icon:has(> option[value="body"]:checked) ~ .ability_limb_2_arm_preview {
-    display: none
-}
-.ability_limb_icon:has(> option[value="body"]:checked) ~ .ability_limb_body_preview {
-    display: inline
-}
-.ability_limb_icon:has(> option[value="body"]:checked) ~ .ability_limb_mind_preview {
-	display: none
-}
-.ability_limb_icon:has(> option[value="body"]:checked) ~ .ability_limb_focus_preview {
-    display: none
-}
-.ability_limb_icon:has(> option[value="body"]:checked) ~ .ability_limb_legs_preview {
-    display: none
+.charsheet .sheet-child input,
+.charsheet .sheet-child input + label {
+    display: none;
+    z-index: 1;
 }
 
-/* select mind */
-
-.ability_limb_icon:has(> option[value="mind"]:checked) ~ .ability_limb_1_arm_preview {
-	display: none
-}
-.ability_limb_icon:has(> option[value="mind"]:checked) ~ .ability_limb_2_arm_preview {
-    display: none
-}
-.ability_limb_icon:has(> option[value="mind"]:checked) ~ .ability_limb_body_preview {
-    display: none
-}
-.ability_limb_icon:has(> option[value="mind"]:checked) ~ .ability_limb_mind_preview {
-	display: inline
-}
-.ability_limb_icon:has(> option[value="mind"]:checked) ~ .ability_limb_focus_preview {
-    display: none
-}
-.ability_limb_icon:has(> option[value="mind"]:checked) ~ .ability_limb_legs_preview {
-    display: none
+.charsheet .sheet-child:hover {
+    background: rgb(228, 131, 5);
+    position:absolute;
+    width: 100px;
+    height: auto;
+    z-index: 1;
+    padding: 5px;
 }
 
-/* select focus */
-
-.ability_limb_icon:has(> option[value="focus"]:checked) ~ .ability_limb_1_arm_preview {
-	display: none
-}
-.ability_limb_icon:has(> option[value="focus"]:checked) ~ .ability_limb_2_arm_preview {
-    display: none
-}
-.ability_limb_icon:has(> option[value="focus"]:checked) ~ .ability_limb_body_preview {
-    display: none
-}
-.ability_limb_icon:has(> option[value="focus"]:checked) ~ .ability_limb_mind_preview {
-	display: none
-}
-.ability_limb_icon:has(> option[value="focus"]:checked) ~ .ability_limb_focus_preview {
-    display: inline
-}
-.ability_limb_icon:has(> option[value="focus"]:checked) ~ .ability_limb_legs_preview {
-    display: none
+.charsheet .sheet-child:hover > div.sheet-limb-1-arm {
+    display: none;
 }
 
-/* select legs */
+.charsheet .sheet-child:hover input,
+.charsheet .sheet-child:hover input + label {
+    display: inline;
+}
 
-.ability_limb_icon:has(> option[value="legs"]:checked) ~ .ability_limb_1_arm_preview {
-	display: none
+.charsheet .sheet-child:hover input + label {
+   margin-right: 50%
 }
-.ability_limb_icon:has(> option[value="legs"]:checked) ~ .ability_limb_2_arm_preview {
-    display: none
+
+.charsheet .sheet-child:hover label {
+    display: inline-block;
 }
-.ability_limb_icon:has(> option[value="legs"]:checked) ~ .ability_limb_body_preview {
-    display: none
+
+.charsheet div.sheet-limb-1-arm {
+    background-position: -411px -1px;
+    width: 35px;
+    height: 35px;
+    background: url("https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png");
+    background-size:cover;
+    background-repeat: no-repeat;
+    color: transparent;
+    display: none;
 }
-.ability_limb_icon:has(> option[value="legs"]:checked) ~ .ability_limb_mind_preview {
-	display: none
+
+.charsheet div.sheet-limb-2-arm {
+    background-position: -703px -1px;
+    width: 35px;
+    height: 35px;
+    background: url("https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png");
+    background-size:cover;
+    background-repeat: no-repeat;
+    color: transparent;
+    display: none;
 }
-.ability_limb_icon:has(> option[value="legs"]:checked) ~ .ability_limb_focus_preview {
-    display: none
+
+.charsheet div.sheet-limb-body {
+    background-position: -411px -1px;
+    width: 35px;
+    height: 35px;
+    background: url("https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/body-icon.png");
+    background-size:cover;
+    background-repeat: no-repeat;
+    color: transparent;
+    display: none;
 }
-.ability_limb_icon:has(> option[value="legs"]:checked) ~ .ability_limb_legs_preview {
-    display: inline
+
+.charsheet div.sheet-limb-mind {
+    background-position: -703px -1px;
+    width: 35px;
+    height: 35px;
+    background: url("https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/mind-icon.png");
+    background-size:cover;
+    background-repeat: no-repeat;
+    color: transparent;
+    display: none;
+}
+
+.charsheet div.sheet-limb-focus {
+    background-position: -411px -1px;
+    width: 35px;
+    height: 35px;
+    background: url("https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/focus-icon.png");
+    background-size:cover;
+    background-repeat: no-repeat;
+    color: transparent;
+    display: none;
+}
+
+.charsheet div.sheet-limb-legs {
+    background-position: -703px -1px;
+    width: 35px;
+    height: 35px;
+    background: url("https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/leg-icon.png");
+    background-size:cover;
+    background-repeat: no-repeat;
+    color: transparent;
+    display: none;
+}
+
+.charsheet .sheet-child:not(:hover) input.sheet-select-radio.sheet-limb-1-arm:checked ~ div.sheet-limb-1-arm,
+.charsheet .sheet-child:not(:hover) input.sheet-select-radio.sheet-limb-2-arm:checked ~ div.sheet-limb-2-arm,
+.charsheet .sheet-child:not(:hover) input.sheet-select-radio.sheet-limb-body:checked ~ div.sheet-limb-body,
+.charsheet .sheet-child:not(:hover) input.sheet-select-radio.sheet-limb-mind:checked ~ div.sheet-limb-mind,
+.charsheet .sheet-child:not(:hover) input.sheet-select-radio.sheet-limb-focus:checked ~ div.sheet-limb-focus,
+.charsheet .sheet-child:not(:hover) input.sheet-select-radio.sheet-limb-legs:checked ~ div.sheet-limb-legs {
+    display: block;
 }
