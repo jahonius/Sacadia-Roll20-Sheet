@@ -12,6 +12,11 @@
 	display: block;
 }
 
+.fieldsets {
+	display: grid;
+	gap: 2rem;
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -107,4 +112,156 @@ textarea[name="attr_item_description"] {
 
 .sheet-tabs button:hover {
     background-color: #357ABD;
+}
+
+/* Hide inactive limb icons 
+------------------------------------------------
+------------------------------------------------
+*/
+
+/* setup hidden previews */
+
+.ability_limb_1_arm_preview {
+    display: none
+}
+.ability_limb_2_arm_preview {
+    display: none
+}
+.ability_limb_body_preview {
+    display: none
+}
+.ability_limb_mind_preview {
+    display: none
+}
+.ability_limb_focus_preview {
+    display: none
+}
+.ability_limb_legs_preview {
+    display: none
+}
+
+/* select 1 arm */
+
+.ability_limb_icon:has(> option[value="1-arm"]:checked) ~ .ability_limb_1_arm_preview {
+    display: inline
+}
+.ability_limb_icon:has(> option[value="1-arm"]:checked) ~ .ability_limb_2_arm_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="1-arm"]:checked) ~ .ability_limb_body_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="1-arm"]:checked) ~ .ability_limb_mind_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="1-arm"]:checked) ~ .ability_limb_focus_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="1-arm"]:checked) ~ .ability_limb_legs_preview {
+    display: none
+}
+
+/* select 2 arm */
+
+.ability_limb_icon:has(> option[value="2-arm"]:checked) ~ .ability_limb_1_arm_preview {
+	display: none
+}
+.ability_limb_icon:has(> option[value="2-arm"]:checked) ~ .ability_limb_2_arm_preview {
+    display: inline
+}
+.ability_limb_icon:has(> option[value="2-arm"]:checked) ~ .ability_limb_body_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="2-arm"]:checked) ~ .ability_limb_mind_preview {
+	display: none
+}
+.ability_limb_icon:has(> option[value="2-arm"]:checked) ~ .ability_limb_focus_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="2-arm"]:checked) ~ .ability_limb_legs_preview {
+    display: none
+}
+
+/* select body */
+
+.ability_limb_icon:has(> option[value="body"]:checked) ~ .ability_limb_1_arm_preview {
+	display: none
+}
+.ability_limb_icon:has(> option[value="body"]:checked) ~ .ability_limb_2_arm_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="body"]:checked) ~ .ability_limb_body_preview {
+    display: inline
+}
+.ability_limb_icon:has(> option[value="body"]:checked) ~ .ability_limb_mind_preview {
+	display: none
+}
+.ability_limb_icon:has(> option[value="body"]:checked) ~ .ability_limb_focus_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="body"]:checked) ~ .ability_limb_legs_preview {
+    display: none
+}
+
+/* select mind */
+
+.ability_limb_icon:has(> option[value="mind"]:checked) ~ .ability_limb_1_arm_preview {
+	display: none
+}
+.ability_limb_icon:has(> option[value="mind"]:checked) ~ .ability_limb_2_arm_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="mind"]:checked) ~ .ability_limb_body_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="mind"]:checked) ~ .ability_limb_mind_preview {
+	display: inline
+}
+.ability_limb_icon:has(> option[value="mind"]:checked) ~ .ability_limb_focus_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="mind"]:checked) ~ .ability_limb_legs_preview {
+    display: none
+}
+
+/* select focus */
+
+.ability_limb_icon:has(> option[value="focus"]:checked) ~ .ability_limb_1_arm_preview {
+	display: none
+}
+.ability_limb_icon:has(> option[value="focus"]:checked) ~ .ability_limb_2_arm_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="focus"]:checked) ~ .ability_limb_body_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="focus"]:checked) ~ .ability_limb_mind_preview {
+	display: none
+}
+.ability_limb_icon:has(> option[value="focus"]:checked) ~ .ability_limb_focus_preview {
+    display: inline
+}
+.ability_limb_icon:has(> option[value="focus"]:checked) ~ .ability_limb_legs_preview {
+    display: none
+}
+
+/* select legs */
+
+.ability_limb_icon:has(> option[value="legs"]:checked) ~ .ability_limb_1_arm_preview {
+	display: none
+}
+.ability_limb_icon:has(> option[value="legs"]:checked) ~ .ability_limb_2_arm_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="legs"]:checked) ~ .ability_limb_body_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="legs"]:checked) ~ .ability_limb_mind_preview {
+	display: none
+}
+.ability_limb_icon:has(> option[value="legs"]:checked) ~ .ability_limb_focus_preview {
+    display: none
+}
+.ability_limb_icon:has(> option[value="legs"]:checked) ~ .ability_limb_legs_preview {
+    display: inline
 }

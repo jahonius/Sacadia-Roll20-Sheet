@@ -64,13 +64,35 @@
 
     <div class="sheet-abilities">
         <div class="abilities-container">
-            <img src="resources/full-actions.png" alt="All Actions">
+            <div class="abilities-column">
+                <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/full-actions.png" style="height: 80%" alt="All Actions">
+            </div>
+        </div>
+        
+        <div class="abilities-container">
             <div class="abilities-column">
                 <h2>Active Abilities</h2>
                 <label>Advantage Rolls: <input type="number" name="attr_ability_advantage" value="1" min="1"></label>
                 <hr>
                 <fieldset class="repeating_abilities">
                     <label>Ability Name: <input type="text" name="attr_ability_name"></label>
+                    <label>Icon: 
+                        <select name="attr_ability_icon" class="ability_limb_icon">
+                            <option value="1-arm">1 Arm</option>
+                            <option value="2-arm">2 Arm</option>
+                            <option value="body">Body</option>
+                            <option value="mind">Mind</option>
+                            <option value="focus">Focus</option>
+                            <option value="legs">Legs</option>
+                        </select>
+                        <img class="ability_limb_1_arm_preview" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png">
+                        <img class="ability_limb_2_arm_preview" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png">
+                        <img class="ability_limb_body_preview" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/body-icon.png">
+                        <img class="ability_limb_mind_preview" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/mind-icon.png">
+                        <img class="ability_limb_focus_preview" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/focus-icon.png">
+                        <img class="ability_limb_legs_preview" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/leg-icon.png">
+                    </label>
+                    
                     <label>Attack Modifier: <input type="text" name="attr_attack_mod" placeholder="e.g. +5"></label>
                     <label>Damage Roll: <input type="text" name="attr_damage_roll" placeholder="e.g. 2d6+3"></label>
                     <button type="roll" value="&{template:default} {{name=@{ability_name}}} {{Hit=[[ @{ability_advantage}d20kh1+@{attack_mod} ]]}}
@@ -103,13 +125,13 @@
         const buttonlist = ["character","abilities","inventory"];
         buttonlist.forEach(button => {
             on(`clicked:${button}`, function() {
+                console.log(button)
                 setAttrs({
                     sheetTab: button
                 });
             });
         });
-    </script>
-    <script type="text/worker">
+
         const stats = ["power", "finesse", "wiles", "courage", "fate"];
         
         stats.forEach(stat => {
