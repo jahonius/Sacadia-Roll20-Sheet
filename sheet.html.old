@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Character Sheet</title>
+</head>
+<body>
+    <div class="character-sheet">
+        <h1>Character Sheet</h1>
+        <div class="sheet-tabs">
+            <button type="action" name="act_character" >Character</button>
+            <button type="action" name="act_abilities" >Abilities</button>
+            <button type="action" name="act_inventory" >Inventory</button>
+        </div>
+        
+        <p></p>
+        <input type='hidden' class='sheet-tabstoggle' name='attr_sheetTab'  value='character'  />
+        
+        <div class="sheet-character">
+            <label>Name: <input type="text" name="attr_character_name"></label>
+            <label>Race: <input type="text" name="attr_race"></label>
+            <label>Profession: <input type="text" name="attr_profession"></label>
+            <hr>
+            <table class="stats-table">
+                <tr>
+                    <td><strong>Level</strong><br><input type="number" name="attr_level" value="0"></td>
+                    <td><strong>Proficiency</strong><br><input type="number" name="attr_proficiency" value="0"></td>
+                    <td><strong>AP</strong><br><input type="number" name="attr_ap" value="0"></td>
+                    <td><strong>Movement Speed</strong><br><input type="number" name="attr_move" value="0"></td>
+                    <td><strong>Current Health</strong><br><input type="number" name="attr_health" value="0"></td>
+                    <td><strong>Max Health</strong><br><input type="number" name="attr_health_max" value="0"></td>
+                </tr>
+            </table>
+            <hr>
+            <table class="stats-table">
+                <tr>
+                    <td>Physical Defense<br><input type="number" name="attr_pd" value="0"></td>
+                    <td>Mental Defense<br><input type="number" name="attr_md" value="0"></td>
+                    <td>Check DC<br><input type="number" name="attr_check_dc" value="0"></td>
+                </tr>
+            </table>
+            <hr>
+            <table class="stats-table">
+                <tr>
+                    <td>Power<br><input type="hidden" name="attr_power_color" value="neutral"><span class="stat-display" name="attr_power_display">0</span>&nbsp;<input type="number" name="attr_power" value="0"><br><input type="checkbox" name="attr_power_prof" value="1"><br>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{power} + (@{power_prof}*@{proficiency}) ]]}}">Roll</button>
+                    </td>
+                    <td>Finesse<br><input type="hidden" name="attr_finesse_color" value="neutral"><span class="stat-display" name="attr_finesse_display">0</span>&nbsp;<input type="number" name="attr_finesse" value="0"><br><input type="checkbox" name="attr_finesse_prof" value="1"><br>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Finesse=[[ @{stat_advantage}d20kh1+@{finesse} + (@{finesse_prof}*@{proficiency}) ]]}}">Roll</button>
+                    </td>
+                    <td>Wiles<br><input type="hidden" name="attr_wiles_color" value="neutral"><span class="stat-display" name="attr_wiles_display">0</span>&nbsp;<input type="number" name="attr_wiles" value="0"><br><input type="checkbox" name="attr_wiles_prof" value="1"><br>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Wiles=[[ @{stat_advantage}d20kh1+@{wiles} + (@{wiles_prof}*@{proficiency}) ]]}}">Roll</button>
+                    </td>
+                    <td>Courage<br><input type="hidden" name="attr_courage_color" value="neutral"><span class="stat-display" name="attr_courage_display">0</span>&nbsp;<input type="number" name="attr_courage" value="0"><br><input type="checkbox" name="attr_courage_prof" value="1"><br>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Courage=[[ @{stat_advantage}d20kh1+@{courage} + (@{courage_prof}*@{proficiency}) ]]}}">Roll</button>
+                    </td>
+                    <td>Fate<br><input type="hidden" name="attr_fate_color" value="neutral"><span class="stat-display" name="attr_fate_display">0</span>&nbsp;<input type="number" name="attr_fate" value="0"><br><input type="checkbox" name="attr_fate_prof" value="1"><br>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Fate=[[ @{stat_advantage}d20kh1+@{fate} + (@{fate_prof}*@{proficiency}) ]]}}">Roll</button>
+                    </td>
+                </tr>
+            </table>
+            <hr>
+            <label>Stat Rolls Advantage: <input type="number" name="attr_stat_advantage" value="1" min="1"></label>
+        </div>
+
+    <div class="sheet-abilities">
+        <div class="abilities-container">
+            <div class="abilities-column">
+                <h2>Active Abilities</h2>
+                <label>Advantage Rolls: <input type="number" name="attr_ability_advantage" value="1" min="1"></label>
+                <hr>
+                <fieldset class="repeating_abilities">
+                    <label>Ability Name: <input type="text" name="attr_ability_name"></label>
+                    <label>Attack Modifier: <input type="number" name="attr_attack_mod" placeholder="e.g. +5"></label>
+                    <label>Damage Roll: <input type="text" name="attr_damage_roll" placeholder="e.g. 2d6+3"></label>
+                    <button type="roll" value="&{template:default} {{name=@{ability_name}}} {{Hit=[[ @{ability_advantage}d20kh1+@{attack_mod} ]]}}
+                    [Click here to roll damage](~repeating_abilities_damage)">Roll Attack</button>
+                    <button type="roll" name="roll_damage" value="&{template:default} {{name=@{ability_name}}} {{Damage=[[ @{damage_roll} ]]}}"></button>
+                    <hr>
+                </fieldset>
+            </div>
+            <div class="abilities-column">
+                <h2>Passive Abilities</h2>
+                <fieldset class="repeating_passives">
+                    <label>Name: <input type="text" name="attr_passive_name"></label>
+                    <label>Description: <textarea name="attr_passive_description"></textarea></label>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <div class="sheet-inventory">
+        <h2>Inventory</h2>
+        <fieldset class="repeating_inventory">
+            <label>Item Name: <input type="text" name="attr_item_name"></label>
+            <label>Description: <textarea name="attr_item_description" rows=2></textarea></label>
+            <label>Value: <input type="text" name="attr_item_value"></label>
+        </fieldset>
+    </div>
+
+    <script type="text/worker">
+        const buttonlist = ["character","abilities","inventory"];
+        buttonlist.forEach(button => {
+            on(`clicked:${button}`, function() {
+                setAttrs({
+                    sheetTab: button
+                });
+            });
+        });
+    </script>
+    <script type="text/worker">
+        const stats = ["power", "finesse", "wiles", "courage", "fate"];
+        
+        stats.forEach(stat => {
+            on(`change:${stat}`, function() {
+                getAttrs([stat], function(values) {
+                    let statValue = parseInt(values[stat]) || 0;
+                    let update = {};
+                    update[`${stat}_display`] = statValue;
+                    update[`${stat}_color`] = statValue > 0 ? "positive" : statValue < 0 ? "negative" : "neutral";
+                    setAttrs(update);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
