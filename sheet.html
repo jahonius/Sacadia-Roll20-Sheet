@@ -14,7 +14,6 @@
         <input type='hidden' class='sheet-tabstoggle' name='attr_sheetTab' value='character' />
         
         <p></p>
-        <input type='hidden' class='sheet-tabstoggle' name='attr_sheetTab'  value='character'  />
         
         <div class="sheet-character">
             <label>Name: <input type="text" name="attr_character_name"></label>
@@ -65,13 +64,14 @@
 
     <div class="sheet-abilities">
         <div class="abilities-container">
+            <img src="resources/full-actions.png" alt="All Actions">
             <div class="abilities-column">
                 <h2>Active Abilities</h2>
                 <label>Advantage Rolls: <input type="number" name="attr_ability_advantage" value="1" min="1"></label>
                 <hr>
                 <fieldset class="repeating_abilities">
                     <label>Ability Name: <input type="text" name="attr_ability_name"></label>
-                    <label>Attack Modifier: <input type="number" name="attr_attack_mod" placeholder="e.g. +5"></label>
+                    <label>Attack Modifier: <input type="text" name="attr_attack_mod" placeholder="e.g. +5"></label>
                     <label>Damage Roll: <input type="text" name="attr_damage_roll" placeholder="e.g. 2d6+3"></label>
                     <button type="roll" value="&{template:default} {{name=@{ability_name}}} {{Hit=[[ @{ability_advantage}d20kh1+@{attack_mod} ]]}}
                     [Click here to roll damage](~repeating_abilities_damage)">Roll Attack</button>
