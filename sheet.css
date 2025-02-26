@@ -42,7 +42,7 @@ body {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    max-width: 800px;
+    width: 1000px;
     margin: auto;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
@@ -68,6 +68,9 @@ body {
 .sheet-section.selected {
     display: block;
 }
+.stat-roll {
+    font-size: 18px !important;
+}
 .stats-table {
     width: 100%;
     border-collapse: collapse;
@@ -81,34 +84,51 @@ body {
 .stat-display {
     font-size: 24px;
     font-weight: bold;
-    display: block;
+    display: table;
+    margin: 0 auto;
     text-align: center;
     margin-top: 5px;
     border: none;
     background: transparent;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
     width: 50px;
 }
-[name$="_color"][value="positive"] ~ .stat-display {
-    color: green;
+[name$="_color"][value="1"] ~ .stat-display {
+    color: rgb(241, 223, 56);
 }
-[name$="_color"][value="negative"] ~ .stat-display {
-    color: red;
+[name$="_color"][value="2"] ~ .stat-display {
+    color: rgb(213, 241, 56);
 }
-[name$="_color"][value="neutral"] ~ .stat-display {
-    color: black;
+[name$="_color"][value="3"] ~ .stat-display {
+    color: rgb(176, 241, 56);
 }
-.abilities-container {
-    display: inline-flex;
+[name$="_color"][value="4"] ~ .stat-display {
+    color: rgb(124, 241, 56);
 }
-.abilities-column {
-    width: 100%;
+[name$="_color"][value="5"] ~ .stat-display {
+    color: rgb(93, 241, 56);
+}
+[name$="_color"][value="6"] ~ .stat-display {
+    color: rgb(18, 233, 47);
+}
+.column-container {
+    display: flex;
+    column-gap: 30px;
+}
+.thirds-column {
+    width: 33%;
 }
 
-textarea[name="attr_passive_description"] {
-    height: 50px; /* Adjust height as needed */
+.smallmargin {
+    margin-top: 4px; 
+    margin-bottom: 4px;
 }
 
-textarea[name="attr_item_description"] {
+.halfs-column {
+    width: 50%;
+}
+
+textarea {
     height: 50px; /* Adjust height as needed */
 }
 
@@ -149,8 +169,8 @@ textarea[name="attr_item_description"] {
 
 .charsheet .sheet-child {
     vertical-align: middle;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
 }
 
 .charsheet .sheet-child input,
@@ -187,8 +207,8 @@ textarea[name="attr_item_description"] {
 
 .charsheet div.sheet-limb-1-arm {
     background-position: -411px -1px;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     background: url("https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png");
     background-size:cover;
     background-repeat: no-repeat;
@@ -198,8 +218,8 @@ textarea[name="attr_item_description"] {
 
 .charsheet div.sheet-limb-2-arm {
     background-position: -703px -1px;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     background: url("https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png");
     background-size:cover;
     background-repeat: no-repeat;
@@ -209,8 +229,8 @@ textarea[name="attr_item_description"] {
 
 .charsheet div.sheet-limb-body {
     background-position: -411px -1px;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     background: url("https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/body-icon.png");
     background-size:cover;
     background-repeat: no-repeat;
@@ -220,8 +240,8 @@ textarea[name="attr_item_description"] {
 
 .charsheet div.sheet-limb-mind {
     background-position: -703px -1px;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     background: url("https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/mind-icon.png");
     background-size:cover;
     background-repeat: no-repeat;
@@ -231,8 +251,8 @@ textarea[name="attr_item_description"] {
 
 .charsheet div.sheet-limb-focus {
     background-position: -411px -1px;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     background: url("https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/focus-icon.png");
     background-size:cover;
     background-repeat: no-repeat;
@@ -242,8 +262,8 @@ textarea[name="attr_item_description"] {
 
 .charsheet div.sheet-limb-legs {
     background-position: -703px -1px;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     background: url("https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/leg-icon.png");
     background-size:cover;
     background-repeat: no-repeat;
@@ -281,16 +301,21 @@ textarea[name="attr_item_description"] {
 .sheet-slider {
     position: absolute;
     cursor: pointer;
+    margin-left: 20px;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    width: 70%;
+    width: 68%;
     height: 235%;
     background-color: #ccc;
     transition: 0.4s;
     border-radius: 24px;
 }
+
+div.abilities-column + div.abilities-column {
+    margin-left: 40px;
+  }
 
 .sheet-slider:before {
     position: absolute;
@@ -310,5 +335,5 @@ input:checked + .sheet-slider {
 }
 
 input:checked + .sheet-slider:before {
-    transform: translateX(80px);
+    transform: translateX(8vw);
 }

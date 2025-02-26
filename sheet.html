@@ -4,79 +4,366 @@
     
 </head>
 <body>
-    <div class="character-sheet">
-        <h1>Character Sheet</h1>
-        <div class="sheet-tabs">
-            <button type="action" name="act_character" value="character">Character</button>
-            <button type="action" name="act_abilities" value="abilities">Abilities</button>
-            <button type="action" name="act_inventory" value="inventory">Inventory</button>
+<div class="character-sheet">
+    <h1>Character Sheet</h1>
+    <div class="sheet-tabs">
+        <button type="action" name="act_character" value="character">Character</button>
+        <button type="action" name="act_abilities" value="abilities">Abilities</button>
+        <button type="action" name="act_inventory" value="inventory">Inventory</button>
+    </div>
+    <input type='hidden' class='sheet-tabstoggle' name='attr_sheetTab' value='character' />
+    
+    <p></p>
+        
+    <div class="sheet-character">
+        <div class="column-container">
+            <div class="halfs-column">
+                <label>Name: <input type="text" name="attr_character_name"></label>
+                <label>Ancestry: <input type="text" name="attr_race"></label>
+            </div>
+            <div>
+                <label>Profession: <input type="text" name="attr_profession"></label>
+                <label>Culture: <input type="text" name="attr_culture"></label>
+            </div>
         </div>
-        <input type='hidden' class='sheet-tabstoggle' name='attr_sheetTab' value='character' />
-        
-        <p></p>
-        
-        <div class="sheet-character">
-            <label>Name: <input type="text" name="attr_character_name"></label>
-            <label>Race: <input type="text" name="attr_race"></label>
-            <label>Profession: <input type="text" name="attr_profession"></label>
-            <hr>
-            <table class="stats-table">
-                <tr>
-                    <td><strong>Level</strong><br><input type="number" name="attr_level" value="0"></td>
-                    <td><strong>Proficiency</strong><br><input type="number" name="attr_proficiency" value="0"></td>
-                    <td><strong>AP</strong><br><input type="number" name="attr_ap" value="0"></td>
-                    <td><strong>Movement Speed</strong><br><input type="number" name="attr_move" value="0"></td>
-                    <td><strong>Current Health</strong><br><input type="number" name="attr_health" value="0"></td>
-                    <td><strong>Max Health</strong><br><input type="number" name="attr_health_max" value="0"></td>
-                </tr>
-            </table>
-            <hr>
-            <table class="stats-table">
-                <tr>
-                    <td>Physical Defense<br><input type="number" name="attr_pd" value="0"></td>
-                    <td>Mental Defense<br><input type="number" name="attr_md" value="0"></td>
-                    <td>Check DC<br><input type="number" name="attr_check_dc" value="0"></td>
-                </tr>
-            </table>
-            <hr>
-            <table class="stats-table">
-                <tr>
-                    <td>Power<br><input type="hidden" name="attr_power_color" value="neutral"><span class="stat-display" name="attr_power_display">0</span>&nbsp;<input type="number" name="attr_power" value="0"><br>
+        <hr>
+        <table class="stats-table">
+            <tr>
+                <td><strong>Level</strong><br><input type="number" name="attr_level" value="0"></td>
+                <td><strong>Proficiency</strong><br><input type="number" name="attr_proficiency" value="0"></td>
+                <td><strong>AP</strong><br><input type="number" name="attr_ap" value="0"></td>
+                <td><strong>Movement Speed</strong><br><input type="number" name="attr_move" value="0"></td>
+                <td><strong>Current Health</strong><br><input type="number" name="attr_health" value="0"></td>
+                <td><strong>Max Health</strong><br><input type="number" name="attr_health_max" value="0"></td>
+            </tr>
+        </table>
+        <hr>
+        <table class="stats-table">
+            <tr>
+                <td><h3>Physical Defense</h3><input type="number" name="attr_pd" value="0"></td>
+                <td><h3>Mental Defense</h3><input type="number" name="attr_md" value="0"></td>
+                <td><h3>Check DC</h3><input type="number" name="attr_check_dc" value="0"></td>
+            </tr>
+        </table>
+        <hr>
+        <table class="stats-table">
+            <tr>
+                <td><h3>Power</h3><input type="hidden" name="attr_power_color" value="neutral">
+                    <span class="stat-display" name="attr_power_display">0</span>
+                    &nbsp;
+                    <input type="number" name="attr_power" value="0">
+                    <br>
+                    <button type="roll" class="stat-roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{power} + @{proficiency} ]]}}">Roll</button>
+                </td>
+                <td><h3>Finesse</h3><input type="hidden" name="attr_finesse_color" value="neutral">
+                    <span class="stat-display" name="attr_finesse_display">0</span>
+                    &nbsp;
+                    <input type="number" name="attr_finesse" value="0">
+                    <br>
+                    <button type="roll" class="stat-roll" value="&{template:default} {{name=Stat Roll}} {{Finesse=[[ @{stat_advantage}d20kh1+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                </td>
+                <td><h3>Wiles</h3><input type="hidden" name="attr_wiles_color" value="neutral">
+                    <span class="stat-display" name="attr_wiles_display">0</span>
+                    &nbsp;
+                    <input type="number" name="attr_wiles" value="0">
+                    <br>
+                    <button type="roll" class="stat-roll" value="&{template:default} {{name=Stat Roll}} {{Wiles=[[ @{stat_advantage}d20kh1+@{wiles} + *@{proficiency} ]]}}">Roll</button>
+                </td>
+                <td><h3>Courage</h3><input type="hidden" name="attr_courage_color" value="neutral">
+                    <span class="stat-display" name="attr_courage_display">0</span>
+                    &nbsp;
+                    <input type="number" name="attr_courage" value="0">
+                    <br>
+                    <button type="roll" class="stat-roll" value="&{template:default} {{name=Stat Roll}} {{Courage=[[ @{stat_advantage}d20kh1+@{courage} + *@{proficiency} ]]}}">Roll</button>
+                </td>
+                <td><h3>Fate</h3><input type="hidden" name="attr_fate_color" value="neutral">
+                    <span class="stat-display" name="attr_fate_display">0</span>
+                    &nbsp;
+                    <input type="number" name="attr_fate" value="0">
+                    <br>
+                    <button type="roll" class="stat-roll" value="&{template:default} {{name=Stat Roll}} {{Fate=[[ @{stat_advantage}d20kh1+@{fate} + @{proficiency} ]]}}">Roll</button>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <label>Stat Rolls Advantage: 
+            <input type="number" name="attr_stat_advantage" value="1" min="1">
+        </label>
+
+        <hr>
+
+        <div class="column-container">
+            <div class="thirds-column">
+                <h2 style="text-align: center;">General Talents</h2>
+                <label>Available Talent Points: 
+                    <input type="text" name="attr_available_talents" value="0" min="0">
+                </label>
+                <br>
+                <h3 style="text-align: center;">---- Crafting ----</h3>
+                <div style="text-align: center;" class="column-container">
+                    <div class="halfs-column">
+                        <hr class="smallmargin">
+                        <div style="text-align: left;" class="column-container">
+                            <div class="halfs-column">
+                                <strong>Alchemy</strong>
+                            </div>
+                            <div class="halfs-column">
+                                <input type="checkbox" name="attr_prof_alchemy">
+                            </div>
+                        </div>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                        <hr class="smallmargin">
+                        <div style="text-align: left;" class="column-container">
+                            <div class="halfs-column">
+                                <strong>Art</strong>
+                            </div>
+                            <div class="halfs-column">
+                                <input type="checkbox" name="attr_prof_art">
+                            </div>
+                        </div>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                        <hr class="smallmargin">
+                        <div style="text-align: left;" class="column-container">
+                            <div class="halfs-column">
+                                <strong>Construction</strong>
+                            </div>
+                            <div class="halfs-column">
+                                <input type="checkbox" name="attr_prof_construction">
+                            </div>
+                        </div>
                         <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{power} + @{proficiency} ]]}}">Roll</button>
-                    </td>
-                    <td>Finesse<br><input type="hidden" name="attr_finesse_color" value="neutral"><span class="stat-display" name="attr_finesse_display">0</span>&nbsp;<input type="number" name="attr_finesse" value="0"><br>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Finesse=[[ @{stat_advantage}d20kh1+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                    </td>
-                    <td>Wiles<br><input type="hidden" name="attr_wiles_color" value="neutral"><span class="stat-display" name="attr_wiles_display">0</span>&nbsp;<input type="number" name="attr_wiles" value="0"><br>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Wiles=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                    </td>
-                    <td>Courage<br><input type="hidden" name="attr_courage_color" value="neutral"><span class="stat-display" name="attr_courage_display">0</span>&nbsp;<input type="number" name="attr_courage" value="0"><br>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Courage=[[ @{stat_advantage}d20kh1+@{courage} + *@{proficiency} ]]}}">Roll</button>
-                    </td>
-                    <td>Fate<br><input type="hidden" name="attr_fate_color" value="neutral"><span class="stat-display" name="attr_fate_display">0</span>&nbsp;<input type="number" name="attr_fate" value="0"><br>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Fate=[[ @{stat_advantage}d20kh1+@{fate} + @{proficiency} ]]}}">Roll</button>
-                    </td>
-                </tr>
-            </table>
-            <hr>
-            <label>Stat Rolls Advantage: <input type="number" name="attr_stat_advantage" value="1" min="1"></label>
+                        <hr class="smallmargin">
+                        <div style="text-align: left;" class="column-container">
+                            <div class="halfs-column">
+                                <strong>Cooking</strong>
+                            </div>
+                            <div class="halfs-column">
+                                <input type="checkbox" name="attr_prof_cooking">
+                            </div>
+                        </div>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                        <hr class="smallmargin">
+                    </div>
+                    <div class="halfs-column">
+                        <hr class="smallmargin">
+                        <div style="text-align: left;" class="column-container">
+                            <div class="halfs-column">
+                                <strong>Herbalism</strong>
+                            </div>
+                            <div class="halfs-column">
+                                <input type="checkbox" name="attr_prof_herbalism">
+                            </div>
+                        </div>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                        <hr class="smallmargin">
+                        <div style="text-align: left;" class="column-container">
+                            <div class="halfs-column">
+                                <strong>Ritual</strong>
+                            </div>
+                            <div class="halfs-column">
+                                <input type="checkbox" name="attr_prof_ritual">
+                            </div>
+                        </div>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                        <hr class="smallmargin">
+                        <div style="text-align: left;" class="column-container">
+                            <div class="halfs-column">
+                                <strong>Smithing</strong>
+                            </div>
+                            <div class="halfs-column">
+                                <input type="checkbox" name="attr_prof_smithing">
+                            </div>
+                        </div>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                        <hr class="smallmargin">
+                        <div style="text-align: left;" class="column-container">
+                            <div class="halfs-column">
+                                <strong>Tailor</strong>
+                            </div>
+                            <div class="halfs-column">
+                                <input type="checkbox" name="attr_prof_tailor">
+                            </div>
+                        </div>
+                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                        <hr class="smallmargin">
+                    </div>
+                </div>
+                <br>
+                <h3 style="text-align: center;">---- Knowledge ----</h3>
+                <br>
+                <div class="column-container">
+                    <div class="halfs-column">
+
+                    </div>
+                    <div class="halfs-column">
+                        
+                    </div>
+                </div>
+                <br>
+                <h3 style="text-align: center;">---- Action ----</h3>
+                <br>
+                <div class="column-container">
+                    <div class="halfs-column">
+
+                    </div>
+                    <div class="halfs-column">
+                        
+                    </div>
+                </div>
+                <br>
+                <h3 style="text-align: center;">---- General ----</h3>
+                <br>
+                <div class="column-container">
+                    <div class="halfs-column">
+
+                    </div>
+                    <div class="halfs-column">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="thirds-column">
+                <h2 style="text-align: center;">Specialized Talents</h2>
+                <br>
+                <hr>
+                <fieldset class="repeating_talents">
+                    <strong>Talent</strong> <input type="text" name="attr_special_talent_name">
+                    <br>
+                    <strong>Cost</strong><input type="text" name="attr_special_talent_cost">
+                    <br>
+                    <strong>Description</strong><textarea name="attr_special_talent_desc">
+                    <br>
+                    <hr>
+                </fieldset>
+                
+            </div>
+
+            <div class="thirds-column">
+                <h2 style="text-align: center;">Weapons</h2>
+                <h3>I.</h3> <input type="text">
+                <br>
+                Base Damage Dice: <input type="number">
+                <div class="column-container">
+                    <div class="thirds-column">
+                        <div class="column-container">
+                            <div class="halfs-column" style="text-align:right;">
+                                <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png">
+                            </div>
+                            <div class="halfs-column">
+                                <input type="checkbox" name="attr_weapon1_1_hand">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="thirds-column">
+                        <div class="column-container">
+                            <div class="halfs-column" style="text-align:right;">
+                                <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png">
+                            </div>
+                            <div class="halfs-column">
+                                <input type="checkbox" name="attr_weapon1_2_hand">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="thirds-column">
+
+                    </div>
+                </div>
+                <br>
+                <h3>II.</h3> <input type="text">
+                <br>
+                Base Damage Dice: <input type="number">
+                <div class="column-container">
+                    <div class="thirds-column">
+                        <div class="column-container">
+                            <div class="halfs-column" style="text-align:right;">
+                                <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png">
+                            </div>
+                            <div class="halfs-column">
+                                <input type="checkbox" name="attr_weapon2_1_hand">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="thirds-column">
+                        <div class="column-container">
+                            <div class="halfs-column" style="text-align:right;">
+                                <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png">
+                            </div>
+                            <div class="halfs-column">
+                                <input type="checkbox" name="attr_weapon2_2_hand">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="thirds-column">
+
+                    </div>
+                </div>
+                <br>
+                <h3>III.</h3> <input type="text">
+                <br>
+                Base Damage Dice: <input type="number">
+                <div class="column-container">
+                    <div class="thirds-column">
+                        <div class="column-container">
+                            <div class="halfs-column" style="text-align:right;">
+                                <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png">
+                            </div>
+                            <div class="halfs-column">
+                                <input type="checkbox" name="attr_weapon3_1_hand">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="thirds-column">
+                        <div class="column-container">
+                            <div class="halfs-column" style="text-align:right;">
+                                <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png">
+                            </div>
+                            <div class="halfs-column">
+                                <input type="checkbox" name="attr_weapon3_2_hand">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="thirds-column">
+
+                    </div>
+                </div>
+                <br>
+                <h2 style="text-align: center;">Armor</h2>
+                <h3>Set:</h3> <input type="text">
+                <br>
+                <h3>Add-On:</h3> <input type="text">
+                <br>
+                <h3>Trinket:</h3> <input type="text">
+                <br>
+                <h3>Shield:</h3> <input type="text">
+                <br>
+                <h3>Trinket 2:</h3> <input type="text">
+            </div>
         </div>
+
+    </div>
 
     <div class="sheet-abilities">
         <h2 style="text-align: center;">Abilities</h2>
         <hr>
-        <div class="abilities-container">
-            <div class="abilities-column">
+        <h3 style="text-align: center;">Limb Exhaustion Tracker</h3>
+        <br>
+        <div>
+            <button style="display: block; margin: auto;" type="action" name="act_reset_limb_exh">Reset Limbs</button>
+        </div>
+        <br>
+        <div class="column-container">
+            <div class="thirds-column">
                 <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/full-actions.png" alt="All Actions">
             </div>
-            <div class="abilities-column">
+            <div class="thirds-column">
                 <div>
                     <span><strong>Left Arm</strong></span>
                     <br>
                     <div class="sheet-sameline">
                         <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png" style="width: 20%; padding: 0px !important;">
                         <label class="sheet-switch">
-                            <input type="checkbox" name="attr_toggle_exh_1_arm" value="1">
+                            <input type="checkbox" name="attr_toggle_exh_left" value="1">
                             <span class="sheet-slider"></span>
                         </label>
                     </div>
@@ -88,7 +375,7 @@
                     <div class="sheet-sameline">
                         <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png" style="width: 20%; padding: 0px !important;">
                         <label class="sheet-switch">
-                            <input type="checkbox" name="attr_toggle_exh_2_arm" value="1">
+                            <input type="checkbox" name="attr_toggle_exh_right" value="1">
                             <span class="sheet-slider"></span>
                         </label>
                     </div>
@@ -105,8 +392,20 @@
                         </label>
                     </div>
                 </div>
+                <br>
+                <div>
+                    <span><strong>Reaction</strong></span>
+                    <br>
+                    <div class="sheet-sameline">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/body-icon.png" style="width: 20%; padding: 0px !important;">
+                        <label class="sheet-switch">
+                            <input type="checkbox" name="attr_toggle_exh_reaction" value="1">
+                            <span class="sheet-slider"></span>
+                        </label>
+                    </div>
+                </div>
             </div>
-            <div class="abilities-column">
+            <div class="thirds-column">
                 <div>
                     <span><strong>Mind</strong></span>
                     <br>
@@ -156,7 +455,7 @@
             <h2>Active Abilities</h2>
             <label>Advantage Rolls: <input type="number" name="attr_ability_advantage" value="1" min="1"></label>
             <hr>
-            <fieldset class="repeating_abilities">
+             
                 <label>Ability Name: <input type="text" name="attr_ability_name"></label>
                 <div class="sheet-container">
                     <div class="sheet-child">
@@ -183,6 +482,8 @@
                         <div class="sheet-limb-legs"></div>
                     </div>
                 </div>
+
+                <br><br>
                 
                 <label>Attack Modifier: <input type="text" name="attr_attack_mod" placeholder="e.g. +5"></label>
                 <label>Damage Roll: <input type="text" name="attr_damage_roll" placeholder="e.g. 2d6+3"></label>
@@ -222,7 +523,6 @@
         const main_sheet_buttonlist = ["character","abilities","inventory"];
         main_sheet_buttonlist.forEach(button => {
             on(`clicked:${button}`, function() {
-                console.log(button)
                 setAttrs({
                     sheetTab: button
                 });
@@ -232,11 +532,23 @@
         const abilities_buttonlist = ["active_abilities","passive_abilities","reactions_and_boosts"];
         abilities_buttonlist.forEach(button => {
             on(`clicked:${button}`, function() {
-                console.log(button)
                 setAttrs({
                     sheet_abilitiesTab: button
                 });
             });
+        });
+
+        on("clicked:reset_limb_exh", function() {
+            let update = {
+                "toggle_exh_left": "0",
+                "toggle_exh_right": "0",
+                "toggle_exh_body": "0",
+                "toggle_exh_mind": "0",
+                "toggle_exh_focus": "0",
+                "toggle_exh_legs": "0",
+                "toggle_exh_reaction": "0"
+            }
+            setAttrs(update);
         });
 
         const stats = ["power", "finesse", "wiles", "courage", "fate"];
@@ -247,7 +559,7 @@
                     let statValue = parseInt(values[stat]) || 0;
                     let update = {};
                     update[`${stat}_display`] = statValue;
-                    update[`${stat}_color`] = statValue > 0 ? "positive" : statValue < 0 ? "negative" : "neutral";
+                    update[`${stat}_color`] = values[stat];
                     setAttrs(update);
                 });
             });
@@ -258,9 +570,7 @@
         on(`change:repeating_abilities:${limb_num}`, function() {
             console.log("changed limb")
             getAttrs([`repeating_abilities_${limb_num}`], function(values) {
-                console.log(values[`repeating_abilities_${limb_num}`])
                 let limbValue = parseInt(values[`repeating_abilities_${limb_num}`]);
-                console.log(limbValue)
                 let update = {}
                 if (limbValue == 1) {
                     update[`repeating_abilities_ability_limb`] = "One Arm"
