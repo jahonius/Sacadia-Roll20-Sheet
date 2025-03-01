@@ -4,14 +4,16 @@
 /*Configure the tab buttons*/
 .sheet-character,
 .sheet-abilities,
-.sheet-inventory {
+.sheet-inventory,
+.sheet-backstory {
 	display: none;
 }
 
 /* show the selected tab */
 .sheet-tabstoggle[value="character"] ~ .sheet-character,
 .sheet-tabstoggle[value="abilities"] ~ .sheet-abilities,
-.sheet-tabstoggle[value="inventory"] ~ .sheet-inventory {
+.sheet-tabstoggle[value="inventory"] ~ .sheet-inventory,
+.sheet-tabstoggle[value="backstory"] ~ .sheet-backstory {
 	display: block;
 }
 
@@ -39,7 +41,7 @@ body {
     padding: 20px;
 }
 .character-sheet {
-    background: white;
+    background: rgb(250,244,242);
     padding: 20px;
     border-radius: 10px;
     width: 1000px;
@@ -77,12 +79,12 @@ body {
     margin-top: 10px;
 }
 .stats-table td {
-    border: 1px solid #ccc;
+    border: 3px solid #911d20;
     padding: 8px;
     text-align: center;
 }
 .stat-display {
-    font-size: 24px;
+    font-size: 32px;
     font-weight: bold;
     display: table;
     margin: 0 auto;
@@ -90,33 +92,50 @@ body {
     margin-top: 5px;
     border: none;
     background: transparent;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    color: #911d20;
+    
     width: 50px;
 }
-[name$="_color"][value="1"] ~ .stat-display {
-    color: rgb(241, 223, 56);
+
+h2 {
+    color: #911d20;
+    text-decoration: underline;
 }
-[name$="_color"][value="2"] ~ .stat-display {
-    color: rgb(213, 241, 56);
+
+h3 {
+    color: #911d20;
 }
-[name$="_color"][value="3"] ~ .stat-display {
-    color: rgb(176, 241, 56);
+
+h4 {
+    color: #911d20;
 }
-[name$="_color"][value="4"] ~ .stat-display {
-    color: rgb(124, 241, 56);
-}
-[name$="_color"][value="5"] ~ .stat-display {
-    color: rgb(93, 241, 56);
-}
-[name$="_color"][value="6"] ~ .stat-display {
-    color: rgb(18, 233, 47);
-}
+
 .column-container {
     display: flex;
     column-gap: 30px;
 }
+
 .thirds-column {
     width: 33%;
+}
+
+.twothirds-column {
+    width: 66%;
+}
+
+.fifths-column {
+    width: 20%
+}
+
+.fourths-column {
+    width: 25%
+}
+
+.bounded-box {
+    border: solid;
+    border-color: #911d20;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
 .smallmargin {
@@ -133,7 +152,7 @@ textarea {
 }
 
 .sheet-tabs button {
-    background-color: #ec9615;
+    background-color: #911d20;
     color: white;
     border: none;
     border-radius: 20px;
@@ -284,7 +303,7 @@ textarea {
     position: relative;
     display: inline-block;
     width: 50px;
-    height: 24px;
+    height: 50px;
 }
 
 .sheet-switch input {
@@ -307,7 +326,6 @@ textarea {
     right: 0;
     bottom: 0;
     width: 68%;
-    height: 235%;
     background-color: #ccc;
     transition: 0.4s;
     border-radius: 24px;
@@ -319,8 +337,8 @@ div.abilities-column + div.abilities-column {
 
 .sheet-slider:before {
     position: absolute;
-    height: 50px;
-    width: 42px;
+    height: 44px;
+    width: 44px;
     left: 3px;
     bottom: 3px;
     background-color: rgb(255, 255, 255);
@@ -337,3 +355,217 @@ input:checked + .sheet-slider {
 input:checked + .sheet-slider:before {
     transform: translateX(8vw);
 }
+
+/* health bar */
+div.sheet-healthbar {
+    width: 230px;
+    height: 20px;
+    border: 2px solid black;
+    color: black;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+input.sheet-healthbar[value="0"] ~ div.sheet-healthbar {
+    background: red;
+}
+input.sheet-healthbar[value="1"] ~ div.sheet-healthbar {
+    background: linear-gradient(to left, red 90%, #255200 5%,#449600 95%, #adfc03 100%);
+}
+input.sheet-healthbar[value="2"] ~ div.sheet-healthbar {
+    background: linear-gradient(to left, red 80%, #255200 10%,#449600 90%, #adfc03 100%);
+}
+input.sheet-healthbar[value="3"] ~ div.sheet-healthbar {
+    background: linear-gradient(to left, red 70%, #255200 20%,#449600 80%, #adfc03 100%);
+}
+input.sheet-healthbar[value="4"] ~ div.sheet-healthbar {
+    background: linear-gradient(to left, red 60%, #255200 30%,#449600 70%, #adfc03 100%);
+}
+input.sheet-healthbar[value="5"] ~ div.sheet-healthbar {
+    background: linear-gradient(to left, red 50%, #255200 40%,#449600 60%, #adfc03 80%);
+}
+input.sheet-healthbar[value="6"] ~ div.sheet-healthbar {
+    background: linear-gradient(to left, red 40%, #255200 40%,#449600 50%, #adfc03 70%);
+}
+input.sheet-healthbar[value="7"] ~ div.sheet-healthbar {
+    background: linear-gradient(to left, red 30%, #255200 30%,#449600 40%, #adfc03 60%);
+}   
+input.sheet-healthbar[value="8"] ~ div.sheet-healthbar {
+    background: linear-gradient(to left, red 20%, #255200 20%,#449600 30%, #adfc03 50%);
+}
+input.sheet-healthbar[value="9"] ~ div.sheet-healthbar {
+    background: linear-gradient(to left, red 10%, #255200 10%,#449600 20%, #adfc03 40%);
+} 
+input.sheet-healthbar[value="10"] ~ div.sheet-healthbar {
+    background: linear-gradient(to left, #255200 1%,#449600 10%, #adfc03 30%);
+}
+input.sheet-healthbar[value="11"] ~ div.sheet-healthbar {
+    background: linear-gradient(to left, #255200 1%,#449600 10%, #adfc03 30%);
+}
+
+/* condition dice */
+input.sheet-conditions[value="1"] ~ div.first-face {
+    display: flex;
+}
+input.sheet-conditions[value="1"] ~ div.empty-face,
+input.sheet-conditions[value="1"] ~ div.second-face,
+input.sheet-conditions[value="1"] ~ div.third-face,
+input.sheet-conditions[value="1"] ~ div.fourth-face,
+input.sheet-conditions[value="1"] ~ div.fifth-face,
+input.sheet-conditions[value="1"] ~ div.sixth-face {
+    display: none;
+}
+
+input.sheet-conditions[value="2"] ~ div.second-face {
+    display: flex;
+}
+input.sheet-conditions[value="2"] ~ div.empty-face,
+input.sheet-conditions[value="2"] ~ div.first-face,
+input.sheet-conditions[value="2"] ~ div.third-face,
+input.sheet-conditions[value="2"] ~ div.fourth-face,
+input.sheet-conditions[value="2"] ~ div.fifth-face,
+input.sheet-conditions[value="2"] ~ div.sixth-face {
+    display: none;
+}
+
+div.empty-face,
+div.first-face,
+div.second-face,
+div.third-face,
+div.fourth-face,
+div.fifth-face,
+div.sixth-face {
+    display: none;
+}
+
+input.sheet-conditions[value="0"] ~ div.empty-face { display: flex; }
+input.sheet-conditions[value="1"] ~ div.first-face { display: flex; }
+input.sheet-conditions[value="2"] ~ div.second-face { display: flex; }
+input.sheet-conditions[value="3"] ~ div.third-face { display: flex; }
+input.sheet-conditions[value="4"] ~ div.fourth-face { display: flex; }
+input.sheet-conditions[value="5"] ~ div.fifth-face { display: flex; }
+input.sheet-conditions[value="6"] ~ div.sixth-face { display: flex; }
+
+div.one-condition-text,
+div.two-condition-text,
+div.three-condition-text,
+div.four-condition-text,
+div.five-condition-text,
+div.six-condition-text {
+    display: none;
+}
+
+input.sheet-conditions[value="1"] ~ div.one-condition-text { display: block; }
+input.sheet-conditions[value="2"] ~ div.two-condition-text { display: block; }
+input.sheet-conditions[value="3"] ~ div.three-condition-text { display: block; }
+input.sheet-conditions[value="4"] ~ div.four-condition-text { display: block; }
+input.sheet-conditions[value="5"] ~ div.five-condition-text { display: block; }
+input.sheet-conditions[value="6"] ~ div.six-condition-text { display: block; }
+
+[class$="condition-text"] {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* hide input arrows */
+input[type="number"] {
+    -webkit-appearance: textfield;
+       -moz-appearance: textfield;
+            appearance: textfield;
+  }
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+  }
+
+  button.upbutton,
+  button.downbutton {
+      border: ;
+  }
+
+/* dice faces */
+.first-face {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .second-face {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .second-face .pip:nth-of-type(2) {
+    align-self: flex-end;
+  }
+  
+  .third-face {
+    display: flex;
+    justify-content: space-between;
+  }
+    
+  .third-face .pip:nth-of-type(2) {
+    align-self: center;
+  }
+  
+  .third-face .pip:nth-of-type(3) {
+    align-self: flex-end;
+  }
+  
+  .fourth-face, .sixth-face {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .fourth-face .column, .sixth-face .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .fifth-face {
+    display: flex;
+    justify-content: space-between;
+  }
+    
+  .fifth-face .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+    
+  .fifth-face .column:nth-of-type(2) {
+    justify-content: center;
+  }
+  
+  [class$="face"] {
+    padding: 4px;
+    margin: 0 auto;
+    
+    background-color: #e7e7e7;
+    width: 58px;
+    height: 58px;
+
+    object-fit: contain;
+    
+    box-shadow:
+      inset 0 5px white, 
+      inset 0 -5px #bbb,
+      inset 5px 0 #d7d7d7, 
+      inset -5px 0 #d7d7d7;
+    
+    border-radius: 10%;
+  }
+  
+  .pip {
+    display: block;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    margin: 4px;
+  
+    background-color: #333;
+    box-shadow: inset 0 3px #111, inset 0 -3px #555;
+  }
+
+/* wound dot css */

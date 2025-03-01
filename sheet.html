@@ -5,11 +5,13 @@
 </head>
 <body>
 <div class="character-sheet">
+    <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/tales_of_sacadia.png">
     <h1>Character Sheet</h1>
     <div class="sheet-tabs">
-        <button type="action" name="act_character" value="character">Character</button>
+        <button type="action" name="act_character" value="character">Stats</button>
         <button type="action" name="act_abilities" value="abilities">Abilities</button>
         <button type="action" name="act_inventory" value="inventory">Inventory</button>
+        <button type="action" name="act_backstory" value="backstory">Character</button>
     </div>
     <input type='hidden' class='sheet-tabstoggle' name='attr_sheetTab' value='character' />
     
@@ -17,70 +19,88 @@
         
     <div class="sheet-character">
         <div class="column-container">
-            <div class="halfs-column">
+            <div class="thirds-column">
                 <label>Name: <input type="text" name="attr_character_name"></label>
                 <label>Ancestry: <input type="text" name="attr_race"></label>
             </div>
-            <div>
+            <div class="thirds-column">
                 <label>Profession: <input type="text" name="attr_profession"></label>
                 <label>Culture: <input type="text" name="attr_culture"></label>
+            </div>
+            <div class="thirds-column">
+                <div>
+                    <div style="display: flex">
+                        <h3>Current HP:</h3><input type="number" name="attr_health" value="0">
+                    </div>
+                    
+                    <div class="sheet-container">
+                        <input type='hidden' type='number' value='@{healthv}' name="attr_healthbar" class="sheet-hidden sheet-healthbar" disabled='true'>
+                        <div class="sheet-healthbar"></div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display: flex">
+                        <h3>Wounds:</h3>
+                        <div class="radiocontainer">
+                            <input checked="checked" class="radiobox reset" type="radio" name="attr_wounds" value="0">
+                            <input class="radiobox" type="radio" name="attr_wounds" value="1">
+                            <input class="radiobox" type="radio" name="attr_wounds" value="2">
+                            <input class="radiobox" type="radio" name="attr_wounds" value="3">
+                            <input class="radiobox" type="radio" name="attr_wounds" value="4">
+                            <input class="radiobox" type="radio" name="attr_wounds" value="5">
+                            <input class="radiobox" type="radio" name="attr_wounds" value="6">
+                        </div>
+                    </div>   
+                </div>
             </div>
         </div>
         <hr>
         <table class="stats-table">
             <tr>
-                <td><strong>Level</strong><br><input type="number" name="attr_level" value="0"></td>
-                <td><strong>Proficiency</strong><br><input type="number" name="attr_proficiency" value="0"></td>
-                <td><strong>AP</strong><br><input type="number" name="attr_ap" value="0"></td>
-                <td><strong>Movement Speed</strong><br><input type="number" name="attr_move" value="0"></td>
-                <td><strong>Current Health</strong><br><input type="number" name="attr_health" value="0"></td>
-                <td><strong>Max Health</strong><br><input type="number" name="attr_health_max" value="0"></td>
+                <td><h3>Level</h3><input type="number" name="attr_level" value="0"></td>
+                <td><h3>Max Health</h3><input type="number" name="attr_max_health" value="0"></td>
+                <td><h3>Proficiency</h3><input type="number" name="attr_proficiency" value="0"></td>
+                <td><h3>AP</h3><input type="number" name="attr_ap" value="0"></td>
+                <td><h3>Movement Speed</h3><input type="number" name="attr_move" value="0"></td>
             </tr>
         </table>
         <hr>
-        <table class="stats-table">
-            <tr>
-                <td><h3>Physical Defense</h3><input type="number" name="attr_pd" value="0"></td>
-                <td><h3>Mental Defense</h3><input type="number" name="attr_md" value="0"></td>
-                <td><h3>Check DC</h3><input type="number" name="attr_check_dc" value="0"></td>
-            </tr>
-        </table>
-        <hr>
+        
         <table class="stats-table">
             <tr>
                 <td><h3>Power</h3><input type="hidden" name="attr_power_color" value="neutral">
                     <span class="stat-display" name="attr_power_display">0</span>
                     &nbsp;
                     <input type="number" name="attr_power" value="0">
-                    <br>
+                    <br class="smallmargin">
                     <button type="roll" class="stat-roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{power} + @{proficiency} ]]}}">Roll</button>
                 </td>
                 <td><h3>Finesse</h3><input type="hidden" name="attr_finesse_color" value="neutral">
                     <span class="stat-display" name="attr_finesse_display">0</span>
                     &nbsp;
                     <input type="number" name="attr_finesse" value="0">
-                    <br>
+                    <br class="smallmargin">
                     <button type="roll" class="stat-roll" value="&{template:default} {{name=Stat Roll}} {{Finesse=[[ @{stat_advantage}d20kh1+@{finesse} + @{proficiency} ]]}}">Roll</button>
                 </td>
                 <td><h3>Wiles</h3><input type="hidden" name="attr_wiles_color" value="neutral">
                     <span class="stat-display" name="attr_wiles_display">0</span>
                     &nbsp;
                     <input type="number" name="attr_wiles" value="0">
-                    <br>
+                    <br class="smallmargin">
                     <button type="roll" class="stat-roll" value="&{template:default} {{name=Stat Roll}} {{Wiles=[[ @{stat_advantage}d20kh1+@{wiles} + *@{proficiency} ]]}}">Roll</button>
                 </td>
                 <td><h3>Courage</h3><input type="hidden" name="attr_courage_color" value="neutral">
                     <span class="stat-display" name="attr_courage_display">0</span>
                     &nbsp;
                     <input type="number" name="attr_courage" value="0">
-                    <br>
+                    <br class="smallmargin">
                     <button type="roll" class="stat-roll" value="&{template:default} {{name=Stat Roll}} {{Courage=[[ @{stat_advantage}d20kh1+@{courage} + *@{proficiency} ]]}}">Roll</button>
                 </td>
                 <td><h3>Fate</h3><input type="hidden" name="attr_fate_color" value="neutral">
                     <span class="stat-display" name="attr_fate_display">0</span>
                     &nbsp;
                     <input type="number" name="attr_fate" value="0">
-                    <br>
+                    <br class="smallmargin">
                     <button type="roll" class="stat-roll" value="&{template:default} {{name=Stat Roll}} {{Fate=[[ @{stat_advantage}d20kh1+@{fate} + @{proficiency} ]]}}">Roll</button>
                 </td>
             </tr>
@@ -90,254 +110,1173 @@
             <input type="number" name="attr_stat_advantage" value="1" min="1">
         </label>
 
-        <hr>
+        <br>
 
         <div class="column-container">
             <div class="thirds-column">
-                <h2 style="text-align: center;">General Talents</h2>
-                <label>Available Talent Points: 
-                    <input type="text" name="attr_available_talents" value="0" min="0">
-                </label>
-                <br>
-                <h3 style="text-align: center;">---- Crafting ----</h3>
-                <div style="text-align: center;" class="column-container">
-                    <div class="halfs-column">
-                        <hr class="smallmargin">
-                        <div style="text-align: left;" class="column-container">
-                            <div class="halfs-column">
-                                <strong>Alchemy</strong>
-                            </div>
-                            <div class="halfs-column">
-                                <input type="checkbox" name="attr_prof_alchemy">
-                            </div>
+                <div class="bounded-box">
+                    <div class="column-container">
+                        <div class="halfs-column">
+                            <td><h3>Physical Defense</h3><input type="number" name="attr_pd" value="0"></td>
+                            <td><h3>Mental Defense</h3><input type="number" name="attr_md" value="0"></td>
+                            <td><h3>Check DC</h3><input type="number" name="attr_check_dc" value="0"></td>
                         </div>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                        <hr class="smallmargin">
-                        <div style="text-align: left;" class="column-container">
-                            <div class="halfs-column">
-                                <strong>Art</strong>
-                            </div>
-                            <div class="halfs-column">
-                                <input type="checkbox" name="attr_prof_art">
-                            </div>
+                        <div class="halfs-column">
+                            <td><h3>Physical To-Hit</h3><input type="number" name="attr_phy_tohit" value="0"></td>
+                            <td><h3>Ranged To-Hit</h3><input type="number" name="attr_ranged_tohit" value="0"></td>
+                            <td><h3>Spell To-Hit</h3><input type="number" name="attr_spell_tohit" value="0"></td>
                         </div>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{courage} + @{proficiency} ]]}}">Roll</button>
-                        <hr class="smallmargin">
-                        <div style="text-align: left;" class="column-container">
-                            <div class="halfs-column">
-                                <strong>Construction</strong>
-                            </div>
-                            <div class="halfs-column">
-                                <input type="checkbox" name="attr_prof_construction">
-                            </div>
-                        </div>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{power} + @{proficiency} ]]}}">Roll</button>
-                        <hr class="smallmargin">
-                        <div style="text-align: left;" class="column-container">
-                            <div class="halfs-column">
-                                <strong>Cooking</strong>
-                            </div>
-                            <div class="halfs-column">
-                                <input type="checkbox" name="attr_prof_cooking">
-                            </div>
-                        </div>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{courage} + @{proficiency} ]]}}">Roll</button>
-                        <hr class="smallmargin">
-                    </div>
-                    <div class="halfs-column">
-                        <hr class="smallmargin">
-                        <div style="text-align: left;" class="column-container">
-                            <div class="halfs-column">
-                                <strong>Herbalism</strong>
-                            </div>
-                            <div class="halfs-column">
-                                <input type="checkbox" name="attr_prof_herbalism">
-                            </div>
-                        </div>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                        <hr class="smallmargin">
-                        <div style="text-align: left;" class="column-container">
-                            <div class="halfs-column">
-                                <strong>Ritual</strong>
-                            </div>
-                            <div class="halfs-column">
-                                <input type="checkbox" name="attr_prof_ritual">
-                            </div>
-                        </div>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                        <hr class="smallmargin">
-                        <div style="text-align: left;" class="column-container">
-                            <div class="halfs-column">
-                                <strong>Smithing</strong>
-                            </div>
-                            <div class="halfs-column">
-                                <input type="checkbox" name="attr_prof_smithing">
-                            </div>
-                        </div>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                        <hr class="smallmargin">
-                        <div style="text-align: left;" class="column-container">
-                            <div class="halfs-column">
-                                <strong>Tailor</strong>
-                            </div>
-                            <div class="halfs-column">
-                                <input type="checkbox" name="attr_prof_tailor">
-                            </div>
-                        </div>
-                        <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                        <hr class="smallmargin">
                     </div>
                 </div>
-                <br>
-                <h3 style="text-align: center;">---- Knowledge ----</h3>
-                <br>
-                <div class="column-container">
-                    <div class="halfs-column">
+                <div class="bounded-box">
+                    <div class="column-container">
+                        <div class="halfs-column">
+                            <div class="column-container">
+                                <div class="halfs-column">
+                                    <h4>Blinded</h4>
+                                    <h4>Prone</h4>
+                                    <h4>Unconcious</h4>
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_blinded">
+                                    <br class="smallmargin">
+                                    <input type="checkbox" name="attr_prone">
+                                    <br class="smallmargin">
+                                    <input type="checkbox" name="attr_unconcious">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="halfs-column">
+                            <div class="column-container">
+                                <div class="halfs-column">
+                                    <h4>Surprised</h4>
+                                    <h4>Surrounded</h4>
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_surprised">
+                                    <br class="smallmargin"> 
+                                    <input type="checkbox" name="attr_surrounded">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div style="text-align: center;" class="column-container">
+                        <div class="thirds-column">
+                            <h3>Fumbled</h3>
+                            <input type='hidden' type="number" name="attr_fumbled" value="0" min="0" max="6">
+                            
+                            <input type='hidden' type="number" value='@{condition_fumbled}' min="0" max="6" name="attr_fumbled_dice" class="sheet-hidden sheet-conditions" disabled="true">
+                            <button name="act_fumbled_up" type="action" class="upbutton"><strong>+</strong></button>
+                            <button name="act_fumbled_down" type="action" class="downbutton"><strong>-</strong></button>
+                            <div class="empty-face">
+                                <span></span>
+                            </div>
+                            <div class="first-face">
+                                <span class="pip"></span>
+                            </div>
+                            <div class="second-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="third-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="fourth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="fifth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="sixth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            
+                            <br class="smallmargin">
 
-                    </div>
-                    <div class="halfs-column">
-                        
-                    </div>
-                </div>
-                <br>
-                <h3 style="text-align: center;">---- Action ----</h3>
-                <br>
-                <div class="column-container">
-                    <div class="halfs-column">
-
-                    </div>
-                    <div class="halfs-column">
-                        
-                    </div>
-                </div>
-                <br>
-                <h3 style="text-align: center;">---- General ----</h3>
-                <br>
-                <div class="column-container">
-                    <div class="halfs-column">
-
-                    </div>
-                    <div class="halfs-column">
-                        
+                            <div class="one-condition-text">
+                                -1 to next roll
+                            </div>
+                            <div class="two-condition-text">
+                                -2 to next roll
+                            </div>
+                            <div class="three-condition-text">
+                                -3 to next roll
+                            </div>
+                            <div class="four-condition-text">
+                                -4 to next roll
+                            </div>
+                            <div class="five-condition-text">
+                                -5 to next roll
+                            </div>
+                            <div class="six-condition-text">
+                                -6 to next roll
+                            </div>
+                        </div>
+                        <div style="text-align: center;" class="thirds-column">
+                            <h3>Rended</h3>
+                            <input type='hidden' type="number" name="attr_rended" value="1" min="0" max="6">
+                            
+                            <input type='hidden' type="number" value='@{condition_rended}' min="0" max="6" name="attr_rended_dice" class="sheet-hidden sheet-conditions" disabled="true">
+                            <button name="act_rended_up" type="action" class="upbutton"><strong>+</strong></button>
+                            <button name="act_rended_down" type="action" class="downbutton"><strong>-</strong></button>
+                            <div class="empty-face">
+                                <span></span>
+                            </div>
+                            <div class="first-face">
+                                <span class="pip"></span>
+                            </div>
+                            <div class="second-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="third-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="fourth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="fifth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="sixth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            
+                            <br class="smallmargin">
+                            <div class="one-condition-text">
+                                -1 to PD until Nightly Rest
+                            </div>
+                            <div class="two-condition-text">
+                                -2 to PD until Nightly Rest
+                            </div>
+                            <div class="three-condition-text">
+                                -3 to PD until Nightly Rest
+                            </div>
+                            <div class="four-condition-text">
+                                -4 to PD until Nightly Rest
+                            </div>
+                            <div class="five-condition-text">
+                                -5 to PD until Nightly Rest
+                            </div>
+                            <div class="six-condition-text">
+                                -6 to PD until Nightly Rest
+                            </div>
+                        </div>
+                        <div style="text-align: center;" class="thirds-column">
+                            <h3>Madness</h3>
+                            <input type='hidden' type="number" name="attr_madness" value="1" min="0" max="6">
+                            
+                            <input type='hidden' type="number" value='@{condition_madness}' min="0" max="6" name="attr_madness_dice" class="sheet-hidden sheet-conditions" disabled="true">
+                            <button name="act_madness_up" type="action" class="upbutton"><strong>+</strong></button>
+                            <button name="act_madness_down" type="action" class="downbutton"><strong>-</strong></button>
+                            <div class="empty-face">
+                                <span></span>
+                            </div>
+                            <div class="first-face">
+                                <span class="pip"></span>
+                            </div>
+                            <div class="second-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="third-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="fourth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="fifth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="sixth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            
+                            <br class="smallmargin">
+                            Oracles only
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="twothirds-column">
+                <div class="bounded-box">
+                    <div class="column-container">
+                        <div style="text-align: center;" class="fifths-column">
+                            <h3>Fatigue</h3>
+                            <input type='hidden' type="number" name="attr_fatigue" value="1" min="0" max="6">
+                            
+                            <input type='hidden' type="number" value='@{condition_fatigue}' min="0" max="6" name="attr_fatigue_dice" class="sheet-hidden sheet-conditions" disabled="true">
+                            <button name="act_fatigue_up" type="action" class="upbutton"><strong>+</strong></button>
+                            <button name="act_fatigue_down" type="action" class="downbutton"><strong>-</strong></button>
+                            <div class="empty-face">
+                                <span></span>
+                            </div>
+                            <div class="first-face">
+                                <span class="pip"></span>
+                            </div>
+                            <div class="second-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="third-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="fourth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="fifth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="sixth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>  
+                            <br class="smallmargin">
+                            <div class="one-condition-text">
+                                -1 AP, no reactions
+                            </div>
+                            <div class="two-condition-text">
+                                -2 AP, no reactions
+                            </div>
+                            <div class="three-condition-text">
+                                -3 AP, no reactions
+                            </div>
+                            <div class="four-condition-text">
+                                -4 AP, no reactions
+                            </div>
+                            <div class="five-condition-text">
+                                -5 AP, no reactions
+                            </div>
+                            <div class="six-condition-text">
+                                -6 AP, no reactions
+                            </div>
+                        </div>
+                        <div style="text-align: center;" class="fifths-column">
+                            <h3>Frenzy</h3>
+                            <input type='hidden' type="number" name="attr_frenzy" value="1" min="0" max="6">
+                            <input type='hidden' type="number" value='@{condition_frenzy}' min="0" max="6" name="attr_frenzy_dice" class="sheet-hidden sheet-conditions" disabled="true">
+                            <button name="act_frenzy_up" type="action" class="upbutton"><strong>+</strong></button>
+                            <button name="act_frenzy_down" type="action" class="downbutton"><strong>-</strong></button>
+                            <div class="empty-face">
+                                <span></span>
+                            </div>
+                            <div class="first-face">
+                                <span class="pip"></span>
+                            </div>
+                            <div class="second-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="third-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="fourth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="fifth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="sixth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="one-condition-text">
+                                -1 to Trait Checks
+                            </div>
+                            <div class="two-condition-text">
+                                -2 to Trait Checks
+                            </div>
+                            <div class="three-condition-text">
+                                -3 to Trait Checks
+                            </div>
+                            <div class="four-condition-text">
+                                -4 to Trait Checks
+                            </div>
+                            <div class="five-condition-text">
+                                -5 to Trait Checks
+                            </div>
+                            <div class="six-condition-text">
+                                -6 to Trait Checks
+                            </div> 
+                        </div>
+                        <div style="text-align: center;" class="fifths-column">
+                            <h3>Delirium</h3>
+                            <input type='hidden' type="number" name="attr_delirium" value="1" min="0" max="6">
+                            <input type='hidden' type="number" value='@{condition_delirium}' min="0" max="6" name="attr_delirium_dice" class="sheet-hidden sheet-conditions" disabled="true">
+                            <button name="act_delirium_up" type="action" class="upbutton"><strong>+</strong></button>
+                            <button name="act_delirium_down" type="action" class="downbutton"><strong>-</strong></button>
+                            <div class="empty-face">
+                                <span></span>
+                            </div>
+                            <div class="first-face">
+                                <span class="pip"></span>
+                            </div>
+                            <div class="second-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="third-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="fourth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="fifth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="sixth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="one-condition-text">
+                                -1 to MD
+                            </div>
+                            <div class="two-condition-text">
+                                -2 to MD
+                            </div>
+                            <div class="three-condition-text">
+                                -3 to MD
+                            </div>
+                            <div class="four-condition-text">
+                                -4 to MD
+                            </div>
+                            <div class="five-condition-text">
+                                -5 to MD
+                            </div>
+                            <div class="six-condition-text">
+                                -6 to MD
+                            </div> 
+                        </div>
+                        <div style="text-align: center;" class="fifths-column">
+                            <h3>Panic</h3>
+                            <input type='hidden' type="number" name="attr_panic" value="1" min="0" max="6">
+                            <input type='hidden' type="number" value='@{condition_panic}' min="0" max="6" name="attr_panic_dice" class="sheet-hidden sheet-conditions" disabled="true">
+                            <button name="act_panic_up" type="action" class="upbutton"><strong>+</strong></button>
+                            <button name="act_panic_down" type="action" class="downbutton"><strong>-</strong></button>
+                            <div class="empty-face">
+                                <span></span>
+                            </div>
+                            <div class="first-face">
+                                <span class="pip"></span>
+                            </div>
+                            <div class="second-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="third-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="fourth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="fifth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="sixth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="one-condition-text">
+                                1x Disadvantage to Trait Checks and attacks against source of Panic. Cannot choose to move towards it.
+                            </div>
+                            <div class="two-condition-text">
+                                2x Disadvantage to Trait Checks and attacks against source of Panic. Cannot choose to move towards it.
+                            </div>
+                            <div class="three-condition-text">
+                                3x Disadvantage to Trait Checks and attacks against source of Panic. Cannot choose to move towards it.
+                            </div>
+                            <div class="four-condition-text">
+                                Fail all Trait Checks against source of Panic, spend 1AP running directly away from source.
+                            </div>
+                            <div class="five-condition-text">
+                                Fail all Trait Checks against source of Panic, must spend 3AP running directly away from source.
+                            </div>
+                            <div class="six-condition-text">
+                                Fail all Trait Checks against source of Panic, must spend all AP running directly away from source.
+                            </div> 
+                        </div>
+                        <div style="text-align: center;" class="fifths-column">
+                            <h3>Taunt</h3>
+                            <input type='hidden' type="number" name="attr_taunt" value="1" min="0" max="6">
+                            <input type='hidden' type="number" value='@{condition_taunt}' min="0" max="6" name="attr_taunt_dice" class="sheet-hidden sheet-conditions" disabled="true">
+                            <button name="act_taunt_up" type="action" class="upbutton"><strong>+</strong></button>
+                            <button name="act_taunt_down" type="action" class="downbutton"><strong>-</strong></button>
+                            <div class="empty-face">
+                                <span></span>
+                            </div>
+                            <div class="first-face">
+                                <span class="pip"></span>
+                            </div>
+                            <div class="second-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="third-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="fourth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="fifth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="sixth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="one-condition-text">
+                                1x Disadvantage to to-hit against creatures except the source of taunt.
+                            </div>
+                            <div class="two-condition-text">
+                                2x Disadvantage to to-hit against creatures except the source of taunt.
+                            </div>
+                            <div class="three-condition-text">
+                                2x Disadvantage to to-hit against creatures except the source of taunt. 
+                                Cannot move away from target.
+                            </div>
+                            <div class="four-condition-text">
+                                3x Disadvantage to to-hit against creatures except the source of taunt. 
+                                Cannot move away from target.
+                            </div>
+                            <div class="five-condition-text">
+                                Cannot attack anyone but the source of taunt. 
+                                Cannot move away from target.
+                            </div>
+                            <div class="six-condition-text">
+                                Cannot attack anyone but the source of taunt. 
+                                Must move towards the target if unable to attack it.
+                            </div> 
+                        </div>
+                    </div>
+                    <h3 style="text-align: center; text-decoration: underline;">Mental Adversarial Conditions</h3>
+                </div>
+                
 
-            <div class="thirds-column">
-                <h2 style="text-align: center;">Specialized Talents</h2>
                 <br>
-                <hr>
-                <fieldset class="repeating_talents">
-                    <strong>Talent</strong> <input type="text" name="attr_special_talent_name">
-                    <br>
-                    <strong>Cost</strong><input type="text" name="attr_special_talent_cost">
-                    <br>
-                    <strong>Description</strong><textarea name="attr_special_talent_desc">
-                    <br>
-                    <hr>
-                </fieldset>
+                
+                <div class="bounded-box">
+                    <div class="column-container">
+                        <div style="text-align: center;" class="fourths-column">
+                            <h3>Nausea</h3>
+                            <input type='hidden' type="number" name="attr_nausea" value="1" min="0" max="6">
+                            <input type='hidden' type="number" value='@{condition_nausea}' min="0" max="6" name="attr_nausea_dice" class="sheet-hidden sheet-conditions" disabled="true">
+                            <button name="act_nausea_up" type="action" class="upbutton"><strong>+</strong></button>
+                            <button name="act_nausea_down" type="action" class="downbutton"><strong>-</strong></button>
+                            <div class="empty-face">
+                                <span></span>
+                            </div>
+                            <div class="first-face">
+                                <span class="pip"></span>
+                            </div>
+                            <div class="second-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="third-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="fourth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="fifth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="sixth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            -1 to Attacks
+                        </div>
+                        <div style="text-align: center;" class="fourths-column">
+                            <h3>Hemorrhage</h3>
+                            <input type='hidden' type="number" name="attr_hemorrhage" value="1" min="0" max="6">
+                            <input type='hidden' type="number" value='@{condition_hemorrhage}' min="0" max="6" name="attr_hemorrhage_dice" class="sheet-hidden sheet-conditions" disabled="true">
+                            <button name="act_hemorrhage_up" type="action" class="upbutton"><strong>+</strong></button>
+                            <button name="act_hemorrhage_down" type="action" class="downbutton"><strong>-</strong></button>
+                            <div class="empty-face">
+                                <span></span>
+                            </div>
+                            <div class="first-face">
+                                <span class="pip"></span>
+                            </div>
+                            <div class="second-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="third-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="fourth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+
+                                <div class="column">
+
+                                    <span class="pip"></span>
+
+                                    <span class="pip"></span>
+
+                                </div>
+                            </div>
+                            <div class="fifth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="sixth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            1D10 Damage / Turn
+                        </div>
+                        <div style="text-align: center;" class="fourths-column">
+                            <h3>Pinned</h3>
+                            <input type='hidden' type="number" name="attr_pinned" value="1" min="0" max="6">
+                            <input type='hidden' type="number" value='@{condition_pinned}' min="0" max="6" name="attr_pinned_dice" class="sheet-hidden sheet-conditions" disabled="true">
+                            <button name="act_pinned_up" type="action" class="upbutton"><strong>+</strong></button>
+                            <button name="act_pinned_down" type="action" class="downbutton"><strong>-</strong></button>
+                            <div class="empty-face">
+                                <span></span>
+                            </div>
+                            <div class="first-face">
+                                <span class="pip"></span>
+                            </div>
+                            <div class="second-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="third-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="fourth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="fifth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="sixth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            Varies by level
+                        </div>
+                        <div style="text-align: center;" class="fourths-column">
+                            <h3>Dying</h3> 
+                            <input type='hidden' type="number" name="attr_dying" value="0" min="0" max="6">
+                            <input type='hidden' type="number" value='@{condition_dying}' min="0" max="6" name="attr_dying_dice" class="sheet-hidden sheet-conditions" disabled="true">
+                            <button name="act_dying_up" type="action" class="upbutton"><strong>+</strong></button>
+                            <button name="act_dying_down" type="action" class="downbutton"><strong>-</strong></button>
+                            <div class="empty-face">
+                                <span></span>
+                            </div>
+                            <div class="first-face">
+                                <span class="pip"></span>
+                            </div>
+                            <div class="second-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="third-face">
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                                <span class="pip"></span>
+                            </div>
+                            <div class="fourth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="fifth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            <div class="sixth-face">
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                                <div class="column">
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                    <span class="pip"></span>
+                                </div>
+                            </div>
+                            Roll 1X/turn to reduce dying
+                        </div>
+                    </div>
+                    <h3 style="text-align: center; text-decoration: underline;">Physical Adversarial Conditions</h3>
+                </div>
                 
             </div>
+        </div>
+
+        <br>
+
+        <div class="column-container">      
+            <div class="thirds-column">
+                <div class="bounded-box">
+                    <h2 style="text-align: center;">General Talents</h2>
+                    <label>Available Talent Points: 
+                        <input type="text" name="attr_available_talents" value="0" min="0">
+                    </label>
+                    <br>
+                    <h3 style="text-align: center;">---- Crafting ----</h3>
+                    <div style="text-align: center;" class="column-container">
+                        <div class="halfs-column">
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="halfs-column">
+                                    <strong>Alchemy</strong>
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_prof_alchemy">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="halfs-column">
+                                    <strong>Art</strong>
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_prof_art">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="halfs-column">
+                                    <strong>Construction</strong>
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_prof_construction">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{power} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="halfs-column">
+                                    <strong>Cooking</strong>
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_prof_cooking">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                        </div>
+                        <div class="halfs-column">
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="halfs-column">
+                                    <strong>Herbalism</strong>
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_prof_herbalism">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="halfs-column">
+                                    <strong>Ritual</strong>
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_prof_ritual">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="halfs-column">
+                                    <strong>Smithing</strong>
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_prof_smithing">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="halfs-column">
+                                    <strong>Tailor</strong>
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_prof_tailor">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                        </div>
+                    </div>
+                    <br>
+                    <h3 style="text-align: center;">---- Knowledge ----</h3>
+                    <br>
+                    <div class="column-container">
+                        <div class="halfs-column">
+
+                        </div>
+                        <div class="halfs-column">
+                            
+                        </div>
+                    </div>
+                    <br>
+                    <h3 style="text-align: center;">---- Action ----</h3>
+                    <br>
+                    <div class="column-container">
+                        <div class="halfs-column">
+
+                        </div>
+                        <div class="halfs-column">
+                            
+                        </div>
+                    </div>
+                    <br>
+                    <h3 style="text-align: center;">---- General ----</h3>
+                    <br>
+                    <div class="column-container">
+                        <div class="halfs-column">
+
+                        </div>
+                        <div class="halfs-column">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="thirds-column">
+                <div class="bounded-box">
+                    <h2 style="text-align: center;">Specialized Talents</h2>
+                    <br>
+                    <hr>
+                    <fieldset class="repeating_talents">
+                        <strong>Talent</strong> <input type="text" name="attr_special_talent_name">
+                        <br>
+                        <strong>Cost</strong><input type="text" name="attr_special_talent_cost">
+                        <br>
+                        <strong>Description</strong><textarea name="attr_special_talent_desc">
+                        <br>
+                        <hr>
+                    </fieldset>
+                </div>
+            </div>
 
             <div class="thirds-column">
-                <h2 style="text-align: center;">Weapons</h2>
-                <h3>I.</h3> <input type="text">
-                <br>
-                Base Damage Dice: <input type="number">
-                <div class="column-container">
-                    <div class="thirds-column">
-                        <div class="column-container">
-                            <div class="halfs-column" style="text-align:right;">
-                                <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png">
-                            </div>
-                            <div class="halfs-column">
-                                <input type="checkbox" name="attr_weapon1_1_hand">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="thirds-column">
-                        <div class="column-container">
-                            <div class="halfs-column" style="text-align:right;">
-                                <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png">
-                            </div>
-                            <div class="halfs-column">
-                                <input type="checkbox" name="attr_weapon1_2_hand">
+                <div class="bounded-box">
+                    <h2 style="text-align: center;">Weapons</h2>
+                    <h3>I.</h3> <input type="text">
+                    <br>
+                    Base Damage Dice: <input type="number">
+                    <div class="column-container">
+                        <div class="thirds-column">
+                            <div class="column-container">
+                                <div class="halfs-column" style="text-align:right;">
+                                    <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png">
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_weapon1_1_hand">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="thirds-column">
+                        <div class="thirds-column">
+                            <div class="column-container">
+                                <div class="halfs-column" style="text-align:right;">
+                                    <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png">
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_weapon1_2_hand">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="thirds-column">
 
-                    </div>
-                </div>
-                <br>
-                <h3>II.</h3> <input type="text">
-                <br>
-                Base Damage Dice: <input type="number">
-                <div class="column-container">
-                    <div class="thirds-column">
-                        <div class="column-container">
-                            <div class="halfs-column" style="text-align:right;">
-                                <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png">
-                            </div>
-                            <div class="halfs-column">
-                                <input type="checkbox" name="attr_weapon2_1_hand">
-                            </div>
                         </div>
                     </div>
-                    <div class="thirds-column">
-                        <div class="column-container">
-                            <div class="halfs-column" style="text-align:right;">
-                                <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png">
-                            </div>
-                            <div class="halfs-column">
-                                <input type="checkbox" name="attr_weapon2_2_hand">
+                    <br>
+                    <h3>II.</h3> <input type="text">
+                    <br>
+                    Base Damage Dice: <input type="number">
+                    <div class="column-container">
+                        <div class="thirds-column">
+                            <div class="column-container">
+                                <div class="halfs-column" style="text-align:right;">
+                                    <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png">
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_weapon2_1_hand">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="thirds-column">
+                        <div class="thirds-column">
+                            <div class="column-container">
+                                <div class="halfs-column" style="text-align:right;">
+                                    <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png">
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_weapon2_2_hand">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="thirds-column">
 
-                    </div>
-                </div>
-                <br>
-                <h3>III.</h3> <input type="text">
-                <br>
-                Base Damage Dice: <input type="number">
-                <div class="column-container">
-                    <div class="thirds-column">
-                        <div class="column-container">
-                            <div class="halfs-column" style="text-align:right;">
-                                <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png">
-                            </div>
-                            <div class="halfs-column">
-                                <input type="checkbox" name="attr_weapon3_1_hand">
-                            </div>
                         </div>
                     </div>
-                    <div class="thirds-column">
-                        <div class="column-container">
-                            <div class="halfs-column" style="text-align:right;">
-                                <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png">
-                            </div>
-                            <div class="halfs-column">
-                                <input type="checkbox" name="attr_weapon3_2_hand">
+                    <br>
+                    <h3>III.</h3> <input type="text">
+                    <br>
+                    Base Damage Dice: <input type="number">
+                    <div class="column-container">
+                        <div class="thirds-column">
+                            <div class="column-container">
+                                <div class="halfs-column" style="text-align:right;">
+                                    <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png">
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_weapon3_1_hand">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="thirds-column">
+                        <div class="thirds-column">
+                            <div class="column-container">
+                                <div class="halfs-column" style="text-align:right;">
+                                    <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png">
+                                </div>
+                                <div class="halfs-column">
+                                    <input type="checkbox" name="attr_weapon3_2_hand">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="thirds-column">
 
+                        </div>
                     </div>
+                    <br>
+                    <h2 style="text-align: center;">Armor</h2>
+                    <h3>Set:</h3> <input type="text">
+                    <br>
+                    <h3>Add-On:</h3> <input type="text">
+                    <br>
+                    <h3>Trinket:</h3> <input type="text">
+                    <br>
+                    <h3>Shield:</h3> <input type="text">
+                    <br>
+                    <h3>Trinket 2:</h3> <input type="text">
                 </div>
-                <br>
-                <h2 style="text-align: center;">Armor</h2>
-                <h3>Set:</h3> <input type="text">
-                <br>
-                <h3>Add-On:</h3> <input type="text">
-                <br>
-                <h3>Trinket:</h3> <input type="text">
-                <br>
-                <h3>Shield:</h3> <input type="text">
-                <br>
-                <h3>Trinket 2:</h3> <input type="text">
             </div>
         </div>
 
@@ -361,7 +1300,7 @@
                     <span><strong>Left Arm</strong></span>
                     <br>
                     <div class="sheet-sameline">
-                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png" style="width: 20%; padding: 0px !important;">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png" style="width: 15%; padding: 0px !important;">
                         <label class="sheet-switch">
                             <input type="checkbox" name="attr_toggle_exh_left" value="1">
                             <span class="sheet-slider"></span>
@@ -373,7 +1312,7 @@
                     <span><strong>Right Arm</strong></span>
                     <br>
                     <div class="sheet-sameline">
-                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png" style="width: 20%; padding: 0px !important;">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png" style="width: 15%; padding: 0px !important;">
                         <label class="sheet-switch">
                             <input type="checkbox" name="attr_toggle_exh_right" value="1">
                             <span class="sheet-slider"></span>
@@ -385,7 +1324,7 @@
                     <span><strong>Body</strong></span>
                     <br>
                     <div class="sheet-sameline">
-                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/body-icon.png" style="width: 20%; padding: 0px !important;">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/body-icon.png" style="width: 15%; padding: 0px !important;">
                         <label class="sheet-switch">
                             <input type="checkbox" name="attr_toggle_exh_body" value="1">
                             <span class="sheet-slider"></span>
@@ -397,7 +1336,7 @@
                     <span><strong>Reaction</strong></span>
                     <br>
                     <div class="sheet-sameline">
-                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/body-icon.png" style="width: 20%; padding: 0px !important;">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/body-icon.png" style="width: 15%; padding: 0px !important;">
                         <label class="sheet-switch">
                             <input type="checkbox" name="attr_toggle_exh_reaction" value="1">
                             <span class="sheet-slider"></span>
@@ -410,7 +1349,7 @@
                     <span><strong>Mind</strong></span>
                     <br>
                     <div class="sheet-sameline">
-                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/mind-icon.png" style="width: 20%; padding: 0px !important;">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/mind-icon.png" style="width: 15%; padding: 0px !important;">
                         <label class="sheet-switch">
                             <input type="checkbox" name="attr_toggle_exh_mind" value="1">
                             <span class="sheet-slider"></span>
@@ -422,7 +1361,7 @@
                     <span><strong>Focus</strong></span>
                     <br>
                     <div class="sheet-sameline">
-                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/focus-icon.png" style="width: 20%; padding: 0px !important;">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/focus-icon.png" style="width: 15%; padding: 0px !important;">
                         <label class="sheet-switch">
                             <input type="checkbox" name="attr_toggle_exh_focus" value="1">
                             <span class="sheet-slider"></span>
@@ -434,7 +1373,7 @@
                     <span><strong>Legs</strong></span>
                     <br>
                     <div class="sheet-sameline">
-                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/leg-icon.png" style="width: 20%; padding: 0px !important;">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/leg-icon.png" style="width: 15%; padding: 0px !important;">
                         <label class="sheet-switch">
                             <input type="checkbox" name="attr_toggle_exh_legs" value="1">
                             <span class="sheet-slider"></span>
@@ -455,7 +1394,7 @@
             <h2>Active Abilities</h2>
             <label>Advantage Rolls: <input type="number" name="attr_ability_advantage" value="1" min="1"></label>
             <hr>
-             
+             <fieldset class="repeating_actives">
                 <label>Ability Name: <input type="text" name="attr_ability_name"></label>
                 <div class="sheet-container">
                     <div class="sheet-child">
@@ -519,8 +1458,32 @@
         </fieldset>
     </div>
 
+    <div class="sheet-backstory">
+        <h2 style="text-align: center;">Backstory</h2>
+        <div class="column-container">
+            <div class="halfs-column">
+                <div class="bounded-box">
+                    <label>Titles <textarea type="text" name="attr_titles"></textarea></label>
+                    <label>Appearance <textarea type="text" name="attr_appearance"></textarea></label>
+                    <label>Age <input type="text" name="attr_age"></label>
+                </div>
+            </div>
+            <div class="halfs-column">
+                <div class="bounded-box">
+                    <label>Culture <input type="text" name="attr_culture"></label>
+                    <label>Ethnicity <input type="text" name="attr_ethnicity"></label>
+                    <label>Class <input type="text" name="attr_class"></label>
+                    <label>Occupation <input type="text" name="attr_occupation"></label>
+                    <label>Family and Lineage <textarea type="text" name="attr_occupation"></textarea></label>
+                    <label>Community Bonds <textarea type="text" name="attr_occupation"></textarea></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/worker">
-        const main_sheet_buttonlist = ["character","abilities","inventory"];
+
+        const main_sheet_buttonlist = ["character","abilities","inventory","backstory"];
         main_sheet_buttonlist.forEach(button => {
             on(`clicked:${button}`, function() {
                 setAttrs({
@@ -529,6 +1492,51 @@
             });
         });
 
+        const conditions = ["fatigue", "frenzy", "delirium", "panic", "taunt", "nausea", "hemorrhage", "pinned", "dying", "fumbled", "rended", "madness"];
+        on("sheet:opened", function() {
+            conditions.forEach(condition => {
+                getAttrs([`condition_${condition}`, condition], function(values) {
+                    console.log("condition " + condition + " - " + values[`condition_${condition}`])
+                    if (values[`condition_${condition}`] === undefined) {
+                        let init = {};
+                        console.log ("condition undefined")
+                        init[`condition_${condition}`] = 0;
+                        setAttrs(init);
+                    }
+                });
+            });
+        });
+        conditions.forEach(condition => {
+            on(`change:${condition}`, function() {
+                getAttrs([condition], function(values) {
+                    let update = {};
+                    console.log("changed " + condition)
+                    let hidden_var = "condition_" + condition;
+                    setAttrs(update);
+                });
+            });
+            on(`clicked:${condition}_up`, function() {
+                getAttrs([`condition_${condition}`], function(values) {
+                    let update = {};
+                    let conditionValue = parseInt(values[`condition_${condition}`]);
+                    if (conditionValue != 6) {
+                        update[`condition_${condition}`] = conditionValue + 1;
+                        setAttrs(update);
+                    }
+                });
+            });
+            on(`clicked:${condition}_down`, function() {
+                getAttrs([`condition_${condition}`], function(values) {
+                    let update = {};
+                    let conditionValue = parseInt(values[`condition_${condition}`]);
+                    if (conditionValue != 0) {
+                        update[`condition_${condition}`] = conditionValue - 1;
+                        setAttrs(update);
+                    }
+                });
+            });
+        });
+        
         const abilities_buttonlist = ["active_abilities","passive_abilities","reactions_and_boosts"];
         abilities_buttonlist.forEach(button => {
             on(`clicked:${button}`, function() {
@@ -552,14 +1560,11 @@
         });
 
         const stats = ["power", "finesse", "wiles", "courage", "fate"];
-        
         stats.forEach(stat => {
             on(`change:${stat}`, function() {
                 getAttrs([stat], function(values) {
-                    let statValue = parseInt(values[stat]) || 0;
                     let update = {};
-                    update[`${stat}_display`] = statValue;
-                    update[`${stat}_color`] = values[stat];
+                    update[`${stat}_display`] = "+" + values[stat];
                     setAttrs(update);
                 });
             });
@@ -591,6 +1596,25 @@
                 setAttrs(update);
             });
         });
+
+        on("sheet:opened change:health change:max_health", function() {
+            getAttrs(["health", "max_health"], function(values) {
+                var maximum = values.max_health;
+                var current = values.health;
+                var healthPercent = [0,1,20,30,40,50,60,70,80,90,100,999];
+                for(let i = healthPercent.length; i >= 0; i--) {
+                    if(healthPercent[i] <= ((current / maximum)*100)){ 
+                        tvalue = i;
+                        console.log("Health value is " + tvalue)
+                        break; 
+                    }
+                }
+                setAttrs({
+                     "healthv":tvalue
+                });
+           });
+         });
+
     </script>
 </body>
 </html>
