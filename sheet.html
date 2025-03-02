@@ -5,66 +5,83 @@
 </head>
 <body>
 <div class="character-sheet">
-    <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/tales_of_sacadia.png">
-    <h1>Character Sheet</h1>
-    <div class="sheet-tabs">
-        <button type="action" name="act_character" value="character">Stats</button>
-        <button type="action" name="act_abilities" value="abilities">Abilities</button>
-        <button type="action" name="act_inventory" value="inventory">Inventory</button>
-        <button type="action" name="act_backstory" value="backstory">Character</button>
-    </div>
-    <input type='hidden' class='sheet-tabstoggle' name='attr_sheetTab' value='character' />
-    
-    <p></p>
-        
-    <div class="sheet-character">
-        <div class="column-container">
-            <div class="thirds-column">
-                <label>Name: <input type="text" name="attr_character_name"></label>
-                <label>Ancestry: <input type="text" name="attr_race"></label>
-            </div>
-            <div class="thirds-column">
-                <label>Profession: <input type="text" name="attr_profession"></label>
-                <label>Culture: <input type="text" name="attr_culture"></label>
-            </div>
-            <div class="thirds-column">
-                <div>
-                    <div style="display: flex">
-                        <h3>Current HP:</h3><input type="number" name="attr_health" value="0">
-                    </div>
-                    
-                    <div class="sheet-container">
-                        <input type='hidden' type='number' value='@{healthv}' name="attr_healthbar" class="sheet-hidden sheet-healthbar" disabled='true'>
-                        <div class="sheet-healthbar"></div>
-                    </div>
+    <div class="column-container">
+        <div class="twothirds-column">
+            <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/tales_of_sacadia.png">
+        </div>
+        <div class="thirds-column">
+            <div>
+                <div style="display: flex">
+                    <h3>Current HP:</h3><input type="number" name="attr_health" value="0">
                 </div>
-                <div>
-                    <div style="display: flex">
-                        <h3>Wounds:</h3>
-                        <div class="radiocontainer">
-                            <input checked="checked" class="radiobox reset" type="radio" name="attr_wounds" value="0">
-                            <input class="radiobox" type="radio" name="attr_wounds" value="1">
-                            <input class="radiobox" type="radio" name="attr_wounds" value="2">
-                            <input class="radiobox" type="radio" name="attr_wounds" value="3">
-                            <input class="radiobox" type="radio" name="attr_wounds" value="4">
-                            <input class="radiobox" type="radio" name="attr_wounds" value="5">
-                            <input class="radiobox" type="radio" name="attr_wounds" value="6">
+                
+                <div class="sheet-container">
+                    <input type='hidden' type='number' value='@{healthv}' name="attr_healthbar" class="sheet-hidden sheet-healthbar" disabled='true'>
+                    <div class="sheet-healthbar"></div>
+                </div>
+            </div>
+            <div>
+                <div style="display: flex">
+                    <h3>Wounds:</h3>
+                    <div class="radiocontainer">
+                        <input checked="checked" class="radiobox reset" type="radio" name="attr_wounds" value="0">
+                        <input class="radiobox" type="radio" name="attr_wounds" value="1">
+                        <input class="radiobox" type="radio" name="attr_wounds" value="2">
+                        <input class="radiobox" type="radio" name="attr_wounds" value="3">
+                        <input class="radiobox" type="radio" name="attr_wounds" value="4">
+                        <input class="radiobox" type="radio" name="attr_wounds" value="5">
+                        <input class="radiobox" type="radio" name="attr_wounds" value="6">
+                    </div>
+                </div>   
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="column-container">
+        <div class="thirds-column">
+            <h1>Character Sheet</h1>
+            <div class="bounded-box">
+                <div class="column-container">
+                    <div class="halfs-column">
+                        <div class="sheet-tabs">
+                            <button type="action" name="act_character" value="character">Stats</button>
+                            <button type="action" name="act_abilities" value="abilities">Abilities</button>
                         </div>
-                    </div>   
+                    </div>
+                    <div class="halfs-column">
+                        <div class="sheet-tabs">
+                            <button type="action" name="act_inventory" value="inventory">Inventory</button>
+                            <button type="action" name="act_backstory" value="backstory">Character</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <hr>
-        <table class="stats-table">
-            <tr>
-                <td><h3>Level</h3><input type="number" name="attr_level" value="0"></td>
-                <td><h3>Max Health</h3><input type="number" name="attr_max_health" value="0"></td>
-                <td><h3>Proficiency</h3><input type="number" name="attr_proficiency" value="0"></td>
-                <td><h3>AP</h3><input type="number" name="attr_ap" value="0"></td>
-                <td><h3>Movement Speed</h3><input type="number" name="attr_move" value="0"></td>
-            </tr>
-        </table>
-        <hr>
+        <div class="twothirds-column">
+            <div class="column-container">
+                <div class="halfs-column">
+                    <label><h3>Name: </h3><input type="text" class="maininput" name="attr_character_name"></label>
+                    <label><h3>Ancestry: </h3><input type="text" class="maininput" name="attr_race"></label>
+                </div>
+                <div class="halfs-column">
+                    <label><h3>Profession: </h3><input type="text" class="maininput" name="attr_profession"></label>
+                    <label><h3>Culture: </h3><input type="text" class="maininput" name="attr_culture"></label>
+                </div>
+            </div>
+            <table class="stats-table">
+                <tr>
+                    <td><h3>Level</h3><input type="number" name="attr_level" value="0"></td>
+                    <td><h3>Max Health</h3><input type="number" name="attr_max_health" value="0"></td>
+                    <td><h3>Proficiency</h3><input type="number" name="attr_proficiency" value="0"></td>
+                    <td><h3>AP</h3><input type="number" name="attr_ap" value="0"></td>
+                    <td><h3>Movement Speed</h3><input type="number" name="attr_move" value="0"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <input type='hidden' class='sheet-tabstoggle' name='attr_sheetTab' value='character' />
+    <hr> 
+    <div class="sheet-character">
         
         <table class="stats-table">
             <tr>
@@ -112,7 +129,7 @@
 
         <br>
 
-        <div class="column-container">
+        <div class="large-column-container">
             <div class="thirds-column">
                 <div class="bounded-box">
                     <div class="column-container">
@@ -138,11 +155,11 @@
                                     <h4>Unconcious</h4>
                                 </div>
                                 <div class="halfs-column">
-                                    <input type="checkbox" name="attr_blinded">
+                                    <input type="checkbox" class="right-align" name="attr_blinded">
                                     <br class="smallmargin">
-                                    <input type="checkbox" name="attr_prone">
+                                    <input type="checkbox" class="right-align" name="attr_prone">
                                     <br class="smallmargin">
-                                    <input type="checkbox" name="attr_unconcious">
+                                    <input type="checkbox" class="right-align" name="attr_unconcious">
                                 </div>
                             </div>
                         </div>
@@ -153,9 +170,9 @@
                                     <h4>Surrounded</h4>
                                 </div>
                                 <div class="halfs-column">
-                                    <input type="checkbox" name="attr_surprised">
+                                    <input type="checkbox" class="right-align" name="attr_surprised">
                                     <br class="smallmargin"> 
-                                    <input type="checkbox" name="attr_surrounded">
+                                    <input type="checkbox" class="right-align" name="attr_surrounded">
                                 </div>
                             </div>
                         </div>
@@ -1025,54 +1042,57 @@
 
         <br>
 
-        <div class="column-container">      
+        <div class="large-column-container">      
             <div class="thirds-column">
                 <div class="bounded-box">
                     <h2 style="text-align: center;">General Talents</h2>
                     <label>Available Talent Points: 
                         <input type="text" name="attr_available_talents" value="0" min="0">
                     </label>
-                    <br>
                     <h3 style="text-align: center;">---- Crafting ----</h3>
                     <div style="text-align: center;" class="column-container">
                         <div class="halfs-column">
                             <hr class="smallmargin">
                             <div style="text-align: left;" class="column-container">
-                                <div class="halfs-column">
-                                    <strong>Alchemy</strong>
+                                <div class="twothirds-column">
+                                    <h4>Alchemy</h4>
+                                    <span class="italic-subtext">Wiles</span>
                                 </div>
-                                <div class="halfs-column">
-                                    <input type="checkbox" name="attr_prof_alchemy">
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_alchemy">
                                 </div>
                             </div>
                             <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
                             <hr class="smallmargin">
                             <div style="text-align: left;" class="column-container">
-                                <div class="halfs-column">
-                                    <strong>Art</strong>
+                                <div class="twothirds-column">
+                                    <h4>Art</h4>
+                                    <span class="italic-subtext">Courage</span>
                                 </div>
-                                <div class="halfs-column">
-                                    <input type="checkbox" name="attr_prof_art">
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_art">
                                 </div>
                             </div>
                             <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{courage} + @{proficiency} ]]}}">Roll</button>
                             <hr class="smallmargin">
                             <div style="text-align: left;" class="column-container">
-                                <div class="halfs-column">
-                                    <strong>Construction</strong>
+                                <div class="twothirds-column">
+                                    <h4>Construction</h4>
+                                    <span class="italic-subtext">Power</span>
                                 </div>
-                                <div class="halfs-column">
-                                    <input type="checkbox" name="attr_prof_construction">
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_construction">
                                 </div>
                             </div>
                             <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{power} + @{proficiency} ]]}}">Roll</button>
                             <hr class="smallmargin">
                             <div style="text-align: left;" class="column-container">
-                                <div class="halfs-column">
-                                    <strong>Cooking</strong>
+                                <div class="twothirds-column">
+                                    <h4>Cooking</h4>
+                                    <span class="italic-subtext">Courage</span>
                                 </div>
-                                <div class="halfs-column">
-                                    <input type="checkbox" name="attr_prof_cooking">
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_cooking">
                                 </div>
                             </div>
                             <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{courage} + @{proficiency} ]]}}">Roll</button>
@@ -1081,41 +1101,45 @@
                         <div class="halfs-column">
                             <hr class="smallmargin">
                             <div style="text-align: left;" class="column-container">
-                                <div class="halfs-column">
-                                    <strong>Herbalism</strong>
+                                <div class="twothirds-column">
+                                    <h4>Herbalism</h4>
+                                    <span class="italic-subtext">Finesse</span>
                                 </div>
-                                <div class="halfs-column">
-                                    <input type="checkbox" name="attr_prof_herbalism">
-                                </div>
-                            </div>
-                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                            <hr class="smallmargin">
-                            <div style="text-align: left;" class="column-container">
-                                <div class="halfs-column">
-                                    <strong>Ritual</strong>
-                                </div>
-                                <div class="halfs-column">
-                                    <input type="checkbox" name="attr_prof_ritual">
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_herbalism">
                                 </div>
                             </div>
                             <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
                             <hr class="smallmargin">
                             <div style="text-align: left;" class="column-container">
-                                <div class="halfs-column">
-                                    <strong>Smithing</strong>
+                                <div class="twothirds-column">
+                                    <h4>Ritual</h4>
+                                    <span class="italic-subtext">Wiles</span>
                                 </div>
-                                <div class="halfs-column">
-                                    <input type="checkbox" name="attr_prof_smithing">
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_ritual">
                                 </div>
                             </div>
                             <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
                             <hr class="smallmargin">
                             <div style="text-align: left;" class="column-container">
-                                <div class="halfs-column">
-                                    <strong>Tailor</strong>
+                                <div class="twothirds-column">
+                                    <h4>Smithing</h4>
+                                    <span class="italic-subtext">Power</span>
                                 </div>
-                                <div class="halfs-column">
-                                    <input type="checkbox" name="attr_prof_tailor">
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_smithing">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Tailor</h4>
+                                    <span class="italic-subtext">Finesse</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_tailor">
                                 </div>
                             </div>
                             <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
@@ -1124,35 +1148,263 @@
                     </div>
                     <br>
                     <h3 style="text-align: center;">---- Knowledge ----</h3>
-                    <br>
-                    <div class="column-container">
+                    <div style="text-align: center;" class="column-container">
                         <div class="halfs-column">
-
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Literary</h4>
+                                    <span class="italic-subtext">Wiles</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_literary">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Fables</h4>
+                                    <span class="italic-subtext">Wiles</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_fables">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Society</h4>
+                                    <span class="italic-subtext">Finesse</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_society">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{power} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>History</h4>
+                                    <span class="italic-subtext">Wiles</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_history">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
                         </div>
                         <div class="halfs-column">
-                            
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Magic</h4>
+                                    <span class="italic-subtext">Wiles</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_magic">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Religion</h4>
+                                    <span class="italic-subtext">Wiles</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_religion">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Wilderness</h4>
+                                    <span class="italic-subtext">Wiles</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_wilderness">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Other</h4>
+                                    <input type="text" class="italic-subtext">
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_other">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
                         </div>
                     </div>
                     <br>
                     <h3 style="text-align: center;">---- Action ----</h3>
-                    <br>
-                    <div class="column-container">
+                    <div style="text-align: center;" class="column-container">
                         <div class="halfs-column">
-
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Acrobatics</h4>
+                                    <span class="italic-subtext">Finesse</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_acrobatics">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Athletics</h4>
+                                    <span class="italic-subtext">Power</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_athletics">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4 style="font-size: 12px;">Nimble Hands</h4>
+                                    <span class="italic-subtext">Finesse</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_nimblehands">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{power} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
                         </div>
                         <div class="halfs-column">
-                            
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Performance</h4>
+                                    <span class="italic-subtext">Courage</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_performance">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Stealth</h4>
+                                    <span class="italic-subtext">Finesse</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_stealth">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Survival</h4>
+                                    <span class="italic-subtext">Power</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_survival">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
                         </div>
                     </div>
                     <br>
                     <h3 style="text-align: center;">---- General ----</h3>
-                    <br>
-                    <div class="column-container">
+                    <div style="text-align: center;" class="column-container">
                         <div class="halfs-column">
-
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Economy</h4>
+                                    <span class="italic-subtext">Finesse</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_economy">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Medicine</h4>
+                                    <span class="italic-subtext">Courage</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_medicine">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Perception</h4>
+                                    <span class="italic-subtext">Courage</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_perception">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{power} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4 style="font-size: 12px;">Social Graces</h4>
+                                    <span class="italic-subtext">Finesse</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_socialgraces">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
                         </div>
                         <div class="halfs-column">
-                            
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Strategy</h4>
+                                    <span class="italic-subtext">Courage</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_magic">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Tools</h4>
+                                    <span class="italic-subtext">Finesse</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_wilderness">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Transport</h4>
+                                    <span class="italic-subtext">Finesse</span>
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_other">
+                                </div>
+                            </div>
+                            <button type="roll" value="&{template:default} {{name=Stat Roll}} {{Power=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                            <hr class="smallmargin">
                         </div>
                     </div>
                 </div>
@@ -1165,11 +1417,11 @@
                     <br>
                     <hr>
                     <fieldset class="repeating_talents">
-                        <strong>Talent</strong> <input type="text" name="attr_special_talent_name">
+                        <h4>Talent</h4> <input type="text" name="attr_special_talent_name">
                         <br>
-                        <strong>Cost</strong><input type="text" name="attr_special_talent_cost">
+                        <h4>Cost</h4><input type="text" name="attr_special_talent_cost">
                         <br>
-                        <strong>Description</strong><textarea name="attr_special_talent_desc">
+                        <h4>Description</h4><textarea name="attr_special_talent_desc">
                         <br>
                         <hr>
                     </fieldset>
@@ -1267,15 +1519,155 @@
                     </div>
                     <br>
                     <h2 style="text-align: center;">Armor</h2>
-                    <h3>Set:</h3> <input type="text">
+                    <div class="column-container">
+                        <div class="fourfifths-column">
+                            <h3>Set:</h3> <input type="text">
+                            <div class="column-container">
+                                <div class="sixths-column">
+                                    <h6>Inflexible:</h6>
+                                </div>
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                                <div class="sixths-column">
+                                    <h6>Thin:</h6>
+                                </div>
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                                <div class="sixths-column">
+                                    <h6>Flexible:</h6>
+                                </div>  
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fifths-column">
+                            <h4>MA:</h4> <input type="number">
+                            <h4>PA:</h4> <input type="number">
+                        </div>
+                    </div>
                     <br>
-                    <h3>Add-On:</h3> <input type="text">
+                    <div class="column-container">
+                        <div class="fourfifths-column">
+                            <h3>Add-on:</h3> <input type="text">
+                            <div class="column-container">
+                                <div class="sixths-column">
+                                    <h6>Inflexible:</h6>
+                                </div>
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                                <div class="sixths-column">
+                                    <h6>Thin:</h6>
+                                </div>
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                                <div class="sixths-column">
+                                    <h6>Flexible:</h6>
+                                </div>  
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fifths-column">
+                            <h4>MA:</h4> <input type="number">
+                            <h4>PA:</h4> <input type="number">
+                        </div>
+                    </div>
                     <br>
-                    <h3>Trinket:</h3> <input type="text">
+                    <div class="column-container">
+                        <div class="fourfifths-column">
+                            <h3>Trinket:</h3> <input type="text">
+                            <div class="column-container">
+                                <div class="sixths-column">
+                                    <h6>Inflexible:</h6>
+                                </div>
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                                <div class="sixths-column">
+                                    <h6>Thin:</h6>
+                                </div>
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                                <div class="sixths-column">
+                                    <h6>Flexible:</h6>
+                                </div>  
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fifths-column">
+                            <h4>MA:</h4> <input type="number">
+                            <h4>PA:</h4> <input type="number">
+                        </div>
+                    </div>
                     <br>
-                    <h3>Shield:</h3> <input type="text">
+                    <div class="column-container">
+                        <div class="fourfifths-column">
+                            <h3>Shield:</h3> <input type="text">
+                            <div class="column-container">
+                                <div class="sixths-column">
+                                    <h6>Inflexible:</h6>
+                                </div>
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                                <div class="sixths-column">
+                                    <h6>Thin:</h6>
+                                </div>
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                                <div class="sixths-column">
+                                    <h6>Flexible:</h6>
+                                </div>  
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fifths-column">
+                            <h4>MA:</h4> <input type="number">
+                            <h4>PA:</h4> <input type="number">
+                        </div>
+                    </div>
                     <br>
-                    <h3>Trinket 2:</h3> <input type="text">
+                    <div class="column-container">
+                        <div class="fourfifths-column">
+                            <h3>Trinket 2:</h3> <input type="text">
+                            <div class="column-container">
+                                <div class="sixths-column">
+                                    <h6>Inflexible:</h6>
+                                </div>
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                                <div class="sixths-column">
+                                    <h6>Thin:</h6>
+                                </div>
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                                <div class="sixths-column">
+                                    <h6>Flexible:</h6>
+                                </div>  
+                                <div class="sixths-column">
+                                    <input class="right-align" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fifths-column">
+                            <h4>MA:</h4> <input type="number">
+                            <h4>PA:</h4> <input type="number">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1284,7 +1676,7 @@
 
     <div class="sheet-abilities">
         <h2 style="text-align: center;">Abilities</h2>
-        <hr>
+        
         <h3 style="text-align: center;">Limb Exhaustion Tracker</h3>
         <br>
         <div>
@@ -1297,10 +1689,9 @@
             </div>
             <div class="thirds-column">
                 <div>
-                    <span><strong>Left Arm</strong></span>
-                    <br>
+                    <span><h4>Left Arm</h4></span>
                     <div class="sheet-sameline">
-                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png" style="width: 15%; padding: 0px !important;">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png" style="width: 20%; padding: 0px !important;">
                         <label class="sheet-switch">
                             <input type="checkbox" name="attr_toggle_exh_left" value="1">
                             <span class="sheet-slider"></span>
@@ -1309,10 +1700,9 @@
                 </div>
                 <br>
                 <div>
-                    <span><strong>Right Arm</strong></span>
-                    <br>
+                    <span><h4>Right Arm</h4></span>
                     <div class="sheet-sameline">
-                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png" style="width: 15%; padding: 0px !important;">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png" style="width: 20%; padding: 0px !important;">
                         <label class="sheet-switch">
                             <input type="checkbox" name="attr_toggle_exh_right" value="1">
                             <span class="sheet-slider"></span>
@@ -1321,10 +1711,9 @@
                 </div>
                 <br>
                 <div>
-                    <span><strong>Body</strong></span>
-                    <br>
+                    <span><h4>Body</h4></span>
                     <div class="sheet-sameline">
-                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/body-icon.png" style="width: 15%; padding: 0px !important;">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/body-icon.png" style="width: 20%; padding: 0px !important;">
                         <label class="sheet-switch">
                             <input type="checkbox" name="attr_toggle_exh_body" value="1">
                             <span class="sheet-slider"></span>
@@ -1333,10 +1722,9 @@
                 </div>
                 <br>
                 <div>
-                    <span><strong>Reaction</strong></span>
-                    <br>
+                    <span><h4>Reaction</h4></span>
                     <div class="sheet-sameline">
-                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/body-icon.png" style="width: 15%; padding: 0px !important;">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/body-icon.png" style="width: 20%; padding: 0px !important;">
                         <label class="sheet-switch">
                             <input type="checkbox" name="attr_toggle_exh_reaction" value="1">
                             <span class="sheet-slider"></span>
@@ -1346,10 +1734,9 @@
             </div>
             <div class="thirds-column">
                 <div>
-                    <span><strong>Mind</strong></span>
-                    <br>
+                    <span><h4>Mind</h4></span>
                     <div class="sheet-sameline">
-                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/mind-icon.png" style="width: 15%; padding: 0px !important;">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/mind-icon.png" style="width: 20%; padding: 0px !important;">
                         <label class="sheet-switch">
                             <input type="checkbox" name="attr_toggle_exh_mind" value="1">
                             <span class="sheet-slider"></span>
@@ -1358,10 +1745,9 @@
                 </div>
                 <br>
                 <div>
-                    <span><strong>Focus</strong></span>
-                    <br>
+                    <span><h4>Focus</h4></span>
                     <div class="sheet-sameline">
-                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/focus-icon.png" style="width: 15%; padding: 0px !important;">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/focus-icon.png" style="width: 20%; padding: 0px !important;">
                         <label class="sheet-switch">
                             <input type="checkbox" name="attr_toggle_exh_focus" value="1">
                             <span class="sheet-slider"></span>
@@ -1370,10 +1756,9 @@
                 </div>
                 <br>
                 <div>
-                    <span><strong>Legs</strong></span>
-                    <br>
+                    <span><h4>Legs</h4></span>
                     <div class="sheet-sameline">
-                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/leg-icon.png" style="width: 15%; padding: 0px !important;">
+                        <img src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/leg-icon.png" style="width: 20%; padding: 0px !important;">
                         <label class="sheet-switch">
                             <input type="checkbox" name="attr_toggle_exh_legs" value="1">
                             <span class="sheet-slider"></span>
@@ -1426,7 +1811,7 @@
                 
                 <label>Attack Modifier: <input type="text" name="attr_attack_mod" placeholder="e.g. +5"></label>
                 <label>Damage Roll: <input type="text" name="attr_damage_roll" placeholder="e.g. 2d6+3"></label>
-                <button type="roll" value="&{template:default} {{name=@{ability_name}}} {{Limb=@{ability_limb}}} {{Hit=[[ @{ability_advantage}d20kh1+@{attack_mod} ]]}}
+                <button type="roll" type="action" name="act_roll_ability" value="&{template:default} {{name=@{ability_name}}} {{Limb=@{ability_limb}}} {{Hit=[[ @{ability_advantage}d20kh1+@{attack_mod} ]]}}
                 [Click here to roll damage](~repeating_abilities_damage)">Roll Attack</button>
                 <button type="roll" name="roll_damage" value="&{template:default} {{name=@{ability_name}}} {{Damage=[[ @{damage_roll} ]]}}"></button>
                 <hr>
@@ -1450,7 +1835,6 @@
 
     <div class="sheet-inventory">
         <h2 style="text-align: center;">Inventory</h2>
-        <hr>
         <fieldset class="repeating_inventory">
             <label>Item Name: <input type="text" name="attr_item_name"></label><label>Value: <input type="text" name="attr_item_value"></label>
             <label>Description: <textarea name="attr_item_description" rows=2></textarea></label>
@@ -1544,6 +1928,10 @@
                     sheet_abilitiesTab: button
                 });
             });
+        });
+
+        on("clicked:roll_ability", function() {
+            console.log("triggered on roll ability!")
         });
 
         on("clicked:reset_limb_exh", function() {

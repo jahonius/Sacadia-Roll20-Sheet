@@ -35,6 +35,13 @@
 	gap: 2rem;
 }
 
+hr {
+    background-color: #911d20;
+    border: none;
+    height: 3px;
+  /* Set the hr color */
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -47,10 +54,6 @@ body {
     width: 1000px;
     margin: auto;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-.sheet-tabs {
-    display: flex;
-    border-bottom: 2px solid #333;
 }
 .sheet-tab {
     padding: 10px 20px;
@@ -98,21 +101,21 @@ body {
 }
 
 h2 {
-    color: #911d20;
     text-decoration: underline;
 }
 
-h3 {
-    color: #911d20;
-}
-
-h4 {
+:is(h1, h2, h3, h4, h5, h6) {
     color: #911d20;
 }
 
 .column-container {
     display: flex;
-    column-gap: 30px;
+    column-gap: 3%;
+}
+
+.large-column-container {
+    display: flex;
+    column-gap: 1%;
 }
 
 .thirds-column {
@@ -123,12 +126,21 @@ h4 {
     width: 66%;
 }
 
+
+.fourths-column {
+    width: 25%
+}
+
 .fifths-column {
     width: 20%
 }
 
-.fourths-column {
-    width: 25%
+.fourfifths-column {
+    width: 80%
+}
+
+.sixths-column {
+    width: 16%;
 }
 
 .bounded-box {
@@ -151,14 +163,25 @@ textarea {
     height: 50px; /* Adjust height as needed */
 }
 
+input.maininput {
+    font-size: 18px;
+}
+
+.sheet-tabs {
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+
 .sheet-tabs button {
     background-color: #911d20;
     color: white;
     border: none;
     border-radius: 20px;
     padding: 10px 20px;
+    width: 90px;
+    height: 50px;
     margin: 5px;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
     transition: background-color 0.3s ease, border 0.3s ease;
 }
@@ -467,22 +490,6 @@ input.sheet-conditions[value="6"] ~ div.six-condition-text { display: block; }
     font-weight: bold;
 }
 
-/* hide input arrows */
-input[type="number"] {
-    -webkit-appearance: textfield;
-       -moz-appearance: textfield;
-            appearance: textfield;
-  }
-  input[type=number]::-webkit-inner-spin-button, 
-  input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-  }
-
-  button.upbutton,
-  button.downbutton {
-      border: ;
-  }
-
 /* dice faces */
 .first-face {
     display: flex;
@@ -569,3 +576,16 @@ input[type="number"] {
   }
 
 /* wound dot css */
+
+
+/* talent */
+input.right-align {
+    float: right;
+}
+
+.italic-subtext {
+    font-style: italic;
+    color: #911d20;
+    font-size: 12px;
+    width: 70px;
+}
