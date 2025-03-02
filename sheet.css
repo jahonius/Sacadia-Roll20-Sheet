@@ -589,3 +589,17 @@ input.right-align {
     font-size: 12px;
     width: 70px;
 }
+
+/* talent roll divs */
+.disadv-roll,
+.normal-roll {
+    display: none;
+}
+
+input[value="on"] ~ .normal-roll {
+    display: flex;
+}
+
+input[value="0"] ~ .disadv-roll {
+    display: flex;
+}
