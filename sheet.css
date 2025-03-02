@@ -100,6 +100,23 @@ body {
     width: 50px;
 }
 
+.small-display {
+    font-size: 14px;
+    text-transform: capitalize;
+    outline: solid #911d20 2px;
+    padding: 0px 2px;
+    font-weight: bold;
+    display: table;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 5px;
+    border: none;
+    background: transparent;
+    color: #911d20;
+    
+    width: 50px;
+}
+
 h2 {
     text-decoration: underline;
 }
