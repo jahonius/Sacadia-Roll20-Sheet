@@ -502,6 +502,11 @@ input.sheet-conditions[value="4"] ~ div.four-condition-text { display: block; }
 input.sheet-conditions[value="5"] ~ div.five-condition-text { display: block; }
 input.sheet-conditions[value="6"] ~ div.six-condition-text { display: block; }
 
+input.ability-toggle-hidden[value="0"] ~ div.attack-fields { display: none }
+input.ability-toggle-hidden[value="0"] ~ div.ability-fields { display: block }
+input.ability-toggle-hidden[value="1"] ~ div.attack-fields { display: block }
+input.ability-toggle-hidden[value="1"] ~ div.ability-fields { display: none }
+
 [class$="condition-text"] {
     font-size: 12px;
     font-weight: bold;
