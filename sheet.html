@@ -2443,19 +2443,19 @@
                                         });
                                     }
 
-                                    update["ad"] = 8 + parseInt(stat_values["fate"]) + parseInt(armor_set_values["armor_set_ad"]) + style_ad + adorn_ad + parseInt(temp_values["tempbuff_ad"]);
-                                    update["pd"] = 8 + parseInt(stat_values["power"]) + parseInt(armor_set_values["armor_set_pd"]) + style_pd + adorn_pd + parseInt(temp_values["tempbuff_pd"]);
+                                    update["ad"] = 11 + parseInt(stat_values["fate"]) + parseInt(armor_set_values["armor_set_ad"]) + style_ad + adorn_ad + parseInt(temp_values["tempbuff_ad"]);
+                                    update["pd"] = 11 + parseInt(stat_values["power"]) + parseInt(armor_set_values["armor_set_pd"]) + style_pd + adorn_pd + parseInt(temp_values["tempbuff_pd"]);
                                     if (update["ad"] > update["pd"]){
                                         update["pd"] = update["ad"]
                                     }
                                     console.log("updating pd - " + update["pd"])
 
-                                    update["td"] = 8 + parseInt(stat_values["finesse"]) + parseInt(armor_set_values["armor_set_td"]) + style_td + adorn_td + parseInt(temp_values["tempbuff_td"]);
+                                    update["td"] = 11 + parseInt(stat_values["finesse"]) + parseInt(armor_set_values["armor_set_td"]) + style_td + adorn_td + parseInt(temp_values["tempbuff_td"]);
                                     if (update["ad"] > update["td"]){
                                         update["td"] = update["ad"]
                                     }
 
-                                    update["md"] = 8 + parseInt(stat_values["wiles"]) + parseInt(armor_set_values["armor_set_md"]) + style_md + adorn_md + parseInt(temp_values["tempbuff_md"]);
+                                    update["md"] = 11 + parseInt(stat_values["wiles"]) + parseInt(armor_set_values["armor_set_md"]) + style_md + adorn_md + parseInt(temp_values["tempbuff_md"]);
                                     if (update["ad"] > update["md"]){
                                         update["md"] = update["ad"]
                                     }
