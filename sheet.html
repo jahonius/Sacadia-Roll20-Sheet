@@ -1978,6 +1978,10 @@
                 <input type="hidden" name="attr_tempbuff_tohit_melee" value="">
                 <input type="hidden" name="attr_tempbuff_tohit_ranged" value="">
                 <input type="hidden" name="attr_tempbuff_damage" value="">
+                <input type="hidden" name="attr_tempbuff_ad" value=0>
+                <input type="hidden" name="attr_tempbuff_pd" value=0>
+                <input type="hidden" name="attr_tempbuff_td" value=0>
+                <input type="hidden" name="attr_tempbuff_md" value=0>
                 <fieldset class="repeating_tempbuffs">
                     <div class="repeating-box">
                         <div class="column-container">
@@ -2375,95 +2379,90 @@
                         let adorn_md_array = [];
                         let adorn_dr_array = [];
 
+                        console.log("getting styles...")
                         getSectionIDs("armorstyles", styleidarray => {
-                            styleidarray.forEach(styleid => {
-                                style_level_array.push(`repeating_armorstyles_${styleid}_armor_style_level`);
-                                style_ad_array.push(`repeating_armorstyles_${styleid}_armor_style_ad`);
-                                style_pd_array.push(`repeating_armorstyles_${styleid}_armor_style_pd`);
-                                style_td_array.push(`repeating_armorstyles_${styleid}_armor_style_td`);
-                                style_md_array.push(`repeating_armorstyles_${styleid}_armor_style_md`);
-                                style_dr_array.push(`repeating_armorstyles_${styleid}_armor_style_dr`);
+                            getSectionIDs("armoradorns", adornidarray => {
+                                if (styleidarray.length > 0){
+                                    styleidarray.forEach(styleid => {
+                                        style_level_array.push(`repeating_armorstyles_${styleid}_armor_style_level`);
+                                        style_ad_array.push(`repeating_armorstyles_${styleid}_armor_style_ad`);
+                                        style_pd_array.push(`repeating_armorstyles_${styleid}_armor_style_pd`);
+                                        style_td_array.push(`repeating_armorstyles_${styleid}_armor_style_td`);
+                                        style_md_array.push(`repeating_armorstyles_${styleid}_armor_style_md`);
+                                        style_dr_array.push(`repeating_armorstyles_${styleid}_armor_style_dr`);
+                                    });
+                                }
 
-                                getSectionIDs("armoradorns", adornidarray => {
+                                console.log("getting adorns...");
+                                
+                                if (adornidarray.length > 0){
                                     adornidarray.forEach(adornid => {
                                         adorn_ad_array.push(`repeating_armoradorns_${adornid}_armor_adorn_ad`);
                                         adorn_pd_array.push(`repeating_armoradorns_${adornid}_armor_adorn_pd`);
                                         adorn_td_array.push(`repeating_armoradorns_${adornid}_armor_adorn_td`);
                                         adorn_md_array.push(`repeating_armoradorns_${adornid}_armor_adorn_md`);
                                         adorn_dr_array.push(`repeating_armoradorns_${adornid}_armor_adorn_dr`);
-
-                                        getAttrs(adorn_ad_array, function(adorn_ad_values) {
-                                            getAttrs(adorn_pd_array, function(adorn_pd_values) {
-                                                getAttrs(adorn_td_array, function(adorn_td_values) {
-                                                    getAttrs(adorn_md_array, function(adorn_md_values) {
-                                                        getAttrs(adorn_dr_array, function(adorn_dr_values) {
-                                                            getAttrs(style_level_array, function(style_level_values) {
-                                                                getAttrs(style_ad_array, function(style_ad_values) {
-                                                                    getAttrs(style_pd_array, function(style_pd_values) {
-                                                                        getAttrs(style_td_array, function(style_td_values) {
-                                                                            getAttrs(style_md_array, function(style_md_values) {
-                                                                                getAttrs(style_dr_array, function(style_dr_values) {
-
-                                                                                    let style_ad = 0;
-                                                                                    let style_pd = 0;
-                                                                                    let style_td = 0;
-                                                                                    let style_md = 0;
-                                                                                    let style_dr = 0;
-
-                                                                                    let adorn_ad = 0;
-                                                                                    let adorn_pd = 0;
-                                                                                    let adorn_td = 0;
-                                                                                    let adorn_md = 0;
-                                                                                    let adorn_dr = 0;
-
-                                                                                    styleidarray.forEach(styleid => {
-                                                                                        style_ad += parseInt(style_level_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(style_ad_values[`repeating_armorstyles_${styleid}_armor_style_ad`]);
-                                                                                        style_pd += parseInt(style_level_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(style_pd_values[`repeating_armorstyles_${styleid}_armor_style_pd`]);
-                                                                                        style_td += parseInt(style_level_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(style_td_values[`repeating_armorstyles_${styleid}_armor_style_td`]);
-                                                                                        style_md += parseInt(style_level_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(style_md_values[`repeating_armorstyles_${styleid}_armor_style_md`]);
-                                                                                        style_dr += parseInt(style_level_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(style_dr_values[`repeating_armorstyles_${styleid}_armor_style_dr`]);  
-                                                                                        console.log("detected style md - " + style_ad)
-                                                                                    });
-                                                                                    
-                                                                                    adornidarray.forEach(adornid => {
-                                                                                        adorn_ad += parseInt(adorn_ad_values[`repeating_armoradorns_${adornid}_armor_adorn_ad`]);
-                                                                                        adorn_pd += parseInt(adorn_pd_values[`repeating_armoradorns_${adornid}_armor_adorn_pd`]);
-                                                                                        adorn_td += parseInt(adorn_td_values[`repeating_armoradorns_${adornid}_armor_adorn_td`]);
-                                                                                        adorn_md += parseInt(adorn_md_values[`repeating_armoradorns_${adornid}_armor_adorn_md`]);
-                                                                                        adorn_dr += parseInt(adorn_dr_values[`repeating_armoradorns_${adornid}_armor_adorn_dr`]);
-                                                                                    });
-
-                                                                                    update["ad"] = 8 + parseInt(stat_values["fate"]) + parseInt(armor_set_values["armor_set_ad"]) + style_ad + adorn_ad + parseInt(temp_values["tempbuff_ad"]);
-                                                                                    update["pd"] = 8 + parseInt(stat_values["power"]) + parseInt(armor_set_values["armor_set_pd"]) + style_pd + adorn_pd + parseInt(temp_values["tempbuff_pd"]);
-                                                                                    if (update["ad"] > update["pd"]){
-                                                                                        update["pd"] = update["ad"]
-                                                                                    }
-
-                                                                                    update["td"] = 8 + parseInt(stat_values["finesse"]) + parseInt(armor_set_values["armor_set_td"]) + style_td + adorn_td + parseInt(temp_values["tempbuff_td"]);
-                                                                                    if (update["ad"] > update["td"]){
-                                                                                        update["td"] = update["ad"]
-                                                                                    }
-
-                                                                                    update["md"] = 8 + parseInt(stat_values["wiles"]) + parseInt(armor_set_values["armor_set_md"]) + style_md + adorn_md + parseInt(temp_values["tempbuff_md"]);
-                                                                                    if (update["ad"] > update["md"]){
-                                                                                        update["md"] = update["ad"]
-                                                                                    }
-
-                                                                                    update["dr"] = 0 + parseInt(armor_set_values["armor_set_dr"]) + style_dr + adorn_dr
-
-                                                                                    setAttrs(update);
-                                                                                });
-                                                                            });
-                                                                        });
-                                                                    });
-                                                                });
-                                                            });
-                                                        });
-                                                    });
-                                                });
-                                            });
-                                        });
                                     });
+                                }
+
+                                console.log("got adorns");
+
+                                total_array = [...adorn_ad_array, ...adorn_pd_array, ...adorn_td_array, ...adorn_md_array, ...adorn_dr_array, ...style_level_array, ...style_ad_array, ...style_pd_array, ...style_td_array, ...style_md_array, ...style_dr_array];
+                                console.log(total_array)
+                                getAttrs(total_array, function(total_values) {
+                                    console.log("all attrs got!")
+                                    let style_ad = 0;
+                                    let style_pd = 0;
+                                    let style_td = 0;
+                                    let style_md = 0;
+                                    let style_dr = 0;
+
+                                    let adorn_ad = 0;
+                                    let adorn_pd = 0;
+                                    let adorn_td = 0;
+                                    let adorn_md = 0;
+                                    let adorn_dr = 0;
+
+                                    if (styleidarray.length > 0){
+                                        styleidarray.forEach(styleid => {
+                                            style_ad += parseInt(total_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(total_values[`repeating_armorstyles_${styleid}_armor_style_ad`]);
+                                            style_pd += parseInt(total_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(total_values[`repeating_armorstyles_${styleid}_armor_style_pd`]);
+                                            style_td += parseInt(total_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(total_values[`repeating_armorstyles_${styleid}_armor_style_td`]);
+                                            style_md += parseInt(total_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(total_values[`repeating_armorstyles_${styleid}_armor_style_md`]);
+                                            style_dr += parseInt(total_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(total_values[`repeating_armorstyles_${styleid}_armor_style_dr`]);  
+                                            console.log("detected style md - " + style_ad)
+                                        });
+                                    }
+                                    if (adornidarray.length > 0){
+                                        adornidarray.forEach(adornid => {
+                                            adorn_ad += parseInt(total_values[`repeating_armoradorns_${adornid}_armor_adorn_ad`]);
+                                            adorn_pd += parseInt(total_values[`repeating_armoradorns_${adornid}_armor_adorn_pd`]);
+                                            adorn_td += parseInt(total_values[`repeating_armoradorns_${adornid}_armor_adorn_td`]);
+                                            adorn_md += parseInt(total_values[`repeating_armoradorns_${adornid}_armor_adorn_md`]);
+                                            adorn_dr += parseInt(total_values[`repeating_armoradorns_${adornid}_armor_adorn_dr`]);
+                                        });
+                                    }
+
+                                    update["ad"] = 8 + parseInt(stat_values["fate"]) + parseInt(armor_set_values["armor_set_ad"]) + style_ad + adorn_ad + parseInt(temp_values["tempbuff_ad"]);
+                                    update["pd"] = 8 + parseInt(stat_values["power"]) + parseInt(armor_set_values["armor_set_pd"]) + style_pd + adorn_pd + parseInt(temp_values["tempbuff_pd"]);
+                                    if (update["ad"] > update["pd"]){
+                                        update["pd"] = update["ad"]
+                                    }
+                                    console.log("updating pd - " + update["pd"])
+
+                                    update["td"] = 8 + parseInt(stat_values["finesse"]) + parseInt(armor_set_values["armor_set_td"]) + style_td + adorn_td + parseInt(temp_values["tempbuff_td"]);
+                                    if (update["ad"] > update["td"]){
+                                        update["td"] = update["ad"]
+                                    }
+
+                                    update["md"] = 8 + parseInt(stat_values["wiles"]) + parseInt(armor_set_values["armor_set_md"]) + style_md + adorn_md + parseInt(temp_values["tempbuff_md"]);
+                                    if (update["ad"] > update["md"]){
+                                        update["md"] = update["ad"]
+                                    }
+
+                                    update["dr"] = 0 + parseInt(armor_set_values["armor_set_dr"]) + style_dr + adorn_dr
+
+                                    setAttrs(update);
                                 });
                             });
                         });
