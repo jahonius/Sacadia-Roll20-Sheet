@@ -41,19 +41,11 @@
         <div class="thirds-column">
             <h1>Character Sheet</h1>
             <div class="bounded-box">
-                <div class="column-container">
-                    <div class="halfs-column">
-                        <div class="sheet-tabs">
-                            <button type="action" name="act_character" value="character">Stats</button>
-                            <button type="action" name="act_abilities" value="abilities">Abilities</button>
-                        </div>
-                    </div>
-                    <div class="halfs-column">
-                        <div class="sheet-tabs">
-                            <button type="action" name="act_inventory" value="inventory">Inventory</button>
-                            <button type="action" name="act_backstory" value="backstory">Character</button>
-                        </div>
-                    </div>
+                <div class="sheet-tabs">
+                    <button type="action" name="act_character" value="character">Stats</button>
+                    <button type="action" name="act_abilities" value="abilities">Abilities</button>
+                    <button type="action" name="act_inventory" value="inventory">Inventory</button>
+                    <button type="action" name="act_backstory" value="backstory">Character</button>
                 </div>
             </div>
         </div>
@@ -73,8 +65,18 @@
                     <td><h3>Level</h3><input type="number" name="attr_level" value="0"></td>
                     <td><h3>Max Health</h3><input type="number" name="attr_max_health" value="0"></td>
                     <td><h3>Proficiency</h3><input type="number" name="attr_proficiency" value="0"></td>
-                    <td><h3>AP</h3><input type="number" name="attr_ap" value="0"></td>
+                    <td><h3>Max AP</h3><input type="number" name="attr_ap" value="0"></td>
                     <td><h3>Movement Speed</h3><input type="number" name="attr_move" value="0"></td>
+                </tr>
+            </table>
+            <table class="stats-table">
+                <tr>
+                    <td><h3>All Defense</h3><span class="stat-display" name="attr_ad">8</span></td>
+                    <td><h3>Physical Defense</h3><span class="stat-display" name="attr_pd">8</span></td>
+                    <td><h3>Touch Defense</h3><span class="stat-display" name="attr_td">8</span></td>
+                    <td><h3>Mental Defense</h3><span class="stat-display" name="attr_md">8</span></td>
+                    <td><h3>Damage Resist</h3><span class="stat-display" name="attr_dr">0</span></td>
+                    <td><h3>Check DC</h3><input type="number" name="attr_checkdc" value=0></td>
                 </tr>
             </table>
         </div>
@@ -82,7 +84,7 @@
     <input type='hidden' class='sheet-tabstoggle' name='attr_sheetTab' value='character' />
     <hr> 
     <div class="sheet-character">
-        
+        <h2 style="text-align: center;">Stats</h2>
         <table class="stats-table">
             <tr>
                 <td><h3>Power</h3><input type="hidden" name="attr_power_color" value="neutral">
@@ -104,14 +106,14 @@
                     &nbsp;
                     <input type="number" name="attr_wiles" value="0">
                     <br class="smallmargin">
-                    <button type="roll" class="stat-roll" value="&{template:default} {{name=Stat Roll}} {{Wiles=[[ @{stat_advantage}d20kh1+@{wiles} + *@{proficiency} ]]}}">Roll</button>
+                    <button type="roll" class="stat-roll" value="&{template:default} {{name=Stat Roll}} {{Wiles=[[ @{stat_advantage}d20kh1+@{wiles} + @{proficiency} ]]}}">Roll</button>
                 </td>
                 <td><h3>Courage</h3><input type="hidden" name="attr_courage_color" value="neutral">
                     <span class="stat-display" name="attr_courage_display">0</span>
                     &nbsp;
                     <input type="number" name="attr_courage" value="0">
                     <br class="smallmargin">
-                    <button type="roll" class="stat-roll" value="&{template:default} {{name=Stat Roll}} {{Courage=[[ @{stat_advantage}d20kh1+@{courage} + *@{proficiency} ]]}}">Roll</button>
+                    <button type="roll" class="stat-roll" value="&{template:default} {{name=Stat Roll}} {{Courage=[[ @{stat_advantage}d20kh1+@{courage} + @{proficiency} ]]}}">Roll</button>
                 </td>
                 <td><h3>Fate</h3><input type="hidden" name="attr_fate_color" value="neutral">
                     <span class="stat-display" name="attr_fate_display">0</span>
@@ -131,20 +133,6 @@
 
         <div class="large-column-container">
             <div class="thirds-column">
-                <div class="bounded-box">
-                    <div class="column-container">
-                        <div class="halfs-column">
-                            <td><h3>Physical Defense</h3><input type="number" name="attr_pd" value="0"></td>
-                            <td><h3>Mental Defense</h3><input type="number" name="attr_md" value="0"></td>
-                            <td><h3>Check DC</h3><input type="number" name="attr_check_dc" value="0"></td>
-                        </div>
-                        <div class="halfs-column">
-                            <td><h3>Physical To-Hit</h3><input type="number" name="attr_phy_tohit" value="0"></td>
-                            <td><h3>Ranged To-Hit</h3><input type="number" name="attr_ranged_tohit" value="0"></td>
-                            <td><h3>Spell To-Hit</h3><input type="number" name="attr_spell_tohit" value="0"></td>
-                        </div>
-                    </div>
-                </div>
                 <div class="bounded-box">
                     <div class="column-container">
                         <div class="halfs-column">
@@ -1113,911 +1101,708 @@
         </div>
 
         <br>
+        <hr>
+            <h2 style="text-align: center;">General Talents</h2>
+            <label>Available Talent Points: 
+                <input type="text" name="attr_available_talents" value="0" min="0">
+            </label>
+            <div class="column-container">
+                <div class="thirds-column">
+                    <div class="bounded-box">
+                        <h3 style="text-align: center;">---- Crafting ----</h3>
+                        <div style="text-align: center;" class="column-container">
+                            <div class="halfs-column">
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Alchemy</h4>
+                                            <span class="italic-subtext">Wiles</span>
+                                            <input type="hidden" type="number" name="attr_alchemy_mod" value="wiles" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_alchemy">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" type="checkbox" name="attr_alchemy_roll" value="@{prof_alchemy}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Alchemy Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Alchemy Roll=[[ 1d20+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                </div>
+                                
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Art</h4>
+                                            <span class="italic-subtext">Courage</span>
+                                            <input type="hidden" type="number" name="attr_art_mod" value="courage" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_art">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" type="checkbox" name="attr_art_roll" value="@{prof_art}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Art Roll=[[ 2d20kl1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Art Roll=[[ 1d20+@{courage} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                </div>
 
-        <div class="large-column-container">      
-            <div class="thirds-column">
-                <div class="bounded-box">
-                    <h2 style="text-align: center;">General Talents</h2>
-                    <label>Available Talent Points: 
-                        <input type="text" name="attr_available_talents" value="0" min="0">
-                    </label>
-                    <h3 style="text-align: center;">---- Crafting ----</h3>
-                    <div style="text-align: center;" class="column-container">
-                        <div class="halfs-column">
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Alchemy</h4>
-                                        <span class="italic-subtext">Wiles</span>
-                                        <input type="hidden" type="number" name="attr_alchemy_mod" value="wiles" class="sheet-hidden" disabled="true">
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Construction</h4>
+                                            <span class="italic-subtext">Power</span>
+                                            <input type="hidden" type="number" name="attr_construction_mod" value="power" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_construction">
+                                        </div>
                                     </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_alchemy">
+                                    <input type="hidden" type="checkbox" name="attr_construction_roll" value="@{prof_construction}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Construction Roll=[[ 2d20kl1+@{power} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Construction Roll=[[ 1d20+@{power} + @{proficiency} ]]}}">Roll</button>
                                     </div>
                                 </div>
-                                <input type="hidden" type="checkbox" name="attr_alchemy_roll" value="@{prof_alchemy}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Alchemy Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Alchemy Roll=[[ 1d20+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Art</h4>
-                                        <span class="italic-subtext">Courage</span>
-                                        <input type="hidden" type="number" name="attr_art_mod" value="courage" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_art">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_art_roll" value="@{prof_art}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Art Roll=[[ 2d20kl1+@{courage} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Art Roll=[[ 1d20+@{courage} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
 
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Construction</h4>
-                                        <span class="italic-subtext">Power</span>
-                                        <input type="hidden" type="number" name="attr_construction_mod" value="power" class="sheet-hidden" disabled="true">
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Cooking</h4>
+                                            <span class="italic-subtext">Courage</span>
+                                            <input type="hidden" type="number" name="attr_cooking_mod" value="courage" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_cooking">
+                                        </div>
                                     </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_construction">
+                                    <input type="hidden" type="checkbox" name="attr_cooking_roll" value="@{prof_cooking}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Cooking Roll=[[ 2d20kl1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Cooking Roll=[[ 1d20+@{courage} + @{proficiency} ]]}}">Roll</button>
                                     </div>
                                 </div>
-                                <input type="hidden" type="checkbox" name="attr_construction_roll" value="@{prof_construction}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Construction Roll=[[ 2d20kl1+@{power} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Construction Roll=[[ 1d20+@{power} + @{proficiency} ]]}}">Roll</button>
-                                </div>
+                                <hr class="smallmargin">
                             </div>
-
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Cooking</h4>
-                                        <span class="italic-subtext">Courage</span>
-                                        <input type="hidden" type="number" name="attr_cooking_mod" value="courage" class="sheet-hidden" disabled="true">
+                            <div class="halfs-column">
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Herbalism</h4>
+                                            <span class="italic-subtext">Finesse</span>
+                                            <input type="hidden" type="number" name="attr_herbalism_mod" value="finesse" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_herbalism">
+                                        </div>
                                     </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_cooking">
+                                    <input type="hidden" type="checkbox" name="attr_herbalism_roll" value="@{prof_herbalism}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Herbalism Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Herbalism Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
                                     </div>
                                 </div>
-                                <input type="hidden" type="checkbox" name="attr_cooking_roll" value="@{prof_cooking}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Cooking Roll=[[ 2d20kl1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Ritual</h4>
+                                            <span class="italic-subtext">Wiles</span>
+                                            <input type="hidden" type="number" name="attr_ritual_mod" value="wiles" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_ritual">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" type="checkbox" name="attr_ritual_roll" value="@{prof_ritual}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Ritual Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Ritual Roll=[[ 1d20+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
                                 </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Cooking Roll=[[ 1d20+@{courage} + @{proficiency} ]]}}">Roll</button>
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Smithing</h4>
+                                            <span class="italic-subtext">Power</span>
+                                            <input type="hidden" type="number" name="attr_smithing_mod" value="power" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_smithing">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" type="checkbox" name="attr_smithing_roll" value="@{prof_smithing}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Smithing Roll=[[ 2d20kl1+@{power} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Smithing Roll=[[ 1d20+@{power} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
                                 </div>
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Tailor</h4>
+                                            <span class="italic-subtext">Finesse</span>
+                                            <input type="hidden" type="number" name="attr_tailor_mod" value="finesse" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_tailor">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" type="checkbox" name="attr_tailor_roll" value="@{prof_tailor}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Tailor Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Tailor Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                </div>
+                                <hr class="smallmargin">
                             </div>
-                            <hr class="smallmargin">
-                        </div>
-                        <div class="halfs-column">
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Herbalism</h4>
-                                        <span class="italic-subtext">Finesse</span>
-                                        <input type="hidden" type="number" name="attr_herbalism_mod" value="finesse" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_herbalism">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_herbalism_roll" value="@{prof_herbalism}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Herbalism Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Herbalism Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Ritual</h4>
-                                        <span class="italic-subtext">Wiles</span>
-                                        <input type="hidden" type="number" name="attr_ritual_mod" value="wiles" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_ritual">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_ritual_roll" value="@{prof_ritual}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Ritual Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Ritual Roll=[[ 1d20+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Smithing</h4>
-                                        <span class="italic-subtext">Power</span>
-                                        <input type="hidden" type="number" name="attr_smithing_mod" value="power" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_smithing">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_smithing_roll" value="@{prof_smithing}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Smithing Roll=[[ 2d20kl1+@{power} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Smithing Roll=[[ 1d20+@{power} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Tailor</h4>
-                                        <span class="italic-subtext">Finesse</span>
-                                        <input type="hidden" type="number" name="attr_tailor_mod" value="finesse" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_tailor">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_tailor_roll" value="@{prof_tailor}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Tailor Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Tailor Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
                         </div>
                     </div>
-                    <br>
-                    <h3 style="text-align: center;">---- Knowledge ----</h3>
-                    <div style="text-align: center;" class="column-container">
-                        <div class="halfs-column">
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Literary</h4>
-                                        <span class="italic-subtext">Wiles</span>
-                                        <input type="hidden" type="number" name="attr_literary_mod" value="wiles" class="sheet-hidden" disabled="true">
+                </div>
+                <div class="thirds-column">
+                    <div class="bounded-box">
+                        <h3 style="text-align: center;">---- Knowledge ----</h3>
+                        <div style="text-align: center;" class="column-container">
+                            <div class="halfs-column">
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Literary</h4>
+                                            <span class="italic-subtext">Wiles</span>
+                                            <input type="hidden" type="number" name="attr_literary_mod" value="wiles" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_literary">
+                                        </div>
                                     </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_literary">
+                                    <input type="hidden" type="checkbox" name="attr_literary_roll" value="@{prof_literary}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Literary Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Literary Roll=[[ 1d20+@{wiles} + @{proficiency} ]]}}">Roll</button>
                                     </div>
                                 </div>
-                                <input type="hidden" type="checkbox" name="attr_literary_roll" value="@{prof_literary}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Literary Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Fables</h4>
+                                            <span class="italic-subtext">Wiles</span>
+                                            <input type="hidden" type="number" name="attr_fables_mod" value="wiles" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_fables">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" type="checkbox" name="attr_fables_roll" value="@{prof_fables}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Fables Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Fables Roll=[[ 1d20+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
                                 </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Literary Roll=[[ 1d20+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Society</h4>
+                                            <span class="italic-subtext">Finesse</span>
+                                            <input type="hidden" type="number" name="attr_society_mod" value="finesse" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_society">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" type="checkbox" name="attr_society_roll" value="@{prof_society}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Society Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Society Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
                                 </div>
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>History</h4>
+                                            <span class="italic-subtext">Wiles</span>
+                                            <input type="hidden" type="number" name="attr_history_mod" value="wiles" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_history">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" type="checkbox" name="attr_history_roll" value="@{prof_history}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{History Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{History Roll=[[ 1d20+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                </div>
+                                <hr class="smallmargin">
                             </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Fables</h4>
-                                        <span class="italic-subtext">Wiles</span>
-                                        <input type="hidden" type="number" name="attr_fables_mod" value="wiles" class="sheet-hidden" disabled="true">
+                            <div class="halfs-column">
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Magic</h4>
+                                            <span class="italic-subtext">Wiles</span>
+                                            <input type="hidden" type="number" name="attr_magic_mod" value="wiles" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_magic">
+                                        </div>
                                     </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_fables">
+                                    <input type="hidden" type="checkbox" name="attr_magic_roll" value="@{prof_magic}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Magic Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Magicr Roll=[[ 1d20+@{wilese} + @{proficiency} ]]}}">Roll</button>
                                     </div>
                                 </div>
-                                <input type="hidden" type="checkbox" name="attr_fables_roll" value="@{prof_fables}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Fables Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Religion</h4>
+                                            <span class="italic-subtext">Wiles</span>
+                                            <input type="hidden" type="number" name="attr_religion_mod" value="wiles" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_religion">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" type="checkbox" name="attr_religion_roll" value="@{prof_religion}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Religion Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Religion Roll=[[ 1d20+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
                                 </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Fables Roll=[[ 1d20+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Wilderness</h4>
+                                            <span class="italic-subtext">Wiles</span>
+                                            <input type="hidden" type="number" name="attr_wilderness_mod" value="wiles" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_wilderness">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" type="checkbox" name="attr_wilderness_roll" value="@{prof_wilderness}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Wilderness Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Wilderness Roll=[[ 1d20+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
                                 </div>
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Other</h4>
+                                            <br>
+                                            <input class="italic-subtext">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_other">
+                                        </div>
+                                    </div>
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Other Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Other Roll=[[ 1d201+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                </div>
+                                <hr class="smallmargin">
                             </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Society</h4>
-                                        <span class="italic-subtext">Finesse</span>
-                                        <input type="hidden" type="number" name="attr_society_mod" value="finesse" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_society">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_society_roll" value="@{prof_society}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Society Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Society Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>History</h4>
-                                        <span class="italic-subtext">Wiles</span>
-                                        <input type="hidden" type="number" name="attr_history_mod" value="wiles" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_history">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_history_roll" value="@{prof_history}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{History Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{History Roll=[[ 1d20+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                        </div>
-                        <div class="halfs-column">
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Magic</h4>
-                                        <span class="italic-subtext">Wiles</span>
-                                        <input type="hidden" type="number" name="attr_magic_mod" value="wiles" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_magic">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_magic_roll" value="@{prof_magic}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Magic Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Magicr Roll=[[ 1d20+@{wilese} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Religion</h4>
-                                        <span class="italic-subtext">Wiles</span>
-                                        <input type="hidden" type="number" name="attr_religion_mod" value="wiles" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_religion">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_religion_roll" value="@{prof_religion}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Religion Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Religion Roll=[[ 1d20+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Wilderness</h4>
-                                        <span class="italic-subtext">Wiles</span>
-                                        <input type="hidden" type="number" name="attr_wilderness_mod" value="wiles" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_wilderness">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_wilderness_roll" value="@{prof_wilderness}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Wilderness Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Wilderness Roll=[[ 1d20+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Other</h4>
-                                        <input class="italic-subtext">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_other">
-                                    </div>
-                                </div>
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Other Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Other Roll=[[ 1d201+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                        </div>
-                    </div>
-                    <br>
-                    <h3 style="text-align: center;">---- Action ----</h3>
-                    <div style="text-align: center;" class="column-container">
-                        <div class="halfs-column">
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Acrobatics</h4>
-                                        <span class="italic-subtext">Finesse</span>
-                                        <input type="hidden" type="number" name="attr_acrobatics_mod" value="finesse" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_acrobatics">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_acrobatics_roll" value="@{prof_acrobatics}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Acrobatics Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Acrobatics Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Athletics</h4>
-                                        <span class="italic-subtext">Power</span>
-                                        <input type="hidden" type="number" name="attr_athletics_mod" value="power" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_athletics">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_athletics_roll" value="@{prof_athletics}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Athletics Roll=[[ 2d20kl1+@{power} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Athletics Roll=[[ 1d20+@{power} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4 style="font-size: 14px;">Nimble Hands</h4>
-                                        <span class="italic-subtext">finesse</span>
-                                        <input type="hidden" type="number" name="attr_nimblehands_mod" value="finesse" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_nimblehands">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_nimblehands_roll" value="@{prof_nimblehands}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Nimble Hands Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Nimble Hands Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                        </div>
-                        <div class="halfs-column">
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Performance</h4>
-                                        <span class="italic-subtext">Courage</span>
-                                        <input type="hidden" type="number" name="attr_performance_mod" value="courage" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_performance">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_performance_roll" value="@{prof_performance}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Performance Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Performance Roll=[[ 1d20+@{courage} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Stealth</h4>
-                                        <span class="italic-subtext">Finesse</span>
-                                        <input type="hidden" type="number" name="attr_stealth_mod" value="finesse" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_stealth">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_stealth_roll" value="@{prof_stealth}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Stealth Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Stealth Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Survival</h4>
-                                        <span class="italic-subtext">Power</span>
-                                        <input type="hidden" type="number" name="attr_survival_mod" value="power" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_survival">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_survival_roll" value="@{prof_survival}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Survival Roll=[[ 2d20kl1+@{power} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Survival Roll=[[ 1d20+@{power} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
                         </div>
                     </div>
-                    <br>
-                    <h3 style="text-align: center;">---- General ----</h3>
-                    <div style="text-align: center;" class="column-container">
-                        <div class="halfs-column">
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Economy</h4>
-                                        <span class="italic-subtext">Finesse</span>
-                                        <input type="hidden" type="number" name="attr_economy_mod" value="finesse" class="sheet-hidden" disabled="true">
+                </div>
+                <div class="thirds-column">
+                    <div class="bounded-box">
+                        <h3 style="text-align: center;">---- Action ----</h3>
+                        <div style="text-align: center;" class="column-container">
+                            <div class="halfs-column">
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Acrobatics</h4>
+                                            <span class="italic-subtext">Finesse</span>
+                                            <input type="hidden" type="number" name="attr_acrobatics_mod" value="finesse" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_acrobatics">
+                                        </div>
                                     </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_economy">
+                                    <input type="hidden" type="checkbox" name="attr_acrobatics_roll" value="@{prof_acrobatics}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Acrobatics Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Acrobatics Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
                                     </div>
                                 </div>
-                                <input type="hidden" type="checkbox" name="attr_economy_roll" value="@{prof_economy}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Economy Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Athletics</h4>
+                                            <span class="italic-subtext">Power</span>
+                                            <input type="hidden" type="number" name="attr_athletics_mod" value="power" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_athletics">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" type="checkbox" name="attr_athletics_roll" value="@{prof_athletics}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Athletics Roll=[[ 2d20kl1+@{power} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Athletics Roll=[[ 1d20+@{power} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
                                 </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Economy Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4 style="font-size: 14px;">Nimble Hands</h4>
+                                            <span class="italic-subtext">finesse</span>
+                                            <input type="hidden" type="number" name="attr_nimblehands_mod" value="finesse" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_nimblehands">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" type="checkbox" name="attr_nimblehands_roll" value="@{prof_nimblehands}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Nimble Hands Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Nimble Hands Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
                                 </div>
+                                <hr class="smallmargin">
                             </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Medicine</h4>
-                                        <span class="italic-subtext">Courage</span>
-                                        <input type="hidden" type="number" name="attr_medicine_mod" value="courage" class="sheet-hidden" disabled="true">
+                            <div class="halfs-column">
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Performance</h4>
+                                            <span class="italic-subtext">Courage</span>
+                                            <input type="hidden" type="number" name="attr_performance_mod" value="courage" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_performance">
+                                        </div>
                                     </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_medicine">
+                                    <input type="hidden" type="checkbox" name="attr_performance_roll" value="@{prof_performance}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Performance Roll=[[ 2d20kl1+@{wiles} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Performance Roll=[[ 1d20+@{courage} + @{proficiency} ]]}}">Roll</button>
                                     </div>
                                 </div>
-                                <input type="hidden" type="checkbox" name="attr_medicine_roll" value="@{prof_medicine}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Medicine Roll=[[ 2d20kl1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Stealth</h4>
+                                            <span class="italic-subtext">Finesse</span>
+                                            <input type="hidden" type="number" name="attr_stealth_mod" value="finesse" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_stealth">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" type="checkbox" name="attr_stealth_roll" value="@{prof_stealth}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Stealth Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Stealth Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
                                 </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Medicine Roll=[[ 1d20+@{courage} + @{proficiency} ]]}}">Roll</button>
+                                <hr class="smallmargin">
+                                <div>
+                                    <div style="text-align: left;" class="column-container">
+                                        <div class="twothirds-column">
+                                            <h4>Survival</h4>
+                                            <span class="italic-subtext">Power</span>
+                                            <input type="hidden" type="number" name="attr_survival_mod" value="power" class="sheet-hidden" disabled="true">
+                                        </div>
+                                        <div class="thirds-column">
+                                            <input type="checkbox" class="right-align" name="attr_prof_survival">
+                                        </div>
+                                    </div>
+                                    <input type="hidden" type="checkbox" name="attr_survival_roll" value="@{prof_survival}" class="sheet-hidden" disabled="true">
+                                    <div class="disadv-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Survival Roll=[[ 2d20kl1+@{power} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
+                                    <div class="normal-roll">
+                                        <button type="roll" value="&{template:default} {{name=Talent}} {{Survival Roll=[[ 1d20+@{power} + @{proficiency} ]]}}">Roll</button>
+                                    </div>
                                 </div>
+                                <hr class="smallmargin">
                             </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Perception</h4>
-                                        <span class="italic-subtext">Courage</span>
-                                        <input type="hidden" type="number" name="attr_perception_mod" value="courage" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_perception">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_perception_roll" value="@{prof_perception}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Perception Roll=[[ 2d20kl1+@{courage} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Perception Roll=[[ 1d20+@{courage} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Social Graces</h4>
-                                        <span class="italic-subtext">Finesse</span>
-                                        <input type="hidden" type="number" name="attr_socialgraces_mod" value="finesse" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_socialgraces">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_socialgraces_roll" value="@{prof_socialgraces}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Social Graces Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Social Graces Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                        </div>
-                        <div class="halfs-column">
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Strategy</h4>
-                                        <span class="italic-subtext">Courage</span>
-                                        <input type="hidden" type="number" name="attr_strategy_mod" value="courage" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_strategy">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_strategy_roll" value="@{prof_strategy}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Strategy Roll=[[ 2d20kl1+@{courage} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Strategy Roll=[[ 1d20+@{courage} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Tools</h4>
-                                        <span class="italic-subtext">Finesse</span>
-                                        <input type="hidden" type="number" name="attr_tools_mod" value="finesse" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_tools">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_tools_roll" value="@{prof_tools}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Tools Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Tools Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
-                            <div>
-                                <div style="text-align: left;" class="column-container">
-                                    <div class="twothirds-column">
-                                        <h4>Transport</h4>
-                                        <span class="italic-subtext">Finesse</span>
-                                        <input type="hidden" type="number" name="attr_transport_mod" value="finesse" class="sheet-hidden" disabled="true">
-                                    </div>
-                                    <div class="thirds-column">
-                                        <input type="checkbox" class="right-align" name="attr_prof_transport">
-                                    </div>
-                                </div>
-                                <input type="hidden" type="checkbox" name="attr_transport_roll" value="@{prof_transport}" class="sheet-hidden" disabled="true">
-                                <div class="disadv-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Transport Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                                <div class="normal-roll">
-                                    <button type="roll" value="&{template:default} {{name=Talent}} {{Transport Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
-                                </div>
-                            </div>
-                            <hr class="smallmargin">
                         </div>
                     </div>
                 </div>
             </div>
+            <br>
+            <div class="bounded-box">
+                <h3 style="text-align: center;">---- General ----</h3>
+                <div style="text-align: center;" class="column-container">
+                    <div class="fourths-column">
+                        <hr class="smallmargin">
+                        <div>
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Economy</h4>
+                                    <span class="italic-subtext">Finesse</span>
+                                    <input type="hidden" type="number" name="attr_economy_mod" value="finesse" class="sheet-hidden" disabled="true">
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_economy">
+                                </div>
+                            </div>
+                            <input type="hidden" type="checkbox" name="attr_economy_roll" value="@{prof_economy}" class="sheet-hidden" disabled="true">
+                            <div class="disadv-roll">
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{Economy Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                            </div>
+                            <div class="normal-roll">
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{Economy Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                            </div>
+                        </div>
+                        <hr class="smallmargin">
+                        <div>
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Medicine</h4>
+                                    <span class="italic-subtext">Courage</span>
+                                    <input type="hidden" type="number" name="attr_medicine_mod" value="courage" class="sheet-hidden" disabled="true">
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_medicine">
+                                </div>
+                            </div>
+                            <input type="hidden" type="checkbox" name="attr_medicine_roll" value="@{prof_medicine}" class="sheet-hidden" disabled="true">
+                            <div class="disadv-roll">
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{Medicine Roll=[[ 2d20kl1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                            </div>
+                            <div class="normal-roll">
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{Medicine Roll=[[ 1d20+@{courage} + @{proficiency} ]]}}">Roll</button>
+                            </div>
+                        </div>
+                        <hr class="smallmargin">
+                    </div>
+                    <div class="fourths-column">
+                        <hr class="smallmargin">
+                        <div>
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Perception</h4>
+                                    <span class="italic-subtext">Courage</span>
+                                    <input type="hidden" type="number" name="attr_perception_mod" value="courage" class="sheet-hidden" disabled="true">
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_perception">
+                                </div>
+                            </div>
+                            <input type="hidden" type="checkbox" name="attr_perception_roll" value="@{prof_perception}" class="sheet-hidden" disabled="true">
+                            <div class="disadv-roll">
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{Perception Roll=[[ 2d20kl1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                            </div>
+                            <div class="normal-roll">
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{Perception Roll=[[ 1d20+@{courage} + @{proficiency} ]]}}">Roll</button>
+                            </div>
+                        </div>
+                        <hr class="smallmargin">
+                        <div>
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Social Graces</h4>
+                                    <span class="italic-subtext">Finesse</span>
+                                    <input type="hidden" type="number" name="attr_socialgraces_mod" value="finesse" class="sheet-hidden" disabled="true">
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_socialgraces">
+                                </div>
+                            </div>
+                            <input type="hidden" type="checkbox" name="attr_socialgraces_roll" value="@{prof_socialgraces}" class="sheet-hidden" disabled="true">
+                            <div class="disadv-roll">
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{Social Graces Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                            </div>
+                            <div class="normal-roll">
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{Social Graces Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                            </div>
+                        </div>
+                        <hr class="smallmargin">
+                    </div>
+                    <div class="fourths-column">
+                        <hr class="smallmargin">
+                        <div>
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Strategy</h4>
+                                    <span class="italic-subtext">Courage</span>
+                                    <input type="hidden" type="number" name="attr_strategy_mod" value="courage" class="sheet-hidden" disabled="true">
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_strategy">
+                                </div>
+                            </div>
+                            <input type="hidden" type="checkbox" name="attr_strategy_roll" value="@{prof_strategy}" class="sheet-hidden" disabled="true">
+                            <div class="disadv-roll">
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{Strategy Roll=[[ 2d20kl1+@{courage} + @{proficiency} ]]}}">Roll</button>
+                            </div>
+                            <div class="normal-roll">
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{Strategy Roll=[[ 1d20+@{courage} + @{proficiency} ]]}}">Roll</button>
+                            </div>
+                        </div>
+                        <hr class="smallmargin">
+                        <div>
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Tools</h4>
+                                    <span class="italic-subtext">Finesse</span>
+                                    <input type="hidden" type="number" name="attr_tools_mod" value="finesse" class="sheet-hidden" disabled="true">
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_tools">
+                                </div>
+                            </div>
+                            <input type="hidden" type="checkbox" name="attr_tools_roll" value="@{prof_tools}" class="sheet-hidden" disabled="true">
+                            <div class="disadv-roll">
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{Tools Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                            </div>
+                            <div class="normal-roll">
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{Tools Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                            </div>
+                        </div>
+                        <hr class="smallmargin">
+                    </div>
+                    <div class="fourths-column">
+                        <hr class="smallmargin">
+                        <div>
+                            <div style="text-align: left;" class="column-container">
+                                <div class="twothirds-column">
+                                    <h4>Transport</h4>
+                                    <span class="italic-subtext">Finesse</span>
+                                    <input type="hidden" type="number" name="attr_transport_mod" value="finesse" class="sheet-hidden" disabled="true">
+                                </div>
+                                <div class="thirds-column">
+                                    <input type="checkbox" class="right-align" name="attr_prof_transport">
+                                </div>
+                            </div>
+                            <input type="hidden" type="checkbox" name="attr_transport_roll" value="@{prof_transport}" class="sheet-hidden" disabled="true">
+                            <div class="disadv-roll">
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{Transport Roll=[[ 2d20kl1+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                            </div>
+                            <div class="normal-roll">
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{Transport Roll=[[ 1d20+@{finesse} + @{proficiency} ]]}}">Roll</button>
+                            </div>
+                        </div>
+                        <hr class="smallmargin">
+                    </div>
+                </div>
+            </div>
 
-            
-            <div class="thirds-column">
-                <div class="bounded-box">
-                    <h2 style="text-align: center;">Specialized Talents</h2>
-                    <fieldset class="repeating_talents">
+        <br>
+        <hr>
+        
+        <div class="large-column-container">      
+            <div class="halfs-column">
+                <h2 style="text-align: center;">Specialized Talents</h2>
+                <fieldset class="repeating_talents">
+                    <div class="bounded-box">
                         <div class="column-container">
                             <div class="twothirds-column">
-                                <h4>Talent</h4> <input type="text" name="attr_special_talent_name">
-                                <div class="column-container">
-                                    <div class="halfs-column">
-                                        <h4>Levels</h4><input type="number" name="attr_special_talent_levels">
-                                    </div>
-                                    <div class="halfs-column">
-                                        <h4>Parent Talent</h4>
-                                        <input type="text" style="width: 100px;" name="attr_special_talent_parent">
-                                    </div>
-                                </div>
+                                <h4>Talent</h4> <input type="text" name="attr_special_talent_name">    
                             </div>
                             <div style="text-align: center; align-items: center;" class="thirds-column">
-                                <br class="smallmargin">
                                 <input type="hidden" type="checkbox" name="attr_talent_mod" value="@{talent_mod}" class="sheet-hidden" disabled="true">
-                                <button type="roll" value="&{template:default} {{name=Talent}} {{@{special_talent_name} Roll=[[ (1 + @{special_talent_levels})d20kh1 + @{talent_mod} + @{proficiency} ]]}}">Roll</button>
-                                <br>
-                                <br>
-                                <span class="small-display" name="attr_stat_display">UNSET</span>                          
+                                <button type="roll" value="&{template:default} {{name=Talent}} {{@{special_talent_name} Roll=[[ (1 + @{special_talent_levels})d20kh1 + @{talent_mod} + @{proficiency} ]]}}">Roll</button>                           
                             </div>
                         </div>
-                        <h4>Description</h4><textarea name="attr_special_talent_desc"></textarea>
-                        <hr>
-                    </fieldset>
-                </div>
+                        <details>
+                            <summary><h4>Details</h4></summary>
+                            <br>
+                            <div class="column-container">
+                                <div class="fourths-column">
+                                    <h4>Levels</h4><input type="number" name="attr_special_talent_levels">
+                                </div>
+                                <div class="halfs-column">
+                                    <h4>Parent Talent</h4>
+                                    <input type="text" style="width: 100px;" name="attr_special_talent_parent">
+                                </div>
+                                <div class="fourths-column">
+                                    <span class="small-display" name="attr_stat_display">UNSET</span> 
+                                </div>
+                            </div>
+                            <h4>Description</h4><textarea name="attr_special_talent_desc"></textarea>
+                        </details>
+                    </div>
+                    <br>
+                </fieldset>
             </div>
 
-            <div class="thirds-column">
-                <div class="bounded-box">
-                    <h2 style="text-align: center;">Weapons</h2>
-                    <h3>I.</h3> <input type="text" name="attr_weapon_1">
-                    <br>
-                    Base Damage Dice: <input type="number" name="attr_weapon_1_dmg">
-                    <div class="column-container">
-                        <div class="thirds-column">
-                            <div class="column-container">
-                                <div class="halfs-column" style="text-align:right;">
-                                    <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png">
-                                </div>
-                                <div class="halfs-column">
-                                    <input type="checkbox" name="attr_weapon1_1_hand">
-                                </div>
-                            </div>
+            <div class="halfs-column">
+                <h2 style="text-align: center;">Passive Abilities</h2>
+                <fieldset class="repeating_passives">
+                    <div class="bounded-box">
+                        <div class="column-container">
+                            <label><h4>Passive</h4> <input type="text" name="attr_passive_name"></label>
                         </div>
-                        <div class="thirds-column">
-                            <div class="column-container">
-                                <div class="halfs-column" style="text-align:right;">
-                                    <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png">
-                                </div>
-                                <div class="halfs-column">
-                                    <input type="checkbox" name="attr_weapon1_2_hand">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="thirds-column">
-
-                        </div>
-                    </div>
-                    <br>
-                    <h3>II.</h3> <input type="text" name="attr_weapon_2">
-                    <br>
-                    Base Damage Dice: <input type="number" name="attr_weapon_2_dmg">
-                    <div class="column-container">
-                        <div class="thirds-column">
-                            <div class="column-container">
-                                <div class="halfs-column" style="text-align:right;">
-                                    <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png">
-                                </div>
-                                <div class="halfs-column">
-                                    <input type="checkbox" name="attr_weapon2_1_hand">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="thirds-column">
-                            <div class="column-container">
-                                <div class="halfs-column" style="text-align:right;">
-                                    <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png">
-                                </div>
-                                <div class="halfs-column">
-                                    <input type="checkbox" name="attr_weapon2_2_hand">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="thirds-column">
-
-                        </div>
-                    </div>
-                    <br>
-                    <h3>III.</h3> <input type="text" name="attr_weapon_3">
-                    <br>
-                    Base Damage Dice: <input type="number" name="attr_weapon_3_dmg">
-                    <div class="column-container">
-                        <div class="thirds-column">
-                            <div class="column-container">
-                                <div class="halfs-column" style="text-align:right;">
-                                    <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/1-arm-icon.png">
-                                </div>
-                                <div class="halfs-column">
-                                    <input type="checkbox" name="attr_weapon3_1_hand">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="thirds-column">
-                            <div class="column-container">
-                                <div class="halfs-column" style="text-align:right;">
-                                    <img style="width: 25px;" src="https://raw.githubusercontent.com/jahonius/Sacadia-Roll20-Sheet/refs/heads/master/resources/2-arm-icon.png">
-                                </div>
-                                <div class="halfs-column">
-                                    <input type="checkbox" name="attr_weapon3_2_hand">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="thirds-column">
-
-                        </div>
-                    </div>
-                    <br>
-                    <h2 style="text-align: center;">Armor</h2>
-                    <div class="column-container">
-                        <div class="fourfifths-column">
-                            <h3>Set:</h3> <input type="text" name="attr_armor_set">
-                            <div class="column-container">
-                                <div class="sixths-column">
-                                    <h6>Inflexible:</h6>
-                                </div>
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_set_inflexible">
-                                </div>
-                                <div class="sixths-column">
-                                    <h6>Thin:</h6>
-                                </div>
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_set_thin">
-                                </div>
-                                <div class="sixths-column">
-                                    <h6>Flexible:</h6>
-                                </div>  
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_set_flexible">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="fifths-column">
-                            <h4>MA:</h4> <input type="number" name="attr_armor_set_ma">
-                            <h4>PA:</h4> <input type="number" name="attr_armor_set_pa">
-                        </div>
-                    </div>
-                    <br>
-                    <div class="column-container">
-                        <div class="fourfifths-column">
-                            <h3>Add-on:</h3> <input type="text" name="attr_armor_addon">
-                            <div class="column-container">
-                                <div class="sixths-column">
-                                    <h6>Inflexible:</h6>
-                                </div>
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_addon_inflexible">
-                                </div>
-                                <div class="sixths-column">
-                                    <h6>Thin:</h6>
-                                </div>
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_addon_thin">
-                                </div>
-                                <div class="sixths-column">
-                                    <h6>Flexible:</h6>
-                                </div>  
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_addon_flexible">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="fifths-column">
-                            <h4>MA:</h4> <input type="number" name="attr_armor_addon_ma">
-                            <h4>PA:</h4> <input type="number" name="attr_armor_addon_pa">
-                        </div>
-                    </div>
-                    <br>
-                    <div class="column-container">
-                        <div class="fourfifths-column">
-                            <h3>Trinket:</h3> <input type="text" name="attr_armor_trinket">
-                            <div class="column-container">
-                                <div class="sixths-column">
-                                    <h6>Inflexible:</h6>
-                                </div>
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_trinket_inflexible">
-                                </div>
-                                <div class="sixths-column">
-                                    <h6>Thin:</h6>
-                                </div>
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_trinket_thin">
-                                </div>
-                                <div class="sixths-column">
-                                    <h6>Flexible:</h6>
-                                </div>  
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_trinket_flexible">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="fifths-column">
-                            <h4>MA:</h4> <input type="number" name="attr_armor_trinket_ma">
-                            <h4>PA:</h4> <input type="number" name="attr_armor_trinket_pa">
-                        </div>
-                    </div>
-                    <br>
-                    <div class="column-container">
-                        <div class="fourfifths-column">
-                            <h3>Shield:</h3> <input type="text" name="attr_armor_shield">
-                            <div class="column-container">
-                                <div class="sixths-column">
-                                    <h6>Inflexible:</h6>
-                                </div>
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_shield_inflexible">
-                                </div>
-                                <div class="sixths-column">
-                                    <h6>Thin:</h6>
-                                </div>
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_shield_thin">
-                                </div>
-                                <div class="sixths-column">
-                                    <h6>Flexible:</h6>
-                                </div>  
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_shield_flexible">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="fifths-column">
-                            <h4>MA:</h4> <input type="number" name="attr_armor_shield_ma">
-                            <h4>PA:</h4> <input type="number" name="attr_armor_shield_pa">
-                        </div>
-                    </div>
-                    <br>
-                    <div class="column-container">
-                        <div class="fourfifths-column">
-                            <h3>Trinket 2:</h3> <input type="text" name="attr_armor_trinket2">
-                            <div class="column-container">
-                                <div class="sixths-column">
-                                    <h6>Inflexible:</h6>
-                                </div>
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_trinket2_inflexible">
-                                </div>
-                                <div class="sixths-column">
-                                    <h6>Thin:</h6>
-                                </div>
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_trinket2_thin">
-                                </div>
-                                <div class="sixths-column">
-                                    <h6>Flexible:</h6>
-                                </div>  
-                                <div class="sixths-column">
-                                    <input class="right-align" type="checkbox" name="attr_armor_trinket2_flexible">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="fifths-column">
-                            <h4>MA:</h4> <input type="number" name="attr_armor_trinket2_ma">
-                            <h4>PA:</h4> <input type="number" name="attr_armor_trinket2_pa">
-                        </div>
-                    </div>
-                </div>
+                        
+                        <details>
+                            <summary><h4>Description</h4></summary>
+                            <br>
+                            <textarea name="attr_passive_description"></textarea>
+                        </details>
+                    </div> 
+                    <br> 
+                </fieldset>
             </div>
         </div>
 
@@ -2121,107 +1906,156 @@
             <div class="halfs-column">
                 <h2 style="text-align: center;">Active Abilities</h2>
                 <label>Advantage Rolls: <input type="number" name="attr_ability_advantage" value="1" min="1"></label>
-                <hr>
+                
                 <fieldset class="repeating_actives">
-                    <div class="column-container">
-                        <div class="halfs-column">
-                            <label>Ability Name: <input type="text" name="attr_ability_name"></label>
-                        </div>
-                        <div class="halfs-column">
-                            <label>Is Attack: <input type="checkbox" name="attr_ability_isattack"></label>
-                        </div>
-                    </div>
+                    <div class="repeating-box">
+                        <div class="column-container">
+                            <div class="fourths-column">
+                                <label><h3>Name:</h3> <input type="text" class="maininput" name="attr_ability_name"></label>
+                            </div>
+                            <div class="fourths-column">
 
-                    <div class="sheet-container">
-                        <div class="sheet-child">
-                            <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-1-arm" value="1" checked="true" />
-                            <label>1-Arm</label>
-                            <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-2-arm" value="2" />
-                            <label>2-Arm</label>
-                            <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-body" value="3" />
-                            <label>Body</label>
-                            <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-mind" value="4" />
-                            <label>Mind</label>
-                            <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-focus" value="5" />
-                            <label>Focus</label>
-                            <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-legs" value="6" />
-                            <label>Legs</label>
+                            </div>
+                            <div class="fourths-column">
+                                <div class="sheet-container">
+                                    <div class="sheet-child">
+                                        <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-1-arm" value="1" checked="true" />
+                                        <label>1-Arm</label>
+                                        <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-2-arm" value="2" />
+                                        <label>2-Arm</label>
+                                        <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-body" value="3" />
+                                        <label>Body</label>
+                                        <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-mind" value="4" />
+                                        <label>Mind</label>
+                                        <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-focus" value="5" />
+                                        <label>Focus</label>
+                                        <input type="radio" name="attr_ability_limb_num" class="sheet-select-radio sheet-limb-legs" value="6" />
+                                        <label>Legs</label>
+        
+                                        <input type='hidden' name='attr_ability_limb' value="One Arm"/>
+        
+                                        <div class="sheet-limb-1-arm"></div>
+                                        <div class="sheet-limb-2-arm"></div>
+                                        <div class="sheet-limb-body"></div>
+                                        <div class="sheet-limb-mind"></div>
+                                        <div class="sheet-limb-focus"></div>
+                                        <div class="sheet-limb-legs"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fourths-column">
+                                <label>Is Attack: <input type="checkbox" name="attr_ability_isattack"></label>
+                            </div>
+                        </div>
 
-                            <input type='hidden' name='attr_ability_limb' value="One Arm"/>
-
-                            <div class="sheet-limb-1-arm"></div>
-                            <div class="sheet-limb-2-arm"></div>
-                            <div class="sheet-limb-body"></div>
-                            <div class="sheet-limb-mind"></div>
-                            <div class="sheet-limb-focus"></div>
-                            <div class="sheet-limb-legs"></div>
+                        
+                        
+                        <input type="hidden" class="ability-toggle-hidden" name="attr_ability_hiddentoggle" value="0">
+                        <div class="attack-fields">
+                            <details>
+                                <summary><h4>Attack Details</h4></summary>
+                                <br>
+                                <label>Roll Modifier: <input type="text" name="attr_attack_mod" placeholder="e.g. +5"></label>
+                                <label>Damage Roll: <input type="text" name="attr_damage_roll" placeholder="e.g. 2d6+3"></label>
+                            </details>
+                            
+                            <button type="roll" type="action" name="act_roll_ability" value="&{template:default} {{name=@{ability_name}}} {{Limb=@{ability_limb}}} {{Hit=[[ @{ability_advantage}d20kh1+@{attack_mod} @{tempbuff_tohit_melee} ]]}}
+                            [Click here to roll damage](~repeating_abilities_damage)">Attack</button>
+                            <button type="roll" name="roll_damage" value="&{template:default} {{name=@{ability_name}}} {{Damage=[[ @{damage_roll} ]]}}">Roll Damage</button>
+                        </div>
+                        
+                        <div class="ability-fields">
+                            <details>
+                                <summary><h4>Description</h4></summary>
+                                <br>
+                                <textarea name="attr_ability_desc"></textarea>
+                            </details>
+                            <button type="roll" name="action" name="act_use_ability" value="&{template:default} {{name=@{ability_name}}} {{Limb=@{ability_limb}}} {{Description=@{ability_desc}}}">Use Ability</button>
                         </div>
                     </div>
-                    
-                    <input type="hidden" class="ability-toggle-hidden" name="attr_ability_hiddentoggle" value="0">
-                    <div class="attack-fields">
-                        <label>Ability Roll Modifier: <input type="text" name="attr_attack_mod" placeholder="e.g. +5"></label>
-                        <label>Damage Roll: <input type="text" name="attr_damage_roll" placeholder="e.g. 2d6+3"></label>
-                        <button type="roll" type="action" name="act_roll_ability" value="&{template:default} {{name=@{ability_name}}} {{Limb=@{ability_limb}}} {{Hit=[[ @{ability_advantage}d20kh1+@{attack_mod} ]]}}
-                        [Click here to roll damage](~repeating_abilities_damage)">Attack</button>
-                        <button type="roll" name="roll_damage" value="&{template:default} {{name=@{ability_name}}} {{Damage=[[ @{damage_roll} ]]}}">Roll Damage</button>
-                    </div>
-                    
-                    <div class="ability-fields">
-                        <label>Ability Description: <textarea name="attr_ability_desc"></textarea></label>
-                        <button type="roll" name="action" name="act_use_ability" value="&{template:default} {{name=@{ability_name}}} {{Limb=@{ability_limb}}} {{Description=@{ability_desc}}}">Use Ability</button>
-                    </div>
+                    <br>
                     
                 </fieldset>
             </div>
             <div class="halfs-column">
                 <h2 style="text-align: center;">Temporary Modifiers</h2>
-                <hr>
+                <br><br>
+                <input type="hidden" name="attr_tempbuff_tohit_melee" value="">
+                <input type="hidden" name="attr_tempbuff_tohit_ranged" value="">
+                <input type="hidden" name="attr_tempbuff_damage" value="">
                 <fieldset class="repeating_tempbuffs">
-                    <label>ACTIVE: <input type="checkbox" name="attr_tempbuff_active"></label>                    
-                    <div class="column-container">
-                        <div class="halfs-column">
-                            <label><input type="text" name="attr_tempbuff_source" placeholder="Name of buff"></label>
+                    <div class="repeating-box">
+                        <div class="column-container">
+                            <div class="halfs-column">
+                                <h3>Buff Source</h3> 
+                            </div>
+                            <div class="halfs-column">
+                                <h4>Buff Type</h4> 
+                            </div>
                         </div>
-                        <div class="halfs-column">
-                            <select name="attr_tempbuff_type">
-                                <option value="tohit_melee">Melee Attack</option>
-                                <option value="tohit_ranged">Ranged Attack</option>
-                                <option value="damage">Damage</option>
-                                <option value="trait_power">Trait: Power</option>
-                            </select>
+                                           
+                        <div class="column-container">
+                            <div class="halfs-column">
+                                <label><input type="text" class="maininput" name="attr_tempbuff_source" placeholder="Name of buff"></label>
+                            </div>
+                            <div class="halfs-column">
+                                <select name="attr_tempbuff_type">
+                                    <option value="tohit_melee">Melee Attack</option>
+                                    <option value="tohit_ranged">Ranged Attack</option>
+                                    <option value="damage">Damage</option>
+                                    <option value="ad">All Defense</option>
+                                    <option value="pd">Physical Defense</option>
+                                    <option value="td">Touch Defense</option>
+                                    <option value="md">Mental Defense</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label>ACTIVE: <input type="checkbox" name="attr_tempbuff_active"></label>
+                        <div class="column-container">
+                            <div class="fourths-column">
+                                <button name="act_tempbuffdown" type="action" class="downbutton"><strong>-</strong></button>
+                            </div>
+                            <div class="fourths-column">
+                                <label>Value: <input type="text" name="attr_tempbuff_value" class="" placeholder="e.g. +5"></label>
+                            </div>
+                            <div class="fourths-column">
+
+                            </div>
+                            <div class="fourths-column">
+                                <button name="act_tempbuffup" type="action" class="upbutton"><strong>+</strong></button>
+                            </div>
                         </div>
                     </div>
-                    <div class="column-container">
-                        <div class="thirds-column">
-                            <button name="act_tempbuffdown" type="action" class="downbutton"><strong>-</strong></button>
-                        </div>
-                        <div class="thirds-column">
-                            <label>Value: <input type="text" name="attr_tempbuff_value" class="" placeholder="e.g. +5"></label>
-                        </div>
-                        <div class="thirds-column">
-                            <button name="act_tempbuffup" type="action" class="upbutton"><strong>+</strong></button>
-                        </div>
-                    </div>
+                    <br>
                     
-                    <hr>
                 </fieldset>
             </div>
         </div>
         <hr> 
         <div class="column-container">
             <div class="halfs-column">
-                <h2 style="text-align: center;">Passive Abilities</h2>
-                <fieldset class="repeating_passives">
-                    <label>Name: <input type="text" name="attr_passive_name"></label>
-                    <label>Description: <textarea name="attr_passive_description"></textarea></label>
+                <h2 style="text-align: center;">Action Pools</h2>
+                <fieldset class="repeating_pools">
+                    <div class="repeating-box">
+                        <label>Pool Type: <input type="text" name="attr_pool_name"></label>
+                        <label>Max Pool Size: <input name="attr_pool_maxval" value=0></label>
+                        <label>Current Pool Size: <input name="attr_pool_currval" value=0></label>
+                    </div> 
+                    <br> 
                 </fieldset>
             </div>
             <div class="halfs-column">
                 <h2 style="text-align: center;">Reactions and Boosts</h2>
                 <fieldset class="repeating_reactions_and_boosts">
-                    <label>Name: <input type="text" name="attr_reaction_and_boost_name"></label>
-                    <label>Description: <textarea name="attr_reaction_and_booot_description"></textarea></label>
+                    <div class="repeating-box">
+                        <label>Name: <input type="text" name="attr_reaction_and_boost_name"></label>
+                        <details>
+                            <summary><h4>Description</h4></summary>
+                            <br>
+                            <textarea name="attr_reaction_and_boost_description"></textarea>
+                        </details>
+                    </div>
+                    <br>
                 </fieldset>
             </div>
         </div>
@@ -2229,11 +2063,141 @@
 
     <div class="sheet-inventory">
         <h2 style="text-align: center;">Inventory</h2>
-        <fieldset class="repeating_inventory">
-            <label>Item Name: <input type="text" name="attr_item_name"></label><label>Value: <input type="text" name="attr_item_value"></label>
-            <label>Description: <textarea name="attr_item_description" rows=2></textarea></label>
-            <hr>
-        </fieldset>
+        <div class="column-container">
+            <div class="halfs-column">
+                <h2 style="text-align: center;">Items</h2>
+                <fieldset class="repeating_inventory">
+                    <div class="bounded-box">
+                        <label>Item Name: <input type="text" name="attr_item_name"></label>
+                        <details>
+                            <summary><h4>Details</h4></summary>
+                            <label>Value: <input type="text" name="attr_item_value"></label>
+                            <label>Description: <textarea name="attr_item_description" rows=2></textarea></label>
+                        </details>
+                    </div>
+                    <br>
+                </fieldset>
+            </div>
+            <div class="halfs-column">
+                <h2 style="text-align: center;">Armor</h2>
+                <div class="bounded-box">
+                    <div class="column-container">
+                        <div class="fourfifths-column">
+                            <h3>Set:</h3> <input type="text" name="attr_armor_set">
+                            <br><br>
+                            <div class="column-container">
+                                <div class="halfs-column">
+                                    <label><h6>Max Stat:</h6><input type="number" name="attr_armor_set_maxstat" value=0></label>
+                                    <label><h6>Adornment Slots:</h6><input type="number" name="attr_armor_set_numadornments" value=0></label>
+                                </div>
+                                <div class="halfs-column">
+                                    <label><h6>Trinket Slots:</h6><input type="number" name="attr_armor_set_numtrinkets" value=0></label>
+                                    <label><h6>Extra RIS:</h6><input type="number" name="attr_armor_set_risnum" value=0></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="fifths-column">
+                            <h4>AD:</h4> <input type="number" name="attr_armor_set_ad" value=0>
+                            <h4>PD:</h4> <input type="number" name="attr_armor_set_pd" value=0>
+                            <h4>TD:</h4> <input type="number" name="attr_armor_set_td" value=0>
+                            <h4>MD:</h4> <input type="number" name="attr_armor_set_md" value=0>
+                            <h4>DR:</h4> <input type="number" name="attr_armor_set_dr" value=0>
+                        </div>
+                    </div>
+                    <hr>
+                    <h3>Styles:</h3>
+                    <fieldset class="repeating_armorstyles">
+                        <div class="bounded-box">
+                            <div class="column-container">
+                                <div class="halfs-column">
+                                    <h4>Name:</h4> <input type="text" name="attr_armor_style">
+                                </div>
+                                <div class="halfs-column">
+                                    <h4>Level:</h4> <input type="number" name="attr_armor_style_level" value=1>
+                                </div>
+                            </div>
+                            <hr>
+                            <details>
+                                <summary><h4>Details</h4></summary>
+                                <br>
+                                <h4>Per Level Impacts:</h4>
+                                <div class="column-container">
+                                    <div class="fourths-column">
+                                        <h4>AD:</h4> <input type="number" name="attr_armor_style_ad" value=0>
+                                        <h4>PD:</h4> <input type="number" name="attr_armor_style_pd" value=0>
+                                    </div>
+                                    <div class="fourths-column">
+                                        <h4>TD:</h4> <input type="number" name="attr_armor_style_td" value=0>
+                                        <h4>MD:</h4> <input type="number" name="attr_armor_style_md" value=0>
+                                    </div>
+                                    <div class="fourths-column">
+                                        <h4>DR:</h4> <input type="number" name="attr_armor_style_dr" value=0>
+                                        <h4>Adorn Slots:</h4> <input type="number" name="attr_armor_style_as" value=0>
+                                    </div>
+                                    <div class="fourths-column">
+                                        <h4>Trinket Slots:</h4> <input type="number" name="attr_armor_style_ts" value=0>
+                                        <h4>Max Stat:</h4> <input type="number" name="attr_armor_style_ms" value=0>
+                                    </div>
+                                </div>
+                            </details>
+                        </div>
+                        <br>
+                    </fieldset>
+                    <br><hr>
+                    <h3>Adornments:</h3>
+                    <fieldset class="repeating_armoradorns">
+                        <div class="bounded-box">
+                            <h4>Name:</h4> <input type="text" name="attr_armor_adorn">
+                            <hr>
+                            <details>
+                                <summary><h4>Details</h4></summary>
+                                <br>
+                                <div class="column-container">
+                                    <div class="fourths-column">
+                                        <h4>AD:</h4> <input type="number" name="attr_armor_adorn_ad" value=0>
+                                        <h4>PD:</h4> <input type="number" name="attr_armor_adorn_pd" value=0>
+                                    </div>
+                                    <div class="fourths-column">
+                                        <h4>TD:</h4> <input type="number" name="attr_armor_adorn_td" value=0>
+                                        <h4>MD:</h4> <input type="number" name="attr_armor_adorn_md" value=0>
+                                    </div>
+                                    <div class="fourths-column">
+                                        <h4>DR:</h4> <input type="number" name="attr_armor_adorn_dr" value=0>
+                                        <h4>Adorn Slots:</h4> <input type="number" name="attr_armor_adorn_as" value=0>
+                                    </div>
+                                    <div class="fourths-column">
+                                        <h4>Trinket Slots:</h4> <input type="number" name="attr_armor_adorn_ts" value=0>
+                                        <h4>Max Stat:</h4> <input type="number" name="attr_armor_adorn_ms" value=0>
+                                    </div>
+                                </div>
+                                <br>
+                                <h4>Other Effects</h4>
+                                <textarea name="attr_armor_adorn_desc">
+                            </details>
+                        </div>
+                        <br>
+                    </fieldset>
+                    <br><hr>
+                    <h3>Trinkets:</h3>
+                    <fieldset class="repeating_armortrinkets">
+                        <div class="bounded-box">
+                            <h4>Name:</h4> <input type="text" name="attr_armor_trinket">
+                            <hr>
+                            <details>
+                                <summary><h4>Details</h4></summary>
+                                <br>
+                                <h4>Effects</h4>
+                                <textarea name="attr_armor_trinket_desc">
+                            </details>
+                        </div>
+                        <br>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        
+        
+        
     </div>
 
     <div class="sheet-backstory">
@@ -2356,13 +2320,162 @@
         const stats = ["power", "finesse", "wiles", "courage", "fate"];
         stats.forEach(stat => {
             on(`change:${stat}`, function() {
-                getAttrs([stat], function(values) {
+                getAttrs(stats, function(values) {
                     let update = {};
                     update[`${stat}_display`] = "+" + values[stat];
                     setAttrs(update);
+                    updateDefenses();
                 });
             });
         });
+
+        const armor_set_mods = ["armor_set_ad","armor_set_pd","armor_set_td","armor_set_md","armor_set_dr"]
+        armor_set_mods.forEach(setmod => {
+            on(`change:${setmod}`, function() {
+                updateDefenses();
+            });
+        });
+
+        const armor_style_mods = ["armor_style_level","armor_style_ad","armor_style_pd","armor_style_td","armor_style_md","armor_style_dr","armor_style_as","armor_style_ts","armor_style_ms"]
+        armor_style_mods.forEach(stylemod => {
+            on(`change:repeating_armorstyles:${stylemod}`, function() {
+                console.log("style changed!");
+                updateDefenses();
+            });
+        });
+
+        const armor_adorn_mods = ["armor_adorn_level","armor_adorn_ad","armor_adorn_pd","armor_adorn_td","armor_adorn_md","armor_adorn_dr","armor_adorn_as","armor_adorn_ts","armor_adorn_ms"]
+        armor_adorn_mods.forEach(adornmod => {
+            on(`change:repeating_armoradorns:${adornmod}`, function() {
+                console.log("adorn changed!");
+                updateDefenses();
+            });
+        });
+
+        const temp_armors = ["tempbuff_ad", "tempbuff_pd", "tempbuff_td" ,"tempbuff_md"];
+        temp_armors.forEach(buffmod => {
+            on(`change:${buffmod}`, function() {
+                console.log("buff armor changed")
+                updateDefenses();
+            });
+        });
+
+        function updateDefenses() {
+            getAttrs(stats, function(stat_values) {
+                getAttrs(armor_set_mods, function(armor_set_values) {
+                    getAttrs(temp_armors, function(temp_values) {
+                        let update = {};
+
+                        let style_level_array = [];
+                        let style_ad_array = [];
+                        let style_pd_array = [];
+                        let style_td_array = [];
+                        let style_md_array = [];
+                        let style_dr_array = [];
+
+                        let adorn_level_array = [];
+                        let adorn_ad_array = [];
+                        let adorn_pd_array = [];
+                        let adorn_td_array = [];
+                        let adorn_md_array = [];
+                        let adorn_dr_array = [];
+
+                        getSectionIDs("armorstyles", styleidarray => {
+                            styleidarray.forEach(styleid => {
+                                style_level_array.push(`repeating_armorstyles_${styleid}_armor_style_level`);
+                                style_ad_array.push(`repeating_armorstyles_${styleid}_armor_style_ad`);
+                                style_pd_array.push(`repeating_armorstyles_${styleid}_armor_style_pd`);
+                                style_td_array.push(`repeating_armorstyles_${styleid}_armor_style_td`);
+                                style_md_array.push(`repeating_armorstyles_${styleid}_armor_style_md`);
+                                style_dr_array.push(`repeating_armorstyles_${styleid}_armor_style_dr`);
+
+                                getSectionIDs("armoradorns", adornidarray => {
+                                    adornidarray.forEach(adornid => {
+                                        adorn_ad_array.push(`repeating_armoradorns_${adornid}_armor_adorn_ad`);
+                                        adorn_pd_array.push(`repeating_armoradorns_${adornid}_armor_adorn_pd`);
+                                        adorn_td_array.push(`repeating_armoradorns_${adornid}_armor_adorn_td`);
+                                        adorn_md_array.push(`repeating_armoradorns_${adornid}_armor_adorn_md`);
+                                        adorn_dr_array.push(`repeating_armoradorns_${adornid}_armor_adorn_dr`);
+
+                                        getAttrs(adorn_ad_array, function(adorn_ad_values) {
+                                            getAttrs(adorn_pd_array, function(adorn_pd_values) {
+                                                getAttrs(adorn_td_array, function(adorn_td_values) {
+                                                    getAttrs(adorn_md_array, function(adorn_md_values) {
+                                                        getAttrs(adorn_dr_array, function(adorn_dr_values) {
+                                                            getAttrs(style_level_array, function(style_level_values) {
+                                                                getAttrs(style_ad_array, function(style_ad_values) {
+                                                                    getAttrs(style_pd_array, function(style_pd_values) {
+                                                                        getAttrs(style_td_array, function(style_td_values) {
+                                                                            getAttrs(style_md_array, function(style_md_values) {
+                                                                                getAttrs(style_dr_array, function(style_dr_values) {
+
+                                                                                    let style_ad = 0;
+                                                                                    let style_pd = 0;
+                                                                                    let style_td = 0;
+                                                                                    let style_md = 0;
+                                                                                    let style_dr = 0;
+
+                                                                                    let adorn_ad = 0;
+                                                                                    let adorn_pd = 0;
+                                                                                    let adorn_td = 0;
+                                                                                    let adorn_md = 0;
+                                                                                    let adorn_dr = 0;
+
+                                                                                    styleidarray.forEach(styleid => {
+                                                                                        style_ad += parseInt(style_level_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(style_ad_values[`repeating_armorstyles_${styleid}_armor_style_ad`]);
+                                                                                        style_pd += parseInt(style_level_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(style_pd_values[`repeating_armorstyles_${styleid}_armor_style_pd`]);
+                                                                                        style_td += parseInt(style_level_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(style_td_values[`repeating_armorstyles_${styleid}_armor_style_td`]);
+                                                                                        style_md += parseInt(style_level_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(style_md_values[`repeating_armorstyles_${styleid}_armor_style_md`]);
+                                                                                        style_dr += parseInt(style_level_values[`repeating_armorstyles_${styleid}_armor_style_level`]) * parseInt(style_dr_values[`repeating_armorstyles_${styleid}_armor_style_dr`]);  
+                                                                                        console.log("detected style md - " + style_ad)
+                                                                                    });
+                                                                                    
+                                                                                    adornidarray.forEach(adornid => {
+                                                                                        adorn_ad += parseInt(adorn_ad_values[`repeating_armoradorns_${adornid}_armor_adorn_ad`]);
+                                                                                        adorn_pd += parseInt(adorn_pd_values[`repeating_armoradorns_${adornid}_armor_adorn_pd`]);
+                                                                                        adorn_td += parseInt(adorn_td_values[`repeating_armoradorns_${adornid}_armor_adorn_td`]);
+                                                                                        adorn_md += parseInt(adorn_md_values[`repeating_armoradorns_${adornid}_armor_adorn_md`]);
+                                                                                        adorn_dr += parseInt(adorn_dr_values[`repeating_armoradorns_${adornid}_armor_adorn_dr`]);
+                                                                                    });
+
+                                                                                    update["ad"] = 8 + parseInt(stat_values["fate"]) + parseInt(armor_set_values["armor_set_ad"]) + style_ad + adorn_ad + parseInt(temp_values["tempbuff_ad"]);
+                                                                                    update["pd"] = 8 + parseInt(stat_values["power"]) + parseInt(armor_set_values["armor_set_pd"]) + style_pd + adorn_pd + parseInt(temp_values["tempbuff_pd"]);
+                                                                                    if (update["ad"] > update["pd"]){
+                                                                                        update["pd"] = update["ad"]
+                                                                                    }
+
+                                                                                    update["td"] = 8 + parseInt(stat_values["finesse"]) + parseInt(armor_set_values["armor_set_td"]) + style_td + adorn_td + parseInt(temp_values["tempbuff_td"]);
+                                                                                    if (update["ad"] > update["td"]){
+                                                                                        update["td"] = update["ad"]
+                                                                                    }
+
+                                                                                    update["md"] = 8 + parseInt(stat_values["wiles"]) + parseInt(armor_set_values["armor_set_md"]) + style_md + adorn_md + parseInt(temp_values["tempbuff_md"]);
+                                                                                    if (update["ad"] > update["md"]){
+                                                                                        update["md"] = update["ad"]
+                                                                                    }
+
+                                                                                    update["dr"] = 0 + parseInt(armor_set_values["armor_set_dr"]) + style_dr + adorn_dr
+
+                                                                                    setAttrs(update);
+                                                                                });
+                                                                            });
+                                                                        });
+                                                                    });
+                                                                });
+                                                            });
+                                                        });
+                                                    });
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        }
 
         const limb_num = "ability_limb_num";
 
@@ -2465,16 +2578,16 @@
             });
          });
 
-         on("clicked:repeating_tempbuffs", function() {
+         function updateBuffs() {
             console.log("changed tempbuffs");
-            let temp_tohit_melee = 0;
-            let temp_tohit_ranged = 0;
-            let temp_damage = 0;
-            let temp_traitpower = 0;
-            let temp_traitfinesse = 0;
-            let temp_traitwiles = 0;
-            let temp_traitcourage = 0;
-            let temp_traitfate = 0;
+            let temp_tohit_melee = "";
+            let temp_tohit_ranged = "";
+            let temp_damage = "";
+
+            let temp_ad = 0;
+            let temp_pd = 0;
+            let temp_td = 0;
+            let temp_md = 0;
 
             getSectionIDs("tempbuffs", idarray => {
                 let modifiers = [];
@@ -2500,16 +2613,65 @@
                                 let active = active_values[`repeating_tempbuffs_${id}_tempbuff_active`];
                                 let typed = types_values[`repeating_tempbuffs_${id}_tempbuff_type`];
 
-                                if (typed == "tohit_melee") {
-                                    temp_tohit_melee += value;
+                                if (typed == "tohit_melee" && active == "on") {
+                                    temp_tohit_melee += " + " + value;
                                 }
+
+                                if (typed == "tohit_ranged" && active == "on") {
+                                    temp_tohit_ranged += " + " + value;
+                                }
+
+                                if (typed == "damage" && active == "on") {
+                                    temp_damage += " + " + value;
+                                }
+
+                                if (typed == "ad" && active == "on") {
+                                    temp_ad += value;
+                                }
+
+                                if (typed == "pd" && active == "on") {
+                                    temp_pd += value;
+                                }
+
+                                if (typed == "td" && active == "on") {
+                                    temp_td += value;
+                                }
+
+                                if (typed == "md" && active == "on") {
+                                    temp_md += value;
+                                }
+                                
                             });
+                            console.log("final tohit melee : " + temp_tohit_melee); 
+                            console.log("final tohit ranged : " + temp_tohit_ranged); 
+                            console.log("final damage : " + temp_damage); 
+
+                            let update = {};
+                            update["tempbuff_tohit_melee"] = temp_tohit_melee;
+                            update["tempbuff_tohit_ranged"] = temp_tohit_ranged;
+                            update["tempbuff_damage"] = temp_damage;
+                            update["tempbuff_ad"] = temp_ad;
+                            update["tempbuff_pd"] = temp_pd;
+                            update["tempbuff_td"] = temp_td;
+                            update["tempbuff_md"] = temp_md;
+                            setAttrs(update);
                         });
                     });
                 });
                 
             });
-            console.log("final tohit melee : " + temp_tohit_melee);                   
+         }
+
+         on("clicked:repeating_tempbuffs", function() {
+            updateBuffs();
+         });
+
+         on("change:repeating_tempbuffs:tempbuff_active", function() {
+            updateBuffs();
+         });
+
+         on("change:repeating_tempbuffs:tempbuff_type", function() {
+            updateBuffs();
          });
 
          on("clicked:repeating_tempbuffs:tempbuffdown", function() {

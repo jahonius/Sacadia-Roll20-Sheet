@@ -195,8 +195,8 @@ input.maininput {
     border: none;
     border-radius: 20px;
     padding: 10px 20px;
-    width: 90px;
-    height: 50px;
+    width: 220px;
+    height: 40px;
     margin: 5px;
     font-size: 20px;
     cursor: pointer;
@@ -624,4 +624,17 @@ input[value="on"] ~ .normal-roll {
 
 input[value="0"] ~ .disadv-roll {
     display: flex;
+}
+
+details {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+}
+
+.repeating-box {
+    border:3px solid #911d20;
+    padding: 10px;
 }
