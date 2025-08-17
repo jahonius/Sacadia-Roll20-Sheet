@@ -2040,6 +2040,7 @@
         <div class="column-container">
             <div class="halfs-column">
                 <h2 style="text-align: center;">Action Pools</h2>
+                <br>
                 <fieldset class="repeating_pools">
                     <div class="repeating-box">
                         <label>Pool Type: <input type="text" name="attr_pool_name"></label>
@@ -2051,14 +2052,16 @@
             </div>
             <div class="halfs-column">
                 <h2 style="text-align: center;">Reactions and Boosts</h2>
-                <fieldset class="repeating_reactions_and_boosts">
+                <br>
+                <fieldset class="repeating_reactionsboosts">
                     <div class="repeating-box">
-                        <label>Name: <input type="text" name="attr_reaction_and_boost_name"></label>
+                        <label>Name: <input type="text" name="attr_reactionboost_name"></label>
                         <details>
                             <summary><h4>Description</h4></summary>
                             <br>
-                            <textarea name="attr_reaction_and_boost_description"></textarea>
+                            <textarea name="attr_reactionboost_description"></textarea>
                         </details>
+                        <button type="roll" name="roll_reactionboost" value="&{template:default} {{name=@{reactionboost_name}}} {{Description= @{reactionboost_description}}}">Post to Chat</button>
                     </div>
                     <br>
                 </fieldset>
