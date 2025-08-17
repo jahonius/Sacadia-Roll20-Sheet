@@ -1951,12 +1951,18 @@
                                 <summary><h4>Attack Details</h4></summary>
                                 <br>
                                 <label>Roll Modifier: <input type="text" name="attr_attack_mod" placeholder="e.g. +5"></label>
-                                <label>Damage Roll: <input type="text" name="attr_damage_roll" placeholder="e.g. 2d6+3"></label>
+                                <label>Damage Roll: <input type="text" name="attr_damageroll" placeholder="e.g. 2d6+3"></label>
+                                <input type="hidden" name="attr_damagemax">
                             </details>
                             
                             <button type="roll" type="action" name="act_roll_ability" value="&{template:default} {{name=@{ability_name}}} {{Limb=@{ability_limb}}} {{Hit=[[ @{ability_advantage}d20kh1+@{attack_mod} @{tempbuff_tohit_melee} ]]}}
                             [Click here to roll damage](~repeating_abilities_damage)">Attack</button>
-                            <button type="roll" name="roll_damage" value="&{template:default} {{name=@{ability_name}}} {{Damage=[[ @{damage_roll} ]]}}">Roll Damage</button>
+                            <button type="roll" name="roll_damage" value="&{template:default} {{name=@{ability_name}}} {{Damage=[[ @{damageroll} @{tempbuff_damage} ]]}}">Roll Damage</button>
+                            <br>
+                            <span >Max Damage - </span>
+                            <span name="attr_damagemax_display">0</span>
+                            <button type="roll" name="roll_max_damage" value="&{template:default} {{name=@{ability_name}}} {{Max Damage=[[ @{damagemax} ]]}}">Post Max Damage</button>
+                            
                         </div>
                         
                         <div class="ability-fields">
@@ -2649,11 +2655,39 @@
                             update["tempbuff_td"] = temp_td;
                             update["tempbuff_md"] = temp_md;
                             setAttrs(update);
+
+                            getSectionIDs("actives", idarray => {
+                                let damagebases = [];
+                
+                                idarray.forEach(id => {
+                                    damagebases.push(`repeating_actives_${id}_damageroll`)
+                                });
+                
+                                getAttrs(damagebases, function(values) {
+                                    idarray.forEach(id => {
+                                        let basedamage = values[`repeating_actives_${id}_damageroll`];
+                                        let damage = basedamage + temp_damage;
+                                        console.log("initial damage string - " + damage);
+                                        damage = damage.replace("d", "*");
+                                        damage = damage.replace(/[^-()\d/*+.]/g, '');
+                                        console.log("max damage string - " + damage);
+                                        damage = eval(damage);
+                                        console.log("calculated max damage - " + damage);
+                
+                                        let update = {};
+                                        update[`repeating_actives_${id}_damagemax`] = damage;
+                                        update[`repeating_actives_${id}_damagemax_display`] = damage;
+                                        setAttrs(update);
+                                    });
+                                });
+                            });
                         });
                     });
                 });
                 
             });
+
+            
          }
 
          on("clicked:repeating_tempbuffs", function() {
@@ -2665,6 +2699,10 @@
          });
 
          on("change:repeating_tempbuffs:tempbuff_type", function() {
+            updateBuffs();
+         });
+
+         on("change:repeating_actives:damageroll", function() {
             updateBuffs();
          });
 
