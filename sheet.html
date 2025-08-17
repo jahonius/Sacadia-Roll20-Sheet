@@ -2669,12 +2669,13 @@
                                 getAttrs(damagebases, function(values) {
                                     idarray.forEach(id => {
                                         let basedamage = values[`repeating_actives_${id}_damageroll`];
-                                        let damage = basedamage + temp_damage;
+                                        let damage = basedamage;
                                         console.log("initial damage string - " + damage);
                                         damage = damage.replace("d", "*");
                                         damage = damage.replace(/[^-()\d/*+.]/g, '');
                                         console.log("max damage string - " + damage);
                                         damage = eval(damage);
+                                        damage = damage + temp_damage;
                                         console.log("calculated max damage - " + damage);
                 
                                         let update = {};
@@ -2702,6 +2703,10 @@
          });
 
          on("change:repeating_tempbuffs:tempbuff_type", function() {
+            updateBuffs();
+         });
+
+         on("change:`repeating_tempbuffs_tempbuff_value`", function() {
             updateBuffs();
          });
 
